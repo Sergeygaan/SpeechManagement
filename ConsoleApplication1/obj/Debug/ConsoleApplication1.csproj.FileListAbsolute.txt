@@ -1,5 +1,0 @@
-C:\MyProject\VoiceControl\VoiceControl\bin\Debug\ConsoleApplication1.exe.config
-C:\MyProject\VoiceControl\VoiceControl\bin\Debug\ConsoleApplication1.exe
-C:\MyProject\VoiceControl\VoiceControl\bin\Debug\ConsoleApplication1.pdb
-C:\MyProject\VoiceControl\ConsoleApplication1\obj\Debug\ConsoleApplication1.exe
-C:\MyProject\VoiceControl\ConsoleApplication1\obj\Debug\ConsoleApplication1.pdb

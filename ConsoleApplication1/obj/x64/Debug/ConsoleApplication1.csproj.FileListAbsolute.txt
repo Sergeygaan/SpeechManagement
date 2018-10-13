@@ -1,6 +1,0 @@
-C:\Users\Sergey\Desktop\Распознание\VoiceControl\ConsoleApplication1\bin\x64\Debug\ConsoleApplication1.exe.config
-C:\Users\Sergey\Desktop\Распознание\VoiceControl\ConsoleApplication1\bin\x64\Debug\ConsoleApplication1.exe
-C:\Users\Sergey\Desktop\Распознание\VoiceControl\ConsoleApplication1\bin\x64\Debug\ConsoleApplication1.pdb
-C:\Users\Sergey\Desktop\Распознание\VoiceControl\ConsoleApplication1\obj\x64\Debug\ConsoleApplication1.csproj.CoreCompileInputs.cache
-C:\Users\Sergey\Desktop\Распознание\VoiceControl\ConsoleApplication1\obj\x64\Debug\ConsoleApplication1.exe
-C:\Users\Sergey\Desktop\Распознание\VoiceControl\ConsoleApplication1\obj\x64\Debug\ConsoleApplication1.pdb
