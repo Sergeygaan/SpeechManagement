@@ -1,0 +1,12 @@
+C:\Users\Sergey\Desktop\Распознание\VoiceControl\VoiceControl\bin\x64\Debug\VoiceControl.exe.config
+C:\Users\Sergey\Desktop\Распознание\VoiceControl\VoiceControl\bin\x64\Debug\VoiceControl.exe
+C:\Users\Sergey\Desktop\Распознание\VoiceControl\VoiceControl\bin\x64\Debug\VoiceControl.pdb
+C:\Users\Sergey\Desktop\Распознание\VoiceControl\VoiceControl\bin\x64\Debug\Microsoft.Speech.dll
+C:\Users\Sergey\Desktop\Распознание\VoiceControl\VoiceControl\obj\x64\Debug\VoiceControl.Form1.resources
+C:\Users\Sergey\Desktop\Распознание\VoiceControl\VoiceControl\obj\x64\Debug\VoiceControl.Properties.Resources.resources
+C:\Users\Sergey\Desktop\Распознание\VoiceControl\VoiceControl\obj\x64\Debug\VoiceControl.csproj.GenerateResource.cache
+C:\Users\Sergey\Desktop\Распознание\VoiceControl\VoiceControl\obj\x64\Debug\VoiceControl.csproj.CoreCompileInputs.cache
+C:\Users\Sergey\Desktop\Распознание\VoiceControl\VoiceControl\obj\x64\Debug\VoiceControl.csproj.CopyComplete
+C:\Users\Sergey\Desktop\Распознание\VoiceControl\VoiceControl\obj\x64\Debug\VoiceControl.exe
+C:\Users\Sergey\Desktop\Распознание\VoiceControl\VoiceControl\obj\x64\Debug\VoiceControl.pdb
+C:\Users\Sergey\Desktop\Распознание\VoiceControl\VoiceControl\obj\x64\Debug\VoiceControl.ScreenDelineation.resources
