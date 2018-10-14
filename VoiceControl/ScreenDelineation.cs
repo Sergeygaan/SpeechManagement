@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static VoiceControl.NumberObject;
 
 namespace VoiceControl
 {
@@ -35,16 +36,9 @@ namespace VoiceControl
             RIGHTUP = 0x00000010
         }
 
-        //private const int ExStyle = -20;
-
-        //private const int Transparent = 0x20;
-
-        //private const int Layered = 0x80000;
+        private NumberObject _numberObject;
 
         private int initialStyle;
-
-        private List<NumberObject> _baseNumberObject = new List<NumberObject>();
-        private List<int> _indexObject = new List<int>();
 
         public ScreenDelineation()
         {
@@ -60,16 +54,18 @@ namespace VoiceControl
             WindowState = FormWindowState.Maximized;
 
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
+
+            _numberObject = new NumberObject();
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (_baseNumberObject.Count == 0)
+            if (_numberObject.listRegionRectangle.Count == 0)
             {
-                DrawingDividingLines(_baseNumberObject, Width, Height);
+                DrawingDividingLines(_numberObject, Width, Height);
             }
 
-            DrawingZone(e, _baseNumberObject);
+            DrawingZone(e, _numberObject);
         }
 
         const int WM_NCHITTEST = 0x0084;
@@ -85,23 +81,21 @@ namespace VoiceControl
             base.WndProc(ref m);
         }
 
-        private void DrawingZone(PaintEventArgs e, List<NumberObject> _numberObject)
+        private void DrawingZone(PaintEventArgs e, NumberObject _currentObject)
         {
-            foreach (var currentObject in _numberObject)
+
+            if (_currentObject.ChildNumberObject != null)
             {
-                if (currentObject._clild.Count != 0)
-                {
-                    DrawingZone(e, currentObject._clild);
-                }
-
-                currentObject.DrawingRectangle(e);
-
-                currentObject.DrawingText(e);
+                DrawingZone(e, _currentObject.ChildNumberObject);
             }
+
+            _currentObject.DrawingRectangle(e);
+
+            _currentObject.DrawingText(e);
         }
 
         //float startX, float startY, float endX, float endY, 
-        private void DrawingDividingLines(List<NumberObject> _numberObject, int width, int height, int startX = 0, int startY = 0)
+        private void DrawingDividingLines(NumberObject _currentObject, int width, int height, int startX = 0, int startY = 0)
         {
             int saveStartX = startX;
 
@@ -119,7 +113,7 @@ namespace VoiceControl
                 {
                     id += 1;
 
-                    _numberObject.Add(new NumberObject(id, startX, startY, endX, endY));
+                    _currentObject.listRegionRectangle.Add(CreateRegionRectangle(id, startX, startY, endX, endY));
 
                     startX += stepWidth;
                     endX += stepWidth;
@@ -133,13 +127,37 @@ namespace VoiceControl
             }
         }
 
+        private RegionRectangle CreateRegionRectangle(int iDObject, int startX, int startY, int endtX, int endY)
+        {
+            var width = endtX - startX;
+            var height = endY - startY;
+
+            var Rectangle = new Rectangle(startX, startY, width, height);
+
+            RegionRectangle regionRectangle = new RegionRectangle();
+
+            regionRectangle.Rectangle = new Rectangle(startX, startY, width, height);
+
+            regionRectangle.IdObject = iDObject;
+
+            regionRectangle.Visible = true;
+
+            regionRectangle.StartX = startX;
+            regionRectangle.StartY = startY;
+
+            regionRectangle.Width = width;
+            regionRectangle.Height = height;
+
+            return regionRectangle;
+        }
+
         public void LeftOneClick(int number)
         {
             int index = number - 1;
 
-            var currentObject = ScaleNumberObject();
+            var currentObject = SearchChild(_numberObject);
 
-            Cursor.Position = currentObject[index].Center;
+            Cursor.Position = currentObject.Center(index);
 
             mouse_event((uint)MouseEventFlags.LEFTDOWN | (uint)MouseEventFlags.LEFTUP, 0, 0, 0, 0);
         }
@@ -148,9 +166,9 @@ namespace VoiceControl
         {
             int index = number - 1;
 
-            var currentObject = ScaleNumberObject();
+            var currentObject = SearchChild(_numberObject);
 
-            Cursor.Position = currentObject[index].Center;
+            Cursor.Position = currentObject.Center(index);
 
             mouse_event((uint)MouseEventFlags.LEFTDOWN | (uint)MouseEventFlags.LEFTUP, 0, 0, 0, 0);
             mouse_event((uint)MouseEventFlags.LEFTDOWN | (uint)MouseEventFlags.LEFTUP, 0, 0, 0, 0);
@@ -160,79 +178,68 @@ namespace VoiceControl
         {
             int index = number - 1;
 
-            var currentObject = ScaleNumberObject();
+            var currentObject = SearchChild(_numberObject);
 
-            Cursor.Position = currentObject[index].Center;
+            Cursor.Position = currentObject.Center(index);
 
             mouse_event((uint)MouseEventFlags.RIGHTDOWN | (uint)MouseEventFlags.RIGHTUP, 0, 0, 0, 0);
         }
 
         public void ScaleNumber(int number)
         {
-            // MessageBox.Show("scale" + " " + number.ToString());
             int index = number - 1;
 
-            _indexObject.Add(index);
-            var currentJbjeck = ScaleNumberObject();
+            var currentNumberObject = SearchChild(_numberObject);
 
-            currentJbjeck[index]._clild.Clear();
-            currentJbjeck[index].Visible = false;
+            var newChildNumberObject = new NumberObject();
 
-            DrawingDividingLines(currentJbjeck[index]._clild, currentJbjeck[index].Width, currentJbjeck[index].Height,
-                                 currentJbjeck[index].StartX, currentJbjeck[index].StartY);
+            //Добавление родителя
+            newChildNumberObject.ParantNumberObject = currentNumberObject;
 
+            //Добавление потомка
+            currentNumberObject.ChildNumberObject = newChildNumberObject;
+
+            currentNumberObject.listRegionRectangle[index].Visible = false;
+
+            DrawingDividingLines(newChildNumberObject,
+                                 currentNumberObject.listRegionRectangle[index].Width, currentNumberObject.listRegionRectangle[index].Height,
+                                 currentNumberObject.listRegionRectangle[index].StartX, currentNumberObject.listRegionRectangle[index].StartY);
 
             Invalidate();
-
         }
 
         public void EndNumber()
         {
-            EndNumberObject();
-         
+            if (SearchChild(_numberObject).ParantNumberObject != null)
+            {
+                var ParantNumberObject = SearchChild(_numberObject).ParantNumberObject;
+
+                if (ParantNumberObject.ChildNumberObject != null)
+                {
+                    //currentNumberObject.
+                    ParantNumberObject.ChildNumberObject = null;
+
+                    foreach (var currentRectangle in ParantNumberObject.listRegionRectangle)
+                    {
+                        currentRectangle.Visible = true;
+                    }
+
+                }
+            }
+
             Invalidate();
         }
 
-        private List<NumberObject> ScaleNumberObject()
+        private NumberObject SearchChild(NumberObject numberObject)
         {
-           var clildObject = _baseNumberObject;
+            var local = numberObject;
 
-            foreach (var currentIndex in _indexObject)
+            while(local.ChildNumberObject != null)
             {
-                if (clildObject[currentIndex]._clild.Count != 0)
-                {
-                    clildObject = clildObject[currentIndex]._clild;
-                }
+                local = local.ChildNumberObject;
             }
 
-            return clildObject;
-        }
-
-        private void EndNumberObject()
-        {
-            var clildObject = _baseNumberObject;
-            NumberObject currentNumberObject = null;
-
-            foreach (var currentIndex in _indexObject)
-            {
-                currentNumberObject = clildObject[currentIndex];
-
-                if (clildObject[currentIndex]._clild.Count != 0)
-                {
-                    clildObject = clildObject[currentIndex]._clild;
-                }
-            }
-            if (currentNumberObject != null)
-            {
-                currentNumberObject.Visible = true;
-            }
-
-            clildObject.Clear();
-
-            if (_indexObject.Count != 0)
-            {
-                _indexObject.Remove(_indexObject.Last());
-            }
+            return local;
         }
     }
 }
