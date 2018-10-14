@@ -67,7 +67,15 @@ namespace VoiceControl
             }
 
             DrawingZone(e, _numberObject);
+
+            if (!flag)
+            {
+                flag = true;
+                ScaleNumber(5);
+            }
         }
+
+        bool flag = false;
 
         const int WM_NCHITTEST = 0x0084;
         const int HTTRANSPARENT = -1;
