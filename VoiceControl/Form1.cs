@@ -212,5 +212,13 @@ namespace VoiceControl
             richTextBox1.AppendText(text + Environment.NewLine);
             richTextBox1.ScrollToCaret();
         }
+
+        private void Form1_Deactivate(object sender, EventArgs e)
+        {
+            //ActiveForm.Focus();
+            //Application.OpenForms[0].Activate();
+            //Application.OpenForms[1].Activate();
+            //Activate();
+        }
     }
 }

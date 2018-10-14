@@ -48,6 +48,7 @@ namespace VoiceControl
             //SetWindowLong(Handle, ExStyle, initialStyle | Layered | Transparent);
             StartPosition = FormStartPosition.CenterScreen;
             TopMost = true;
+            //TopLevel = true;
             ShowIcon = false;
             ShowInTaskbar = false;
             FormBorderStyle = FormBorderStyle.None;
