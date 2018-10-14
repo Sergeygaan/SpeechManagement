@@ -1,3 +1,5 @@
-microsoft speech platform sdk
+https://www.microsoft.com/en-us/download/details.aspx?id=27225
 
-microsoft speech platform runtime
+https://www.microsoft.com/en-us/download/details.aspx?id=27226
+
+https://www.microsoft.com/en-us/download/details.aspx?id=27224

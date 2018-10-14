@@ -71,7 +71,7 @@ namespace VoiceControl
             if (!flag)
             {
                 flag = true;
-                ScaleNumber(5);
+                ScreenMagnifierNumber(8);
             }
         }
 
@@ -194,16 +194,18 @@ namespace VoiceControl
             mouse_event((uint)MouseEventFlags.RIGHTDOWN | (uint)MouseEventFlags.RIGHTUP, 0, 0, 0, 0);
         }
 
+        //Метод для масштабирования
         public void ScaleNumber(int number)
         {
             int index = number - 1;
 
             var currentNumberObject = SearchChild(_numberObject);
 
-            var newChildNumberObject = new NumberObject();
-
-            //Добавление родителя
-            newChildNumberObject.ParantNumberObject = currentNumberObject;
+            var newChildNumberObject = new NumberObject
+            {
+                //Добавление родителя
+                ParantNumberObject = currentNumberObject
+            };
 
             //Добавление потомка
             currentNumberObject.ChildNumberObject = newChildNumberObject;
@@ -213,6 +215,43 @@ namespace VoiceControl
             DrawingDividingLines(newChildNumberObject,
                                  currentNumberObject.listRegionRectangle[index].Width, currentNumberObject.listRegionRectangle[index].Height,
                                  currentNumberObject.listRegionRectangle[index].StartX, currentNumberObject.listRegionRectangle[index].StartY);
+
+            Invalidate();
+        }
+
+        //Метод для масштабирования с применением лупы
+        public void ScreenMagnifierNumber(int number)
+        {
+            //int index = number - 1;
+
+            //var currentNumberObject = SearchChild(_numberObject);
+
+            //Configuration configuration = new Configuration();
+
+           
+            //configuration.MagnifierWidth = currentNumberObject.listRegionRectangle[index].Width;
+            //configuration.MagnifierHeight = currentNumberObject.listRegionRectangle[index].Height;
+
+            //Point point = new Point(currentNumberObject.listRegionRectangle[index].StartX, currentNumberObject.listRegionRectangle[index].StartY);
+
+            //Point point1 = new Point(666, 666);
+
+            //ScreeMagnifier form = new ScreeMagnifier(configuration, point1);
+            //form.Show();
+            //var newChildNumberObject = new NumberObject
+            //{
+            //    //Добавление родителя
+            //    ParantNumberObject = currentNumberObject
+            //};
+
+            ////Добавление потомка
+            //currentNumberObject.ChildNumberObject = newChildNumberObject;
+
+            //currentNumberObject.listRegionRectangle[index].Visible = false;
+
+            //DrawingDividingLines(newChildNumberObject,
+            //                     currentNumberObject.listRegionRectangle[index].Width, currentNumberObject.listRegionRectangle[index].Height,
+            //                     currentNumberObject.listRegionRectangle[index].StartX, currentNumberObject.listRegionRectangle[index].StartY);
 
             Invalidate();
         }
