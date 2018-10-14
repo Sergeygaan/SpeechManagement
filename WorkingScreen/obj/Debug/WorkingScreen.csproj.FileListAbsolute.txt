@@ -1,9 +1,0 @@
-C:\Users\Sergey\Desktop\SpeechManagement\WorkingScreen\obj\Debug\WorkingScreen.Properties.Resources.resources
-C:\Users\Sergey\Desktop\SpeechManagement\WorkingScreen\obj\Debug\VoiceControl.ScreenDelineation.resources
-C:\Users\Sergey\Desktop\SpeechManagement\WorkingScreen\obj\Debug\WorkingScreen.csproj.GenerateResource.cache
-C:\Users\Sergey\Desktop\SpeechManagement\WorkingScreen\obj\Debug\WorkingScreen.csproj.CoreCompileInputs.cache
-C:\Users\Sergey\Desktop\SpeechManagement\WorkingScreen\bin\Debug\WorkingScreen.dll.config
-C:\Users\Sergey\Desktop\SpeechManagement\WorkingScreen\bin\Debug\WorkingScreen.dll
-C:\Users\Sergey\Desktop\SpeechManagement\WorkingScreen\bin\Debug\WorkingScreen.pdb
-C:\Users\Sergey\Desktop\SpeechManagement\WorkingScreen\obj\Debug\WorkingScreen.dll
-C:\Users\Sergey\Desktop\SpeechManagement\WorkingScreen\obj\Debug\WorkingScreen.pdb
