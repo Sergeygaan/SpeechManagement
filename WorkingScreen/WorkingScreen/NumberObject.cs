@@ -23,13 +23,13 @@ namespace VoiceControl
 
         public NumberObject ChildNumberObject;
         public NumberObject ParantNumberObject;
+        public bool Visible { set; get; }
 
         public List<RegionRectangle> listRegionRectangle = new List<RegionRectangle>();
 
         public NumberObject()
         {
-
-          
+            Visible = true;
         }
 
 
@@ -45,7 +45,7 @@ namespace VoiceControl
         {
             foreach (var currentRectangle in listRegionRectangle)
             {
-                if (currentRectangle.Visible)
+                if (Visible)
                 {
                     e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 

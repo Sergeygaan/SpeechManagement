@@ -12,7 +12,6 @@ namespace VoiceControl
 {
     public partial class Form1 : Form
     {
-
         private CultureInfo _culture;
         private SpeechRecognitionEngine _sre;
         private ScreenDelineation _screenDelineation;
@@ -216,7 +215,10 @@ namespace VoiceControl
 
         private void Form1_Deactivate(object sender, EventArgs e)
         {
-
+            //ActiveForm.Focus();
+            //Application.OpenForms[0].Activate();
+            //Application.OpenForms[1].Activate();
+            //Activate();
         }
     }
 }

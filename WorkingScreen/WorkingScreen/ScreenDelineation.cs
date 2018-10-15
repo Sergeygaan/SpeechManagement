@@ -57,6 +57,8 @@ namespace VoiceControl
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
 
             _numberObject = new NumberObject();
+
+            OnTopControl voiceControl = new OnTopControl(Handle);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -71,7 +73,9 @@ namespace VoiceControl
             if (!flag)
             {
                 flag = true;
-                ScreenMagnifierNumber(8);
+                ScaleNumber(5);
+
+                EndNumber();
             }
         }
 
@@ -210,7 +214,7 @@ namespace VoiceControl
             //Добавление потомка
             currentNumberObject.ChildNumberObject = newChildNumberObject;
 
-            currentNumberObject.listRegionRectangle[index].Visible = false;
+            currentNumberObject.Visible = false;
 
             DrawingDividingLines(newChildNumberObject,
                                  currentNumberObject.listRegionRectangle[index].Width, currentNumberObject.listRegionRectangle[index].Height,
@@ -267,10 +271,12 @@ namespace VoiceControl
                     //currentNumberObject.
                     ParantNumberObject.ChildNumberObject = null;
 
-                    foreach (var currentRectangle in ParantNumberObject.listRegionRectangle)
-                    {
-                        currentRectangle.Visible = true;
-                    }
+                    ParantNumberObject.Visible = true;
+
+                    //foreach (var currentRectangle in ParantNumberObject.listRegionRectangle)
+                    //{
+                    //    currentRectangle.Visible = true;
+                    //}
 
                 }
             }
