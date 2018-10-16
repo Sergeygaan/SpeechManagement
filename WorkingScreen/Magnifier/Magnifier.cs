@@ -18,11 +18,11 @@ namespace VoiceControl
         private Timer timer;
         private RegionRectangle _regionRectangle;
 
-        public Magnifier(Form form, RegionRectangle regionRectangle)
+        public Magnifier(Form form, RegionRectangle regionRectangle, int generationNumber)
         {
             _regionRectangle = regionRectangle;
 
-            magnification = 2.0f;
+            magnification = 2.0f * generationNumber;
 
             this.form = form ?? throw new ArgumentNullException("form");
             this.form.Resize += new EventHandler(form_Resize);
@@ -92,8 +92,8 @@ namespace VoiceControl
             int width = _regionRectangle.Width;
             int height = _regionRectangle.Height;
 
-            sourceRect.left = _regionRectangle.StartX;
-            sourceRect.top = _regionRectangle.StartY;
+            sourceRect.left = _regionRectangle.StartX - width / 8;
+            sourceRect.top = _regionRectangle.StartY - width / 8;
 
 
             // Don't scroll outside desktop area.

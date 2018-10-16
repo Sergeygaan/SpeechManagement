@@ -48,7 +48,7 @@ namespace VoiceControl
             //SetWindowLong(Handle, ExStyle, initialStyle | Layered | Transparent);
             StartPosition = FormStartPosition.CenterScreen;
             TopMost = true;
-            //TopLevel = true;
+            TopLevel = true;
             ShowIcon = false;
             ShowInTaskbar = false;
             FormBorderStyle = FormBorderStyle.None;
@@ -57,7 +57,9 @@ namespace VoiceControl
             initialStyle = GetWindowLong(Handle, -20);
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
 
+            //Создание первого поколения
             _numberObject = new NumberObject();
+            _numberObject.GenerationNumber = 1;
 
             //OnTopControl voiceControl = new OnTopControl(Handle);
         }
@@ -211,7 +213,8 @@ namespace VoiceControl
             var newChildNumberObject = new NumberObject
             {
                 //Добавление родителя
-                ParantNumberObject = currentNumberObject
+                ParantNumberObject = currentNumberObject,
+                GenerationNumber = currentNumberObject.GenerationNumber + 1
             };
 
             //Добавление потомка
@@ -241,7 +244,7 @@ namespace VoiceControl
                 magnifierForm = new MagnifierForm();
                 magnifierForm.Show();
 
-                magnifier = new Magnifier(magnifierForm, currentNumberObject.listRegionRectangle[index]);
+                magnifier = new Magnifier(magnifierForm, currentNumberObject.listRegionRectangle[index], currentNumberObject.GenerationNumber);
             }
         }
 

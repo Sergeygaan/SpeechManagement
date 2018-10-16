@@ -23,6 +23,8 @@ namespace VoiceControl
 
         public NumberObject ChildNumberObject;
         public NumberObject ParantNumberObject;
+        public int GenerationNumber;
+
         public bool Visible { set; get; }
 
         public List<RegionRectangle> listRegionRectangle = new List<RegionRectangle>();
