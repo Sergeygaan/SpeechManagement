@@ -43,7 +43,7 @@ namespace VoiceControl
         public ScreenDelineation()
         {
             InitializeComponent();
-            initialStyle = GetWindowLong(Handle, -20);
+  
             TransparencyKey = BackColor;
             //SetWindowLong(Handle, ExStyle, initialStyle | Layered | Transparent);
             StartPosition = FormStartPosition.CenterScreen;
@@ -54,11 +54,17 @@ namespace VoiceControl
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
 
+            initialStyle = GetWindowLong(Handle, -20);
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
 
             _numberObject = new NumberObject();
 
             OnTopControl voiceControl = new OnTopControl(Handle);
+
+            MagnifierForm magnifierForm = new MagnifierForm();
+
+            magnifierForm.Show();
+            Magnifier magnifier = new Magnifier(magnifierForm);
         }
 
         protected override void OnPaint(PaintEventArgs e)

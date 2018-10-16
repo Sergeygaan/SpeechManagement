@@ -48,6 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Magnifier\Magnifier.cs" />
+    <Compile Include="Magnifier\MagnifierForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Magnifier\MagnifierForm.Designer.cs">
+      <DependentUpon>MagnifierForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Magnifier\NativeMethods.cs" />
+    <Compile Include="Magnifier\NativeStructures.cs" />
     <Compile Include="ScreeMagnifier\Configuration.cs" />
     <Compile Include="ScreeMagnifier\ScreeMagnifier.cs">
       <SubType>Form</SubType>
@@ -64,6 +73,9 @@
     <Compile Include="WorkingScreen\ScreenDelineation.Designer.cs">
       <DependentUpon>ScreenDelineation.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Magnifier\MagnifierForm.resx">
+      <DependentUpon>MagnifierForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

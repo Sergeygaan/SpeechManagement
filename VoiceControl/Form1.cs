@@ -56,24 +56,24 @@ namespace VoiceControl
             }
         }
 
-        //private Choices CreateSampleOne()
-        //{
-        //    var one = new SemanticResultValue("one", 1);
-        //    var two = new SemanticResultValue("two", 2);
-        //    var three = new SemanticResultValue("three", 3);
-        //    var four = new SemanticResultValue("four", 4);
-        //    var five = new SemanticResultValue("five", 5);
-        //    var six = new SemanticResultValue("six", 6);
-        //    var seven = new SemanticResultValue("seven", 7);
-        //    var eight = new SemanticResultValue("eight", 8);
-        //    var nine = new SemanticResultValue("nine", 9);
+        private Choices CreateSample()
+        {
+            var one = new SemanticResultValue("one", 1);
+            var two = new SemanticResultValue("two", 2);
+            var three = new SemanticResultValue("three", 3);
+            var four = new SemanticResultValue("four", 4);
+            var five = new SemanticResultValue("five", 5);
+            var six = new SemanticResultValue("six", 6);
+            var seven = new SemanticResultValue("seven", 7);
+            var eight = new SemanticResultValue("eight", 8);
+            var nine = new SemanticResultValue("nine", 9);
 
-        //    return new Choices(one, two, three, four, five, six, seven, eight, nine);
-        //}
+            return new Choices(one, two, three, four, five, six, seven, eight, nine);
+        }
 
         private Grammar Left()
         {
-            var programs = CreateSampleOne();
+            var programs = CreateSample();
 
             var grammarBuilder = new GrammarBuilder("left", SubsetMatchingMode.SubsequenceContentRequired);
             grammarBuilder.Culture = _culture;
@@ -84,7 +84,7 @@ namespace VoiceControl
 
         private Grammar Right()
         {
-            var programs = CreateSampleOne();
+            var programs = CreateSample();
 
             var grammarBuilder = new GrammarBuilder("right", SubsetMatchingMode.SubsequenceContentRequired);
             grammarBuilder.Culture = _culture;
@@ -95,7 +95,7 @@ namespace VoiceControl
 
         private Grammar Double()
         {
-            var programs = CreateSampleOne();
+            var programs = CreateSample();
 
             var grammarBuilder = new GrammarBuilder("Double", SubsetMatchingMode.SubsequenceContentRequired);
             grammarBuilder.Culture = _culture;
@@ -106,7 +106,7 @@ namespace VoiceControl
 
         private Grammar Scale()
         {
-            var programs = CreateSampleOne();
+            var programs = CreateSample();
 
             var grammarBuilder = new GrammarBuilder("scale", SubsetMatchingMode.SubsequenceContentRequired);
             grammarBuilder.Culture = _culture;
@@ -117,7 +117,7 @@ namespace VoiceControl
 
         private Grammar End()
         {
-            var programs = CreateSampleOne();
+            var programs = CreateSample();
 
             var grammarBuilder = new GrammarBuilder("end", SubsetMatchingMode.SubsequenceContentRequired);
             grammarBuilder.Culture = _culture;
@@ -221,80 +221,80 @@ namespace VoiceControl
             //Activate();
         }
 
-        private Choices CreateSampleOne()
-        {
+        //private Choices CreateSampleOne()
+        //{
  
-            GrammarBuilder[] grammarBuilders = 
-            {
-                new SemanticResultValue("one", 1),
+        //    GrammarBuilder[] grammarBuilders = 
+        //    {
+        //        new SemanticResultValue("one", 1),
 
-                //new SemanticResultValue("oneness", -1),
-                //new SemanticResultValue("oner", -1),
-                //new SemanticResultValue("wen", -1),
-                //new SemanticResultValue("whang", -1),
-                //new SemanticResultValue("when", -1),
-                //new SemanticResultValue("whene", -1),
-                //new SemanticResultValue("whener", -1),
-                //new SemanticResultValue("won", -1),
+        //        //new SemanticResultValue("oneness", -1),
+        //        //new SemanticResultValue("oner", -1),
+        //        //new SemanticResultValue("wen", -1),
+        //        //new SemanticResultValue("whang", -1),
+        //        //new SemanticResultValue("when", -1),
+        //        //new SemanticResultValue("whene", -1),
+        //        //new SemanticResultValue("whener", -1),
+        //        //new SemanticResultValue("won", -1),
 
-                //---------------------------------
+        //        //---------------------------------
 
-                new SemanticResultValue("two", 2),
+        //        new SemanticResultValue("two", 2),
 
-                //new SemanticResultValue("to", -1),
-                //new SemanticResultValue("toe", -1),
-                //new SemanticResultValue("too", -1),
-                //new SemanticResultValue("tour", -1),
-                //new SemanticResultValue("tow", -1),
-                //new SemanticResultValue("tower", -1),
+        //        //new SemanticResultValue("to", -1),
+        //        //new SemanticResultValue("toe", -1),
+        //        //new SemanticResultValue("too", -1),
+        //        //new SemanticResultValue("tour", -1),
+        //        //new SemanticResultValue("tow", -1),
+        //        //new SemanticResultValue("tower", -1),
 
-                //---------------------------------
-                new SemanticResultValue("three", 3),
+        //        //---------------------------------
+        //        new SemanticResultValue("three", 3),
 
-                //---------------------------------
+        //        //---------------------------------
 
-                new SemanticResultValue("four", 4),
+        //        new SemanticResultValue("four", 4),
 
-                //new SemanticResultValue("faugh", -1),
-                //new SemanticResultValue("for", -1),
-                //new SemanticResultValue("fore", -1),
+        //        //new SemanticResultValue("faugh", -1),
+        //        //new SemanticResultValue("for", -1),
+        //        //new SemanticResultValue("fore", -1),
 
-                //---------------------------------
+        //        //---------------------------------
 
-                new SemanticResultValue("five", 5),
+        //        new SemanticResultValue("five", 5),
 
-                //new SemanticResultValue("favor", -1),
-                //new SemanticResultValue("favour", -1),
-                //new SemanticResultValue("fever", -1),
-                //new SemanticResultValue("fiver", -1),
+        //        //new SemanticResultValue("favor", -1),
+        //        //new SemanticResultValue("favour", -1),
+        //        //new SemanticResultValue("fever", -1),
+        //        //new SemanticResultValue("fiver", -1),
 
-                //---------------------------------
+        //        //---------------------------------
 
-                new SemanticResultValue("six", 6),
+        //        new SemanticResultValue("six", 6),
 
-                //new SemanticResultValue("sixer", -1),
+        //        //new SemanticResultValue("sixer", -1),
 
-                //---------------------------------
+        //        //---------------------------------
 
-                new SemanticResultValue("seven", 7),
+        //        new SemanticResultValue("seven", 7),
 
-                //new SemanticResultValue("savanna", -1),
-                //new SemanticResultValue("savannah", -1),
+        //        //new SemanticResultValue("savanna", -1),
+        //        //new SemanticResultValue("savannah", -1),
 
-                //---------------------------------
+        //        //---------------------------------
 
-                new SemanticResultValue("eight", 8),
+        //        new SemanticResultValue("eight", 8),
 
-                //new SemanticResultValue("ait", -1),
+        //        //new SemanticResultValue("ait", -1),
 
-                //---------------------------------
+        //        //---------------------------------
 
-                new SemanticResultValue("nine", 9),
+        //        new SemanticResultValue("nine", 9),
 
-                //new SemanticResultValue("neon", 9),
-            };
+        //        //new SemanticResultValue("neon", 9),
+        //    };
             
-            return new Choices(grammarBuilders);
-        }
+        //    return new Choices(grammarBuilders);
+        //}
     }
 }
