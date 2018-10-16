@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace VoiceControl
 {
@@ -13,15 +14,13 @@ namespace VoiceControl
         private float magnification;
         private bool initialized;
         private RECT magWindowRect = new RECT();
-        private System.Windows.Forms.Timer timer;
+        private Timer timer;
 
         public Magnifier(Form form)
         {
-            if (form == null)
-                throw new ArgumentNullException("form");
-
             magnification = 2.0f;
-            this.form = form;
+
+            this.form = form ?? throw new ArgumentNullException("form");
             this.form.Resize += new EventHandler(form_Resize);
             this.form.FormClosing += new FormClosingEventHandler(form_FormClosing);
 
@@ -127,6 +126,9 @@ namespace VoiceControl
 
             // Force redraw.
             NativeMethods.InvalidateRect(hwndMag, IntPtr.Zero, true);
+
+            var initialStyle = NativeMethods.GetWindowLong(form.Handle, -20);
+            NativeMethods.SetWindowLong(form.Handle, -20, initialStyle | 0x80000 | 0x20);
         }
 
         public float Magnification
