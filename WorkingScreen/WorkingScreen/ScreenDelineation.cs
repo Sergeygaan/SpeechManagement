@@ -272,12 +272,6 @@ namespace VoiceControl
                     ParantNumberObject.ChildNumberObject = null;
 
                     ParantNumberObject.Visible = true;
-
-                    //foreach (var currentRectangle in ParantNumberObject.listRegionRectangle)
-                    //{
-                    //    currentRectangle.Visible = true;
-                    //}
-
                 }
             }
 
