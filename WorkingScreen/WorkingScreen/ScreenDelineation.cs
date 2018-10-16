@@ -71,15 +71,15 @@ namespace VoiceControl
 
             DrawingZone(e, _numberObject);
 
-            if (!flag)
-            {
-                flag = true;
-                ScaleNumber(2);
+            //if (!flag)
+            //{
+            //    flag = true;
+            //    ScaleNumber(2);
 
-                IncreaseMagnifier(5);
+            //    IncreaseMagnifier(5);
 
-                //EndNumber();
-            }
+            //    //EndNumber();
+            //}
         }
 
         bool flag = false;
@@ -251,11 +251,13 @@ namespace VoiceControl
             if (magnifier != null)
             {
                 magnifier.Dispose();
+                magnifier = null;
             }
 
             if (magnifierForm != null)
             {
                 magnifierForm.Dispose();
+                magnifierForm = null;
             }
         }
 

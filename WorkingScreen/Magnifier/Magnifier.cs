@@ -179,7 +179,7 @@ namespace VoiceControl
                 return;
             }
 
-            //form.FormBorderStyle = FormBorderStyle.None;
+            form.FormBorderStyle = FormBorderStyle.None;
             form.WindowState = FormWindowState.Maximized;
 
             // Set the magnification factor.
