@@ -164,7 +164,7 @@ namespace VoiceControl
 
             AppendLine(e.Result.Text + " (" + e.Result.Confidence + ")");
 
-            if (e.Result.Confidence < 0.4f)
+            if (e.Result.Confidence < 0.35f)
                 return;
 
             for (var i = 0; i < e.Result.Alternates.Count; ++i)
@@ -176,7 +176,7 @@ namespace VoiceControl
             {
                 AppendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")");
 
-                if (e.Result.Words[i].Confidence < 0.4f)
+                if (e.Result.Words[i].Confidence < 0.35f)
                     return;
             }
 
