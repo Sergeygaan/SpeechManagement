@@ -164,7 +164,7 @@ namespace VoiceControl
 
             AppendLine(e.Result.Text + " (" + e.Result.Confidence + ")");
 
-            if (e.Result.Confidence < 0.6f)
+            if (e.Result.Confidence < 0.4f)
                 return;
 
             for (var i = 0; i < e.Result.Alternates.Count; ++i)
@@ -176,7 +176,7 @@ namespace VoiceControl
             {
                 AppendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")");
 
-                if (e.Result.Words[i].Confidence < 0.6f)
+                if (e.Result.Words[i].Confidence < 0.4f)
                     return;
             }
 
@@ -231,89 +231,5 @@ namespace VoiceControl
             richTextBox1.AppendText(text + Environment.NewLine);
             richTextBox1.ScrollToCaret();
         }
-
-        private void Form1_Deactivate(object sender, EventArgs e)
-        {
-            //ActiveForm.Focus();
-            //Application.OpenForms[0].Activate();
-            //Application.OpenForms[1].Activate();
-            //Activate();
-        }
-
-        //private Choices CreateSampleOne()
-        //{
- 
-        //    GrammarBuilder[] grammarBuilders = 
-        //    {
-        //        new SemanticResultValue("one", 1),
-
-        //        //new SemanticResultValue("oneness", -1),
-        //        //new SemanticResultValue("oner", -1),
-        //        //new SemanticResultValue("wen", -1),
-        //        //new SemanticResultValue("whang", -1),
-        //        //new SemanticResultValue("when", -1),
-        //        //new SemanticResultValue("whene", -1),
-        //        //new SemanticResultValue("whener", -1),
-        //        //new SemanticResultValue("won", -1),
-
-        //        //---------------------------------
-
-        //        new SemanticResultValue("two", 2),
-
-        //        //new SemanticResultValue("to", -1),
-        //        //new SemanticResultValue("toe", -1),
-        //        //new SemanticResultValue("too", -1),
-        //        //new SemanticResultValue("tour", -1),
-        //        //new SemanticResultValue("tow", -1),
-        //        //new SemanticResultValue("tower", -1),
-
-        //        //---------------------------------
-        //        new SemanticResultValue("three", 3),
-
-        //        //---------------------------------
-
-        //        new SemanticResultValue("four", 4),
-
-        //        //new SemanticResultValue("faugh", -1),
-        //        //new SemanticResultValue("for", -1),
-        //        //new SemanticResultValue("fore", -1),
-
-        //        //---------------------------------
-
-        //        new SemanticResultValue("five", 5),
-
-        //        //new SemanticResultValue("favor", -1),
-        //        //new SemanticResultValue("favour", -1),
-        //        //new SemanticResultValue("fever", -1),
-        //        //new SemanticResultValue("fiver", -1),
-
-        //        //---------------------------------
-
-        //        new SemanticResultValue("six", 6),
-
-        //        //new SemanticResultValue("sixer", -1),
-
-        //        //---------------------------------
-
-        //        new SemanticResultValue("seven", 7),
-
-        //        //new SemanticResultValue("savanna", -1),
-        //        //new SemanticResultValue("savannah", -1),
-
-        //        //---------------------------------
-
-        //        new SemanticResultValue("eight", 8),
-
-        //        //new SemanticResultValue("ait", -1),
-
-        //        //---------------------------------
-
-        //        new SemanticResultValue("nine", 9),
-
-        //        //new SemanticResultValue("neon", 9),
-        //    };
-            
-        //    return new Choices(grammarBuilders);
-        //}
     }
 }
