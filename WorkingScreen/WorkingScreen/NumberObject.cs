@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace VoiceControl
 {
-    class NumberObject
+    public class NumberObject
     {
         public class RegionRectangle
         {

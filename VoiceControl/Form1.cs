@@ -46,6 +46,7 @@ namespace VoiceControl
                 _sre.LoadGrammar(Double());
                 _sre.LoadGrammar(Scale());
                 _sre.LoadGrammar(End());
+                _sre.LoadGrammar(Increase());
 
                 // start recognition
                 _sre.RecognizeAsync(RecognizeMode.Multiple);
@@ -122,6 +123,17 @@ namespace VoiceControl
             var grammarBuilder = new GrammarBuilder("end", SubsetMatchingMode.SubsequenceContentRequired);
             grammarBuilder.Culture = _culture;
             grammarBuilder.Append(new SemanticResultKey("end", programs));
+
+            return new Grammar(grammarBuilder);
+        }
+
+        private Grammar Increase()
+        {
+            var programs = CreateSample();
+
+            var grammarBuilder = new GrammarBuilder("loupe", SubsetMatchingMode.SubsequenceContentRequired);
+            grammarBuilder.Culture = _culture;
+            grammarBuilder.Append(new SemanticResultKey("loupe", programs));
 
             return new Grammar(grammarBuilder);
         }
@@ -203,6 +215,13 @@ namespace VoiceControl
                         _screenDelineation.EndNumber();
 
                         break;
+
+                    case "loupe":
+
+                        _screenDelineation.IncreaseMagnifier(number);
+
+                        break;
+
                 }
             }
         }

@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using static VoiceControl.NumberObject;
 
 namespace VoiceControl
 {
@@ -15,9 +16,12 @@ namespace VoiceControl
         private bool initialized;
         private RECT magWindowRect = new RECT();
         private Timer timer;
+        private RegionRectangle _regionRectangle;
 
-        public Magnifier(Form form)
+        public Magnifier(Form form, RegionRectangle regionRectangle)
         {
+            _regionRectangle = regionRectangle;
+
             magnification = 2.0f;
 
             this.form = form ?? throw new ArgumentNullException("form");
@@ -72,16 +76,24 @@ namespace VoiceControl
             if ((!initialized) || (hwndMag == IntPtr.Zero))
                 return;
 
-            POINT mousePoint = new POINT();
+            //POINT mousePoint = new POINT();
             RECT sourceRect = new RECT();
 
-            NativeMethods.GetCursorPos(ref mousePoint);
+            //NativeMethods.GetCursorPos(ref mousePoint);
 
-            int width = (int)((magWindowRect.right - magWindowRect.left) / magnification);
-            int height = (int)((magWindowRect.bottom - magWindowRect.top) / magnification);
+            //int width = (int)((magWindowRect.right - magWindowRect.left) / magnification);
+            //int height = (int)((magWindowRect.bottom - magWindowRect.top) / magnification);
 
-            sourceRect.left = mousePoint.x - width / 2;
-            sourceRect.top = mousePoint.y - height / 2;
+            //sourceRect.left = mousePoint.x - width / 2;
+            //sourceRect.top = mousePoint.y - height / 2;
+
+
+
+            int width = _regionRectangle.Width;
+            int height = _regionRectangle.Height;
+
+            sourceRect.left = _regionRectangle.StartX;
+            sourceRect.top = _regionRectangle.StartY;
 
 
             // Don't scroll outside desktop area.
@@ -93,7 +105,7 @@ namespace VoiceControl
             {
                 sourceRect.left = NativeMethods.GetSystemMetrics(NativeMethods.SM_CXSCREEN) - width;
             }
-            sourceRect.right = sourceRect.left + width;
+            sourceRect.right = sourceRect.left - width;
 
             if (sourceRect.top < 0)
             {
@@ -103,15 +115,10 @@ namespace VoiceControl
             {
                 sourceRect.top = NativeMethods.GetSystemMetrics(NativeMethods.SM_CYSCREEN) - height;
             }
-            sourceRect.bottom = sourceRect.top + height;
+            sourceRect.bottom = sourceRect.top - height;
 
-            if (this.form == null)
-            {
-                timer.Enabled = false;
-                return;
-            }
 
-            if (this.form.IsDisposed)
+            if (form.IsDisposed)
             {
                 timer.Enabled = false;
                 return;
@@ -156,9 +163,9 @@ namespace VoiceControl
             hInst = NativeMethods.GetModuleHandle(null);
 
             // Make the window opaque.
-            form.AllowTransparency = true;
-            form.TransparencyKey = Color.Empty;
-            form.Opacity = 255;
+            //form.AllowTransparency = true;
+            //form.TransparencyKey = Color.Empty;
+            //form.Opacity = 255;
 
             // Create a magnifier control that fills the client area.
             NativeMethods.GetClientRect(form.Handle, ref magWindowRect);
@@ -171,6 +178,9 @@ namespace VoiceControl
             {
                 return;
             }
+
+            //form.FormBorderStyle = FormBorderStyle.None;
+            form.WindowState = FormWindowState.Maximized;
 
             // Set the magnification factor.
             Transformation matrix = new Transformation(magnification);

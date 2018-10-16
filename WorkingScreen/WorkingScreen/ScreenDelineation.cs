@@ -59,12 +59,7 @@ namespace VoiceControl
 
             _numberObject = new NumberObject();
 
-            OnTopControl voiceControl = new OnTopControl(Handle);
-
-            MagnifierForm magnifierForm = new MagnifierForm();
-
-            magnifierForm.Show();
-            Magnifier magnifier = new Magnifier(magnifierForm);
+            //OnTopControl voiceControl = new OnTopControl(Handle);
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -79,9 +74,11 @@ namespace VoiceControl
             if (!flag)
             {
                 flag = true;
-                ScaleNumber(5);
+                ScaleNumber(2);
 
-                EndNumber();
+                IncreaseMagnifier(5);
+
+                //EndNumber();
             }
         }
 
@@ -229,45 +226,46 @@ namespace VoiceControl
             Invalidate();
         }
 
+        MagnifierForm magnifierForm = null;
+        Magnifier magnifier = null;
+
         //Метод для масштабирования с применением лупы
-        public void ScreenMagnifierNumber(int number)
+        public void IncreaseMagnifier(int number)
         {
-            //int index = number - 1;
+            if (magnifierForm == null)
+            {
+                int index = number - 1;
 
-            //var currentNumberObject = SearchChild(_numberObject);
+                var currentNumberObject = SearchChild(_numberObject);
 
-            //Configuration configuration = new Configuration();
+                magnifierForm = new MagnifierForm();
+                magnifierForm.Show();
 
-           
-            //configuration.MagnifierWidth = currentNumberObject.listRegionRectangle[index].Width;
-            //configuration.MagnifierHeight = currentNumberObject.listRegionRectangle[index].Height;
+                magnifier = new Magnifier(magnifierForm, currentNumberObject.listRegionRectangle[index]);
+            }
+        }
 
-            //Point point = new Point(currentNumberObject.listRegionRectangle[index].StartX, currentNumberObject.listRegionRectangle[index].StartY);
+        //Метод отменяет лупу
+        public void EndMagnifier()
+        {
+            if (magnifier != null)
+            {
+                magnifier.Dispose();
+            }
 
-            //Point point1 = new Point(666, 666);
-
-            //ScreeMagnifier form = new ScreeMagnifier(configuration, point1);
-            //form.Show();
-            //var newChildNumberObject = new NumberObject
-            //{
-            //    //Добавление родителя
-            //    ParantNumberObject = currentNumberObject
-            //};
-
-            ////Добавление потомка
-            //currentNumberObject.ChildNumberObject = newChildNumberObject;
-
-            //currentNumberObject.listRegionRectangle[index].Visible = false;
-
-            //DrawingDividingLines(newChildNumberObject,
-            //                     currentNumberObject.listRegionRectangle[index].Width, currentNumberObject.listRegionRectangle[index].Height,
-            //                     currentNumberObject.listRegionRectangle[index].StartX, currentNumberObject.listRegionRectangle[index].StartY);
-
-            Invalidate();
+            if (magnifierForm != null)
+            {
+                magnifierForm.Dispose();
+            }
         }
 
         public void EndNumber()
         {
+            if(magnifierForm != null)
+            {
+                EndMagnifier();
+            }
+
             if (SearchChild(_numberObject).ParantNumberObject != null)
             {
                 var ParantNumberObject = SearchChild(_numberObject).ParantNumberObject;
