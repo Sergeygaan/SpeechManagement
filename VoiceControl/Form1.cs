@@ -164,7 +164,7 @@ namespace VoiceControl
 
             AppendLine(e.Result.Text + " (" + e.Result.Confidence + ")");
 
-            if (e.Result.Confidence < 0.35f)
+            if (e.Result.Confidence < 0.45f)
                 return;
 
             for (var i = 0; i < e.Result.Alternates.Count; ++i)
@@ -176,9 +176,10 @@ namespace VoiceControl
             {
                 AppendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")");
 
-                if (e.Result.Words[i].Confidence < 0.35f)
+                if (e.Result.Words[i].Confidence < 0.1f)
                     return;
             }
+
 
             foreach (var s in e.Result.Semantics)
             {
@@ -228,8 +229,11 @@ namespace VoiceControl
 
         private void AppendLine(string text)
         {
-            richTextBox1.AppendText(text + Environment.NewLine);
-            richTextBox1.ScrollToCaret();
+            if (richTextBox1 != null)
+            {
+                richTextBox1.AppendText(text + Environment.NewLine);
+                richTextBox1.ScrollToCaret();
+            }
         }
     }
 }
