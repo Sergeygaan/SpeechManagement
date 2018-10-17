@@ -48,23 +48,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Magnifier\Magnifier.cs" />
-    <Compile Include="Magnifier\MagnifierForm.cs">
+    <Compile Include="Main\Command\Auxiliary.cs" />
+    <Compile Include="Main\Command\CommandEnd.cs" />
+    <Compile Include="Main\Command\CommandMagnifier.cs" />
+    <Compile Include="Main\Command\CommandRightOneClick.cs" />
+    <Compile Include="Main\Command\CommandScale.cs" />
+    <Compile Include="Main\Command\ICommand.cs" />
+    <Compile Include="Main\Command\CommandLeftDoubleClick.cs" />
+    <Compile Include="Main\Command\CommandLeftOneClick.cs" />
+    <Compile Include="Main\Command\Magnifier\Magnifier.cs" />
+    <Compile Include="Main\Command\Magnifier\MagnifierForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Magnifier\MagnifierForm.Designer.cs">
+    <Compile Include="Main\Command\Magnifier\MagnifierForm.Designer.cs">
       <DependentUpon>MagnifierForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Magnifier\NativeMethods.cs" />
-    <Compile Include="Magnifier\NativeStructures.cs" />
-    <Compile Include="ScreeMagnifier\Configuration.cs" />
-    <Compile Include="ScreeMagnifier\ScreeMagnifier.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ScreeMagnifier\ScreeMagnifier.Designer.cs">
-      <DependentUpon>ScreeMagnifier.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WorkingScreen\NumberObject.cs" />
+    <Compile Include="Main\Command\Magnifier\NativeMethods.cs" />
+    <Compile Include="Main\Command\Magnifier\NativeStructures.cs" />
+    <Compile Include="Main\Drawing\Drawing.cs" />
+    <Compile Include="Main\Main.cs" />
+    <Compile Include="Main\Object\WorkObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkingScreen\OnTopControl.cs" />
     <Compile Include="WorkingScreen\ScreenDelineation.cs">
@@ -73,7 +76,7 @@
     <Compile Include="WorkingScreen\ScreenDelineation.Designer.cs">
       <DependentUpon>ScreenDelineation.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Magnifier\MagnifierForm.resx">
+    <EmbeddedResource Include="Main\Command\Magnifier\MagnifierForm.resx">
       <DependentUpon>MagnifierForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -85,9 +88,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ScreeMagnifier\ScreeMagnifier.resx">
-      <DependentUpon>ScreeMagnifier.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="WorkingScreen\ScreenDelineation.resx">
       <DependentUpon>ScreenDelineation.cs</DependentUpon>
     </EmbeddedResource>

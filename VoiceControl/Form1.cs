@@ -164,7 +164,7 @@ namespace VoiceControl
 
             AppendLine(e.Result.Text + " (" + e.Result.Confidence + ")");
 
-            if (e.Result.Confidence < 0.45f)
+            if (e.Result.Confidence < 0.35f)
                 return;
 
             for (var i = 0; i < e.Result.Alternates.Count; ++i)
@@ -176,10 +176,9 @@ namespace VoiceControl
             {
                 AppendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")");
 
-                if (e.Result.Words[i].Confidence < 0.1f)
+                if (e.Result.Words[i].Confidence < 0.35f)
                     return;
             }
-
 
             foreach (var s in e.Result.Semantics)
             {
@@ -189,39 +188,40 @@ namespace VoiceControl
                 {
                     case "left":
 
-                        _screenDelineation.LeftOneClick(number);
+                        _screenDelineation.ApplyCommand(0, number);
                       
-                        break;
-
-                    case "double":
-
-                        _screenDelineation.LeftDoubleClick(number);
-
                         break;
 
                     case "right":
 
-                        _screenDelineation.RightOneClick(number);
+                        _screenDelineation.ApplyCommand(1, number);
+
+                        break;
+
+                    case "double":
+
+                        _screenDelineation.ApplyCommand(2, number);
 
                         break;
 
                     case "scale":
 
-                        _screenDelineation.ScaleNumber(number);
-
-                        break;
-
-                    case "end":
-
-                        _screenDelineation.EndNumber();
+                        _screenDelineation.ApplyCommand(3, number);
 
                         break;
 
                     case "loupe":
 
-                        _screenDelineation.IncreaseMagnifier(number);
+                        _screenDelineation.ApplyCommand(4, number);
 
                         break;
+
+                    case "end":
+
+                        _screenDelineation.ApplyCommand(5, 0);
+
+                        break;
+
 
                 }
             }
@@ -229,11 +229,8 @@ namespace VoiceControl
 
         private void AppendLine(string text)
         {
-            if (richTextBox1 != null)
-            {
-                richTextBox1.AppendText(text + Environment.NewLine);
-                richTextBox1.ScrollToCaret();
-            }
+            richTextBox1.AppendText(text + Environment.NewLine);
+            richTextBox1.ScrollToCaret();
         }
     }
 }

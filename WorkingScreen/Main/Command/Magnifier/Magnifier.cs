@@ -4,9 +4,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using static VoiceControl.NumberObject;
+using static VoiceControl.WorkObject;
 
-namespace VoiceControl
+namespace Command.Magnif
 {
     public class Magnifier : IDisposable
     {
@@ -128,8 +128,8 @@ namespace VoiceControl
             NativeMethods.MagSetWindowSource(hwndMag, sourceRect);
 
             // Reclaim topmost status, to prevent unmagnified menus from remaining in view. 
-            NativeMethods.SetWindowPos(form.Handle, NativeMethods.HWND_TOPMOST, 0, 0, 0, 0,
-                (int)SetWindowPosFlags.SWP_NOACTIVATE | (int)SetWindowPosFlags.SWP_NOMOVE | (int)SetWindowPosFlags.SWP_NOSIZE);
+            //NativeMethods.SetWindowPos(form.Handle, NativeMethods.HWND_TOPMOST, 0, 0, 0, 0,
+            //    (int)SetWindowPosFlags.SWP_NOACTIVATE | (int)SetWindowPosFlags.SWP_NOMOVE | (int)SetWindowPosFlags.SWP_NOSIZE);
 
             // Force redraw.
             NativeMethods.InvalidateRect(hwndMag, IntPtr.Zero, true);
@@ -179,7 +179,7 @@ namespace VoiceControl
                 return;
             }
 
-            form.FormBorderStyle = FormBorderStyle.None;
+            //form.FormBorderStyle = FormBorderStyle.None;
             form.WindowState = FormWindowState.Maximized;
 
             // Set the magnification factor.
@@ -201,6 +201,8 @@ namespace VoiceControl
             timer = null;
             form.Resize -= form_Resize;
             RemoveMagnifier();
+
+            form?.Dispose();
         }
 
         #region IDisposable Members
@@ -209,6 +211,8 @@ namespace VoiceControl
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+
+            form?.Dispose();
         }
 
         #endregion

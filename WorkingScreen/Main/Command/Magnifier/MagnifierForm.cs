@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace VoiceControl
+namespace Command.Magnif
 {
     public partial class MagnifierForm : Form
     {

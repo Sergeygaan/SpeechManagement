@@ -4,7 +4,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 
-namespace VoiceControl
+namespace Command.Magnif
 {
     // Magnifier Window Styles
     internal enum MagnifierStyle : int

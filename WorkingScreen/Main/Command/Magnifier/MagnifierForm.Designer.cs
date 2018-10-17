@@ -1,4 +1,4 @@
-﻿namespace VoiceControl
+﻿namespace Command.Magnif
 {
     partial class MagnifierForm
     {

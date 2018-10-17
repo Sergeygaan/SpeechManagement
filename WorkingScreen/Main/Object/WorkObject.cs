@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Command.Magnif;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace VoiceControl
 {
-    public class NumberObject
+    public class WorkObject
     {
         public class RegionRectangle
         {
@@ -21,19 +22,21 @@ namespace VoiceControl
             public int Height { set; get; }
         }
 
-        public NumberObject ChildNumberObject;
-        public NumberObject ParantNumberObject;
+        public WorkObject ChildNumberObject;
+        public WorkObject ParantNumberObject;
+
         public int GenerationNumber;
+
+        public Magnifier Magnifier = null;
 
         public bool Visible { set; get; }
 
         public List<RegionRectangle> listRegionRectangle = new List<RegionRectangle>();
 
-        public NumberObject()
+        public WorkObject()
         {
             Visible = true;
         }
-
 
         public void DrawingRectangle(PaintEventArgs e)
         {

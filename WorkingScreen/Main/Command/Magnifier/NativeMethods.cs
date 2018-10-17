@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace VoiceControl
+namespace Command.Magnif
 {
-
     internal static class NativeMethods
     {
 
