@@ -31,12 +31,12 @@ namespace VoiceControl
             _drawing = new Drawing();
 
 
-            commands.Add(new CommandLeftOneClick());
-            commands.Add(new CommandRightOneClick());
-            commands.Add(new CommandLeftDoubleClick());
-            commands.Add(new CommandScale(_drawing));
-            commands.Add(new CommandMagnifier());
-            commands.Add(new CommandEnd());
+            commands.Add(new CommandLeftOneClick()); //0
+            commands.Add(new CommandRightOneClick()); //1
+            commands.Add(new CommandLeftDoubleClick()); //2
+            commands.Add(new CommandScale(_drawing));//3
+            commands.Add(new CommandMagnifier()); //4
+            commands.Add(new CommandEnd()); //5
 
             Auxiliary.WorkObject = _workObject;
         }
@@ -45,14 +45,14 @@ namespace VoiceControl
         {
             DrawingZone(e, _workObject);
 
-            //if(flag)
-            //{
-            //    ApplyCommand(3, 1);
+            if (flag)
+            {
+                ApplyCommand(4, 5);
 
-            //    //ApplyCommand(5, 2);
+                //ApplyCommand(5, 2);
 
-            //    flag = false;
-            //}
+                flag = false;
+            }
         }
 
         bool flag = true;
