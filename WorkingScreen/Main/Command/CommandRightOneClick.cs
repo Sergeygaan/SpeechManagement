@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace Command
         {
             var currentObject = SearchChild();
 
-            Cursor.Position = currentObject.Center(index);
+            Cursor.Position = Point.Round(currentObject.Center(index));
 
             mouse_event((uint)MouseEventFlags.RIGHTDOWN | (uint)MouseEventFlags.RIGHTUP, 0, 0, 0, 0);
         }

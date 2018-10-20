@@ -9,17 +9,17 @@ namespace VoiceControl
     {
         public class RegionRectangle
         {
-            public Rectangle Rectangle { set; get; }
+            public RectangleF Rectangle { set; get; }
 
             public int IdObject { set; get; }
 
             public bool Visible { set; get; }
 
-            public int StartX { set; get; }
-            public int StartY { set; get; }
+            public float StartX { set; get; }
+            public float StartY { set; get; }
 
-            public int Width { set; get; }
-            public int Height { set; get; }
+            public float Width { set; get; }
+            public float Height { set; get; }
         }
 
         public WorkObject ChildNumberObject;
@@ -42,7 +42,8 @@ namespace VoiceControl
         {
             foreach (var currentRectangle in listRegionRectangle)
             {
-                e.Graphics.DrawRectangle(new Pen(Color.Gray), currentRectangle.Rectangle);
+                e.Graphics.DrawRectangle(new Pen(Color.Gray), currentRectangle.Rectangle.X, currentRectangle.Rectangle.Y,
+                                                    currentRectangle.Rectangle.Width, currentRectangle.Rectangle.Height);
             }
         }
 
@@ -54,7 +55,7 @@ namespace VoiceControl
                 {
                     e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-                    int fontSize = currentRectangle.Rectangle.Height / 2;
+                    float fontSize = currentRectangle.Rectangle.Height / 2;
 
                     Font f = new Font("Microsoft Sans Serif", fontSize);
 
@@ -69,9 +70,9 @@ namespace VoiceControl
             }
         }
 
-        public Point Center(int index)
+        public PointF Center(int index)
         {
-                return new Point(listRegionRectangle[index].Rectangle.Left + listRegionRectangle[index].Width / 2,
+                return new PointF(listRegionRectangle[index].Rectangle.Left + listRegionRectangle[index].Width / 2,
                              listRegionRectangle[index].Rectangle.Top + listRegionRectangle[index].Height / 2);
             
         }

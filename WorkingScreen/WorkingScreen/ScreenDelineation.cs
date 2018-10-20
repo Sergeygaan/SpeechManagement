@@ -41,9 +41,9 @@ namespace VoiceControl
             initialStyle = GetWindowLong(Handle, -20);
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
 
-            mainObject = new Main(Width, Height);
-
-            //OnTopControl voiceControl = new OnTopControl(Handle);
+            Size resolution = Screen.PrimaryScreen.Bounds.Size;
+        
+            mainObject = new Main(resolution.Width, resolution.Height);
         }
 
         bool flag = false;
@@ -64,6 +64,22 @@ namespace VoiceControl
         protected override void OnPaint(PaintEventArgs e)
         {
             mainObject.OnPaint(e);
+
+            if (!flag)
+            {
+                //ApplyCommand(3, 5);
+
+                //ApplyCommand(3, 5);
+
+                //ApplyCommand(4, 5);
+
+                //ApplyCommand(5, 2);
+
+
+
+                flag = true;
+            }
+
         }
 
         public void ApplyCommand(int indexCommand, int number)

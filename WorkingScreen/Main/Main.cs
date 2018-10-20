@@ -44,18 +44,7 @@ namespace VoiceControl
         public void OnPaint(PaintEventArgs e)
         {
             DrawingZone(e, _workObject);
-
-            //if (flag)
-            //{
-            //    ApplyCommand(4, 5);
-
-            //    //ApplyCommand(5, 2);
-
-            //    flag = false;
-            //}
         }
-
-        bool flag = true;
 
         //Метод по отрисовке зон 
         private void DrawingZone(PaintEventArgs e, WorkObject _currentObject)

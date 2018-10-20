@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 using static Command.Auxiliary;
 
 namespace Command
@@ -9,7 +10,7 @@ namespace Command
         {
             var currentObject = SearchChild();
 
-            Cursor.Position = currentObject.Center(index);
+            Cursor.Position = Point.Round(currentObject.Center(index));
 
             mouse_event((uint)MouseEventFlags.LEFTDOWN | (uint)MouseEventFlags.LEFTUP, 0, 0, 0, 0);
         }

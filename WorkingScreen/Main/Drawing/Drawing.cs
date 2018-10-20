@@ -12,15 +12,15 @@ namespace Main.Drawing
     public class Drawing
     {
         //Метод по созданию новых зон для мыши
-        public void DrawingDividingLines(WorkObject _currentObject, int width, int height, int startX = 0, int startY = 0)
+        public void DrawingDividingLines(WorkObject _currentObject, float width, float height, float startX = 0, float startY = 0)
         {
-            int saveStartX = startX;
+            float saveStartX = startX;
 
-            var stepWidth = width / 3;
-            var stepHeight = height / 3;
+            float stepWidth = width / 3;
+            float stepHeight = height / 3;
 
-            int endX = stepWidth + startX;
-            int endY = stepHeight + startY;
+            float endX = stepWidth + startX;
+            float endY = stepHeight + startY;
 
             int id = 0;
 
@@ -44,16 +44,16 @@ namespace Main.Drawing
             }
         }
 
-        private RegionRectangle CreateRegionRectangle(int iDObject, int startX, int startY, int endtX, int endY)
+        private RegionRectangle CreateRegionRectangle(int iDObject, float startX, float startY, float endtX, float endY)
         {
             var width = endtX - startX;
             var height = endY - startY;
 
-            var Rectangle = new Rectangle(startX, startY, width, height);
+            var Rectangle = new RectangleF(startX, startY, width, height);
 
             RegionRectangle regionRectangle = new RegionRectangle();
 
-            regionRectangle.Rectangle = new Rectangle(startX, startY, width, height);
+            regionRectangle.Rectangle = new RectangleF(startX, startY, width, height);
 
             regionRectangle.IdObject = iDObject;
 

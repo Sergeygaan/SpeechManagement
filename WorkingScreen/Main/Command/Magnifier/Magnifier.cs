@@ -89,11 +89,11 @@ namespace Command.Magnif
 
 
 
-            int width = _regionRectangle.Width;
-            int height = _regionRectangle.Height;
+            int width = (int)_regionRectangle.Width;
+            int height = (int)_regionRectangle.Height;
 
-            sourceRect.left = _regionRectangle.StartX - width / 8;
-            sourceRect.top = _regionRectangle.StartY - width / 8;
+            sourceRect.left = (int)_regionRectangle.StartX - width / 8;
+            sourceRect.top = (int)_regionRectangle.StartY - width / 8;
 
 
             // Don't scroll outside desktop area.
