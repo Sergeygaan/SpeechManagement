@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -16,11 +18,26 @@ namespace VoiceControl
         private SpeechRecognitionEngine _sre;
         private ScreenDelineation _screenDelineation;
 
+        private List<ArrayCommands> _arrayCommands = new List<ArrayCommands>();
+
         public Form1()
         {
             InitializeComponent();
+
+            FillListCommands();
+ 
             _screenDelineation = new ScreenDelineation();
             _screenDelineation.Show();
+        }
+
+        private void FillListCommands()
+        {
+            _arrayCommands.Add(new ArrayCommands("left", CreateSampleNumbers()));
+            _arrayCommands.Add(new ArrayCommands("right", CreateSampleNumbers()));
+            _arrayCommands.Add(new ArrayCommands("double", CreateSampleNumbers()));
+            _arrayCommands.Add(new ArrayCommands("scale", CreateSampleNumbers()));
+            _arrayCommands.Add(new ArrayCommands("loupe", CreateSampleNumbers()));
+            _arrayCommands.Add(new ArrayCommands("end", CreateSampleEnd()));
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -41,12 +58,7 @@ namespace VoiceControl
                 _sre.SetInputToDefaultAudioDevice();
 
                 // load grammar
-                _sre.LoadGrammar(Left());
-                _sre.LoadGrammar(Right());
-                _sre.LoadGrammar(Double());
-                _sre.LoadGrammar(Scale());
-                _sre.LoadGrammar(End());
-                _sre.LoadGrammar(Increase());
+                LoadGrammar();
 
                 // start recognition
                 _sre.RecognizeAsync(RecognizeMode.Multiple);
@@ -86,113 +98,68 @@ namespace VoiceControl
             return new Choices(grammarBuilders);
         }
 
-        private Grammar Left()
+        private void LoadGrammar()
         {
-            var programs = CreateSampleNumbers();
-
-            var grammarBuilder = new GrammarBuilder("left", SubsetMatchingMode.SubsequenceContentRequired);
-            grammarBuilder.Culture = _culture;
-            grammarBuilder.Append(new SemanticResultKey("left", programs));
-
-            return new Grammar(grammarBuilder);
+            //Загрузка команд из списка
+            foreach(var currentCommand in _arrayCommands)
+            {
+                _sre.LoadGrammar(CreateGrammar(currentCommand.CommandText, currentCommand.SemanticResult));
+            }
         }
 
-        private Grammar Right()
+        private Grammar CreateGrammar(string commandText, Choices semanticResult)
         {
-            var programs = CreateSampleNumbers();
-
-            var grammarBuilder = new GrammarBuilder("right", SubsetMatchingMode.SubsequenceContentRequired);
+            var grammarBuilder = new GrammarBuilder(commandText, SubsetMatchingMode.SubsequenceContentRequired);
             grammarBuilder.Culture = _culture;
-            grammarBuilder.Append(new SemanticResultKey("right", programs));
-
-            return new Grammar(grammarBuilder);
-        }
-
-        private Grammar Double()
-        {
-            var programs = CreateSampleNumbers();
-
-            var grammarBuilder = new GrammarBuilder("Double", SubsetMatchingMode.SubsequenceContentRequired);
-            grammarBuilder.Culture = _culture;
-            grammarBuilder.Append(new SemanticResultKey("double", programs));
-
-            return new Grammar(grammarBuilder);
-        }
-
-        private Grammar Scale()
-        {
-            var programs = CreateSampleNumbers();
-
-            var grammarBuilder = new GrammarBuilder("scale", SubsetMatchingMode.SubsequenceContentRequired);
-            grammarBuilder.Culture = _culture;
-            grammarBuilder.Append(new SemanticResultKey("scale", programs));
-
-            return new Grammar(grammarBuilder);
-        }
-
-        private Grammar Increase()
-        {
-            var programs = CreateSampleNumbers();
-
-            var grammarBuilder = new GrammarBuilder("loupe", SubsetMatchingMode.SubsequenceContentRequired);
-            grammarBuilder.Culture = _culture;
-            grammarBuilder.Append(new SemanticResultKey("loupe", programs));
-
-            return new Grammar(grammarBuilder);
-        }
-
-        private Grammar End()
-        {
-            var programs = CreateSampleEnd();
-
-            var grammarBuilder = new GrammarBuilder("end", SubsetMatchingMode.SubsequenceContentRequired);
-            grammarBuilder.Culture = _culture;
-            grammarBuilder.Append(new SemanticResultKey("end", programs));
+            grammarBuilder.Append(new SemanticResultKey(commandText, semanticResult));
 
             return new Grammar(grammarBuilder);
         }
 
         private void sr_SpeechRecognitionRejected(object sender, SpeechRecognitionRejectedEventArgs e)
         {
-            AppendLine("Speech Recognition Rejected: " + e.Result.Text);
+            AppendLine("Speech Recognition Rejected: " + e.Result.Text, Color.WhiteSmoke);
         }
 
         private void sr_SpeechHypothesized(object sender, SpeechHypothesizedEventArgs e)
         {
-            AppendLine("Speech Hypothesized: " + e.Result.Text + " (" + e.Result.Confidence + ")");
+            AppendLine("Speech Hypothesized: " + e.Result.Text + " (" + e.Result.Confidence + ")", Color.WhiteSmoke);
         }
 
         private void sr_RecognizeCompleted(object sender, RecognizeCompletedEventArgs e)
         {
-            AppendLine("Recognize Completed: " + e.Result.Text);
+            AppendLine("Recognize Completed: " + e.Result.Text, Color.WhiteSmoke);
         }
 
         private void sr_SpeechDetected(object sender, SpeechDetectedEventArgs e)
         {
-            AppendLine("Speech Detected: audio pos " + e.AudioPosition);
+            AppendLine("Speech Detected: audio pos " + e.AudioPosition, Color.WhiteSmoke);
         }
 
+        //Определение корректности текста
         private void sr_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            AppendLine("\t" + "Speech Recognized:");
-
-            AppendLine(e.Result.Text + " (" + e.Result.Confidence + ")");
+            AppendLine("\t" + "Speech Recognized:", Color.WhiteSmoke);
 
             if (e.Result.Confidence < 0.35f)
                 return;
 
             for (var i = 0; i < e.Result.Alternates.Count; ++i)
             {
-                AppendLine("\t" + "Alternate: " + e.Result.Alternates[i].Text + " (" + e.Result.Alternates[i].Confidence + ")");
+                AppendLine("\t" + "Alternate: " + e.Result.Alternates[i].Text + " (" + e.Result.Alternates[i].Confidence + ")", Color.WhiteSmoke);
             }
 
             for (var i = 0; i < e.Result.Words.Count; ++i)
             {
-                AppendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")");
+                AppendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")", Color.WhiteSmoke);
 
-                if (e.Result.Words[i].Confidence < 0.05f)
+                if (e.Result.Words[i].Confidence < 0.2f)
                     return;
             }
+
+            AppendLine(e.Result.Text + " (" + e.Result.Confidence + ")", Color.YellowGreen);
+
+            AppendLine("---------------------------------------------------------------------------------------", Color.WhiteSmoke);
 
             foreach (var s in e.Result.Semantics)
             {
@@ -241,10 +208,42 @@ namespace VoiceControl
             }
         }
 
-        private void AppendLine(string text)
+        private void AppendLine(string text, Color color )
         {
-            richTextBox1.AppendText(text + Environment.NewLine);
-            richTextBox1.ScrollToCaret();
+            ListViewItem listViewItem = new ListViewItem();
+            listViewItem.Text = text;
+            listViewItem.BackColor = color;
+
+            listView.Items.Add(listViewItem);
+
+            if (listView.Items.Count > 2)
+            {
+                listView.Items[listView.Items.Count - 2].Focused = false;
+                listView.Items[listView.Items.Count - 2].Focused = false;
+
+                listView.Items[listView.Items.Count - 1].Focused = true;
+                listView.Items[listView.Items.Count - 1].Focused = true;
+                listView.Items[listView.Items.Count - 1].EnsureVisible();
+            }
+
+            if (listView.Items.Count > 100)
+            {
+                listView.Items.Clear();
+            }
+
         }
     }
+
+    public class ArrayCommands
+    {
+        public string CommandText;
+        public Choices SemanticResult;
+
+        public ArrayCommands(string commandText, Choices semanticResult)
+        {
+            CommandText = commandText;
+            SemanticResult = semanticResult;
+        }
+    }
+
 }
