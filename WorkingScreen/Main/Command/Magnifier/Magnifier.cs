@@ -76,24 +76,22 @@ namespace Command.Magnif
             if ((!initialized) || (hwndMag == IntPtr.Zero))
                 return;
 
-            //POINT mousePoint = new POINT();
+            POINT mousePoint = new POINT();
             RECT sourceRect = new RECT();
 
-            //NativeMethods.GetCursorPos(ref mousePoint);
+            NativeMethods.GetCursorPos(ref mousePoint);
 
-            //int width = (int)((magWindowRect.right - magWindowRect.left) / magnification);
-            //int height = (int)((magWindowRect.bottom - magWindowRect.top) / magnification);
+            int width = (int)((magWindowRect.right - magWindowRect.left) / magnification);
+            int height = (int)((magWindowRect.bottom - magWindowRect.top) / magnification);
 
             //sourceRect.left = mousePoint.x - width / 2;
             //sourceRect.top = mousePoint.y - height / 2;
 
-
-
-            int width = (int)_regionRectangle.Width;
-            int height = (int)_regionRectangle.Height;
+            //int width = (int)_regionRectangle.Width;
+            //int height = (int)_regionRectangle.Height;
 
             sourceRect.left = (int)_regionRectangle.StartX - width / 8;
-            sourceRect.top = (int)_regionRectangle.StartY - width / 8;
+            sourceRect.top = (int)_regionRectangle.StartY - height / 8;
 
 
             // Don't scroll outside desktop area.
@@ -127,9 +125,9 @@ namespace Command.Magnif
             // Set the source rectangle for the magnifier control.
             NativeMethods.MagSetWindowSource(hwndMag, sourceRect);
 
-            // Reclaim topmost status, to prevent unmagnified menus from remaining in view. 
-            NativeMethods.SetWindowPos(form.Handle, NativeMethods.HWND_TOPMOST, 0, 0, 0, 0,
-                (int)SetWindowPosFlags.SWP_NOACTIVATE | (int)SetWindowPosFlags.SWP_NOMOVE | (int)SetWindowPosFlags.SWP_NOSIZE);
+            //Reclaim topmost status, to prevent unmagnified menus from remaining in view.
+           NativeMethods.SetWindowPos(form.Handle, NativeMethods.HWND_TOPMOST, 0, 0, 0, 0,
+               (int)SetWindowPosFlags.SWP_NOACTIVATE | (int)SetWindowPosFlags.SWP_NOMOVE | (int)SetWindowPosFlags.SWP_NOSIZE);
 
             // Force redraw.
             NativeMethods.InvalidateRect(hwndMag, IntPtr.Zero, true);
@@ -179,7 +177,7 @@ namespace Command.Magnif
                 return;
             }
 
-            //form.FormBorderStyle = FormBorderStyle.None;
+            form.FormBorderStyle = FormBorderStyle.None;
             form.WindowState = FormWindowState.Maximized;
 
             // Set the magnification factor.

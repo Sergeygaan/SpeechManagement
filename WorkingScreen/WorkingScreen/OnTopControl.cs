@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Command;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -36,8 +37,11 @@ namespace VoiceControl
                             {
                                 if (mutex.WaitOne(Timeout.Infinite, false))
                                 {
-                                    BringWindowToTop(intPtrControl);
-                                    mutex.ReleaseMutex();
+                                    if (CommandMagnifier.magnifierForm == null)
+                                    {
+                                        BringWindowToTop(intPtrControl);
+                                        mutex.ReleaseMutex();
+                                    }
                                 }
                             }
                             catch { /*А вот эту ошибку надо бы мониторить в подсистеме*/ }

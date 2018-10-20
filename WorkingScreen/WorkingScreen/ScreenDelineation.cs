@@ -44,6 +44,8 @@ namespace VoiceControl
             Size resolution = Screen.PrimaryScreen.Bounds.Size;
         
             mainObject = new Main(resolution.Width, resolution.Height);
+
+            OnTopControl a = new OnTopControl(Handle);
         }
 
         bool flag = false;
@@ -65,20 +67,16 @@ namespace VoiceControl
         {
             mainObject.OnPaint(e);
 
-            if (!flag)
-            {
-                //ApplyCommand(3, 5);
+            //if (!flag)
+            //{
+            //    //ApplyCommand(3, 9);
 
-                //ApplyCommand(3, 5);
+            //    //ApplyCommand(3, 7);
 
-                //ApplyCommand(4, 5);
+            //    ApplyCommand(4, 9);
 
-                //ApplyCommand(5, 2);
-
-
-
-                flag = true;
-            }
+            //    flag = true;
+            //}
 
         }
 
