@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoiceControl", "VoiceContro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkingScreen", "WorkingScreen\WorkingScreen.csproj", "{83355FC0-0486-4FE5-92D6-324FB17DFBB9}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InstallerVoiceControl", "InstallerVoiceControl\InstallerVoiceControl.vdproj", "{B9C6D9F8-62A1-4490-9C76-37DFF188C855}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,12 @@ Global
 		{83355FC0-0486-4FE5-92D6-324FB17DFBB9}.Release|x64.Build.0 = Release|x64
 		{83355FC0-0486-4FE5-92D6-324FB17DFBB9}.Release|x86.ActiveCfg = Release|Any CPU
 		{83355FC0-0486-4FE5-92D6-324FB17DFBB9}.Release|x86.Build.0 = Release|Any CPU
+		{B9C6D9F8-62A1-4490-9C76-37DFF188C855}.Debug|Any CPU.ActiveCfg = Debug
+		{B9C6D9F8-62A1-4490-9C76-37DFF188C855}.Debug|x64.ActiveCfg = Debug
+		{B9C6D9F8-62A1-4490-9C76-37DFF188C855}.Debug|x86.ActiveCfg = Debug
+		{B9C6D9F8-62A1-4490-9C76-37DFF188C855}.Release|Any CPU.ActiveCfg = Release
+		{B9C6D9F8-62A1-4490-9C76-37DFF188C855}.Release|x64.ActiveCfg = Release
+		{B9C6D9F8-62A1-4490-9C76-37DFF188C855}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
