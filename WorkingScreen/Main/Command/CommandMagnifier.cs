@@ -10,7 +10,7 @@ namespace Command
 {
     class CommandMagnifier : ICommand
     {
-        MagnifierForm magnifierForm = null;
+        public static MagnifierForm magnifierForm = null;
        
         public void Act(int index)
         {

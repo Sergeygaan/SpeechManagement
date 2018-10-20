@@ -45,14 +45,14 @@ namespace VoiceControl
         {
             DrawingZone(e, _workObject);
 
-            if (flag)
-            {
-                ApplyCommand(4, 5);
+            //if (flag)
+            //{
+            //    ApplyCommand(4, 5);
 
-                //ApplyCommand(5, 2);
+            //    //ApplyCommand(5, 2);
 
-                flag = false;
-            }
+            //    flag = false;
+            //}
         }
 
         bool flag = true;

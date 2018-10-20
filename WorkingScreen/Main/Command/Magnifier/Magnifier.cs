@@ -128,8 +128,8 @@ namespace Command.Magnif
             NativeMethods.MagSetWindowSource(hwndMag, sourceRect);
 
             // Reclaim topmost status, to prevent unmagnified menus from remaining in view. 
-            //NativeMethods.SetWindowPos(form.Handle, NativeMethods.HWND_TOPMOST, 0, 0, 0, 0,
-            //    (int)SetWindowPosFlags.SWP_NOACTIVATE | (int)SetWindowPosFlags.SWP_NOMOVE | (int)SetWindowPosFlags.SWP_NOSIZE);
+            NativeMethods.SetWindowPos(form.Handle, NativeMethods.HWND_TOPMOST, 0, 0, 0, 0,
+                (int)SetWindowPosFlags.SWP_NOACTIVATE | (int)SetWindowPosFlags.SWP_NOMOVE | (int)SetWindowPosFlags.SWP_NOSIZE);
 
             // Force redraw.
             NativeMethods.InvalidateRect(hwndMag, IntPtr.Zero, true);
@@ -202,7 +202,6 @@ namespace Command.Magnif
             form.Resize -= form_Resize;
             RemoveMagnifier();
 
-            form?.Dispose();
         }
 
         #region IDisposable Members
@@ -212,7 +211,8 @@ namespace Command.Magnif
             Dispose(true);
             GC.SuppressFinalize(this);
 
-            form?.Dispose();
+            form.Dispose();
+            form = null;
         }
 
         #endregion

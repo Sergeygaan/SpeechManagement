@@ -57,24 +57,38 @@ namespace VoiceControl
             }
         }
 
-        private Choices CreateSample()
+        private Choices CreateSampleNumbers()
         {
-            var one = new SemanticResultValue("one", 1);
-            var two = new SemanticResultValue("two", 2);
-            var three = new SemanticResultValue("three", 3);
-            var four = new SemanticResultValue("four", 4);
-            var five = new SemanticResultValue("five", 5);
-            var six = new SemanticResultValue("six", 6);
-            var seven = new SemanticResultValue("seven", 7);
-            var eight = new SemanticResultValue("eight", 8);
-            var nine = new SemanticResultValue("nine", 9);
+            GrammarBuilder[] grammarBuilders = 
+            {
+                 new SemanticResultValue("one", 1),
+                 new SemanticResultValue("two", 2),
+                 new SemanticResultValue("three", 3),
+                 new SemanticResultValue("four", 4),
+                 new SemanticResultValue("five", 5),
+                 new SemanticResultValue("six", 6),
+                 new SemanticResultValue("seven", 7),
+                 new SemanticResultValue("eight", 8),
+                 new SemanticResultValue("nine", 9)
+            };
 
-            return new Choices(one, two, three, four, five, six, seven, eight, nine);
+            return new Choices(grammarBuilders);
+        }
+
+        private Choices CreateSampleEnd()
+        {
+            GrammarBuilder[] grammarBuilders =
+            {
+                 new SemanticResultValue("scale", 11),
+                 new SemanticResultValue("loupe", 12),
+            };
+
+            return new Choices(grammarBuilders);
         }
 
         private Grammar Left()
         {
-            var programs = CreateSample();
+            var programs = CreateSampleNumbers();
 
             var grammarBuilder = new GrammarBuilder("left", SubsetMatchingMode.SubsequenceContentRequired);
             grammarBuilder.Culture = _culture;
@@ -85,7 +99,7 @@ namespace VoiceControl
 
         private Grammar Right()
         {
-            var programs = CreateSample();
+            var programs = CreateSampleNumbers();
 
             var grammarBuilder = new GrammarBuilder("right", SubsetMatchingMode.SubsequenceContentRequired);
             grammarBuilder.Culture = _culture;
@@ -96,7 +110,7 @@ namespace VoiceControl
 
         private Grammar Double()
         {
-            var programs = CreateSample();
+            var programs = CreateSampleNumbers();
 
             var grammarBuilder = new GrammarBuilder("Double", SubsetMatchingMode.SubsequenceContentRequired);
             grammarBuilder.Culture = _culture;
@@ -107,7 +121,7 @@ namespace VoiceControl
 
         private Grammar Scale()
         {
-            var programs = CreateSample();
+            var programs = CreateSampleNumbers();
 
             var grammarBuilder = new GrammarBuilder("scale", SubsetMatchingMode.SubsequenceContentRequired);
             grammarBuilder.Culture = _culture;
@@ -116,24 +130,24 @@ namespace VoiceControl
             return new Grammar(grammarBuilder);
         }
 
-        private Grammar End()
-        {
-            var programs = CreateSample();
-
-            var grammarBuilder = new GrammarBuilder("end", SubsetMatchingMode.SubsequenceContentRequired);
-            grammarBuilder.Culture = _culture;
-            grammarBuilder.Append(new SemanticResultKey("end", programs));
-
-            return new Grammar(grammarBuilder);
-        }
-
         private Grammar Increase()
         {
-            var programs = CreateSample();
+            var programs = CreateSampleNumbers();
 
             var grammarBuilder = new GrammarBuilder("loupe", SubsetMatchingMode.SubsequenceContentRequired);
             grammarBuilder.Culture = _culture;
             grammarBuilder.Append(new SemanticResultKey("loupe", programs));
+
+            return new Grammar(grammarBuilder);
+        }
+
+        private Grammar End()
+        {
+            var programs = CreateSampleEnd();
+
+            var grammarBuilder = new GrammarBuilder("end", SubsetMatchingMode.SubsequenceContentRequired);
+            grammarBuilder.Culture = _culture;
+            grammarBuilder.Append(new SemanticResultKey("end", programs));
 
             return new Grammar(grammarBuilder);
         }
@@ -176,7 +190,7 @@ namespace VoiceControl
             {
                 AppendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")");
 
-                if (e.Result.Words[i].Confidence < 0.35f)
+                if (e.Result.Words[i].Confidence < 0.05f)
                     return;
             }
 

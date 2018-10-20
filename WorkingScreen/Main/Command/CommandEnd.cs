@@ -19,6 +19,11 @@ namespace Command
                 //Метод отменяет лупу
                 currentWorkObject.Magnifier.Dispose();
                 currentWorkObject.Magnifier = null;
+
+                CommandMagnifier.magnifierForm.Close();
+                CommandMagnifier.magnifierForm.Dispose();
+                CommandMagnifier.magnifierForm = null;
+
             }
 
             if (SearchChild().ParantNumberObject != null)
