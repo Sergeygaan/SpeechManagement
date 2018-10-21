@@ -20,9 +20,13 @@ namespace VoiceControl
 
         private List<ArrayCommands> _arrayCommands = new List<ArrayCommands>();
 
+        private LoadCommand _loadCommand;
+
         public Form1()
         {
             InitializeComponent();
+
+            _loadCommand = new LoadCommand();
 
             FillListCommands();
  
@@ -32,18 +36,24 @@ namespace VoiceControl
 
         private void FillListCommands()
         {
-            //_arrayCommands.Add(new ArrayCommands("left", CreateSampleNumbers()));
-            //_arrayCommands.Add(new ArrayCommands("right", CreateSampleNumbers()));
-            //_arrayCommands.Add(new ArrayCommands("double", CreateSampleNumbers()));
-            //_arrayCommands.Add(new ArrayCommands("scale", CreateSampleNumbers()));
-            //_arrayCommands.Add(new ArrayCommands("loupe", CreateSampleNumbers()));
-            //_arrayCommands.Add(new ArrayCommands("end", CreateSampleEnd()));
-            _arrayCommands.Add(new ArrayCommands("левой", CreateSampleNumbers()));
-            _arrayCommands.Add(new ArrayCommands("правой", CreateSampleNumbers()));
-            _arrayCommands.Add(new ArrayCommands("двойной", CreateSampleNumbers()));
-            _arrayCommands.Add(new ArrayCommands("масштаб", CreateSampleNumbers()));
-            _arrayCommands.Add(new ArrayCommands("лупа", CreateSampleNumbers()));
-            _arrayCommands.Add(new ArrayCommands("конец", CreateSampleEnd()));
+            var loadArrayCommands = _loadCommand.OpenRead();
+
+            foreach(var currentLoadArrayCommands in loadArrayCommands)
+            {
+                _arrayCommands.Add(new ArrayCommands(currentLoadArrayCommands.CommandTextReturn(),
+                                    CreateSample(currentLoadArrayCommands.SemanticResultReturn())));
+            }
+
+            ////_arrayCommands.Add(new ArrayCommands("left", CreateSampleNumbers()));
+            ////_arrayCommands.Add(new ArrayCommands("right", CreateSampleNumbers()));
+            ////_arrayCommands.Add(new ArrayCommands("double", CreateSampleNumbers()));
+            ////_arrayCommands.Add(new ArrayCommands("scale", CreateSampleNumbers()));
+            ////_arrayCommands.Add(new ArrayCommands("loupe", CreateSampleNumbers()));
+            ////_arrayCommands.Add(new ArrayCommands("end", CreateSampleEnd()));
+
+
+            ////Открытие сайтов
+            //_arrayCommands.Add(new ArrayCommands("старт", CreateSampleSite()));
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -76,46 +86,61 @@ namespace VoiceControl
             }
         }
 
-        private Choices CreateSampleNumbers()
+        //private Choices CreateSampleNumbers()
+        //{
+        //    GrammarBuilder[] grammarBuilders =
+        //    {
+        //         //new SemanticResultValue("one", 1),
+        //         //new SemanticResultValue("two", 2),
+        //         //new SemanticResultValue("three", 3),
+        //         //new SemanticResultValue("four", 4),
+        //         //new SemanticResultValue("five", 5),
+        //         //new SemanticResultValue("six", 6),
+        //         //new SemanticResultValue("seven", 7),
+        //         //new SemanticResultValue("eight", 8),
+        //         //new SemanticResultValue("nine", 9)
+        //    };
+
+        //    return new Choices(grammarBuilders);
+        //}
+
+        private Choices CreateSample(List<Tuple<string, int>> semanticResult)
         {
-            GrammarBuilder[] grammarBuilders = 
+            GrammarBuilder[] grammarBuilders = new GrammarBuilder[semanticResult.Count];
+
+            int index = 0;
+
+            foreach (var currentSemantic in semanticResult)
             {
-                 //new SemanticResultValue("one", 1),
-                 //new SemanticResultValue("two", 2),
-                 //new SemanticResultValue("three", 3),
-                 //new SemanticResultValue("four", 4),
-                 //new SemanticResultValue("five", 5),
-                 //new SemanticResultValue("six", 6),
-                 //new SemanticResultValue("seven", 7),
-                 //new SemanticResultValue("eight", 8),
-                 //new SemanticResultValue("nine", 9)
+                grammarBuilders[index] = new SemanticResultValue(currentSemantic.Item1, currentSemantic.Item2);
 
-                 new SemanticResultValue("один", 1),
-                 new SemanticResultValue("два", 2),
-                 new SemanticResultValue("три", 3),
-                 new SemanticResultValue("четыре", 4),
-                 new SemanticResultValue("пять", 5),
-                 new SemanticResultValue("шесть", 6),
-                 new SemanticResultValue("семь", 7),
-                 new SemanticResultValue("восемь", 8),
-                 new SemanticResultValue("девять", 9)
-            };
-
+                index++;
+            }
+          
             return new Choices(grammarBuilders);
         }
 
-        private Choices CreateSampleEnd()
-        {
-            GrammarBuilder[] grammarBuilders =
-            {
-                 //new SemanticResultValue("scale", 11),
-                 //new SemanticResultValue("loupe", 12),
-                 new SemanticResultValue("масштаб", 11),
-                 new SemanticResultValue("лупа", 12)
-            };
+        //private Choices CreateSampleEnd()
+        //{
+        //    GrammarBuilder[] grammarBuilders =
+        //    {
+        //         //new SemanticResultValue("scale", 11),
+        //         //new SemanticResultValue("loupe", 12),
+        //    };
 
-            return new Choices(grammarBuilders);
-        }
+        //    return new Choices(grammarBuilders);
+        //}
+
+        //private Choices CreateSampleSite()
+        //{
+        //    GrammarBuilder[] grammarBuilders =
+        //    {
+        //         new SemanticResultValue("гугл", 1),
+        //         //new SemanticResultValue("лупа", 12)
+        //    };
+
+        //    return new Choices(grammarBuilders);
+        //}
 
         private void LoadGrammar()
         {
@@ -229,6 +254,11 @@ namespace VoiceControl
 
                         break;
 
+                    case "старт":
+                        
+                            Process.Start("http://www.google.com/");
+
+                        break;
 
                 }
             }
