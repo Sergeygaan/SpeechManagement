@@ -84,15 +84,8 @@ namespace Command.Magnif
             int width = (int)((magWindowRect.right - magWindowRect.left) / magnification);
             int height = (int)((magWindowRect.bottom - magWindowRect.top) / magnification);
 
-            //sourceRect.left = mousePoint.x - width / 2;
-            //sourceRect.top = mousePoint.y - height / 2;
-
-            //int width = (int)_regionRectangle.Width;
-            //int height = (int)_regionRectangle.Height;
-
             sourceRect.left = (int)_regionRectangle.StartX - width / 8;
             sourceRect.top = (int)_regionRectangle.StartY - height / 8;
-
 
             // Don't scroll outside desktop area.
             if (sourceRect.left < 0)

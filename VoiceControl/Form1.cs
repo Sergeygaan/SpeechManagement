@@ -172,12 +172,14 @@ namespace VoiceControl
 
             for (var i = 0; i < e.Result.Words.Count; ++i)
             {
-                AppendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")", Color.WhiteSmoke);
-
                 if (e.Result.Words[i].Confidence < 0.2f)
                 {
-                    AppendLine(e.Result.Text + " (" + e.Result.Confidence + ")", Color.LightCoral);
+                    AppendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")", Color.LightCoral);
                     return;
+                }
+                else
+                {
+                    AppendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")", Color.WhiteSmoke);
                 }
             }
 
