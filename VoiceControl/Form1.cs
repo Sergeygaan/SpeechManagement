@@ -256,7 +256,7 @@ namespace VoiceControl
 
                     case "старт":
                         
-                            Process.Start("http://www.google.com/");
+                            Process.Start((string)number);
 
                         break;
 
