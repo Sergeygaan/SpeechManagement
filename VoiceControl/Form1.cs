@@ -32,19 +32,26 @@ namespace VoiceControl
 
         private void FillListCommands()
         {
-            _arrayCommands.Add(new ArrayCommands("left", CreateSampleNumbers()));
-            _arrayCommands.Add(new ArrayCommands("right", CreateSampleNumbers()));
-            _arrayCommands.Add(new ArrayCommands("double", CreateSampleNumbers()));
-            _arrayCommands.Add(new ArrayCommands("scale", CreateSampleNumbers()));
-            _arrayCommands.Add(new ArrayCommands("loupe", CreateSampleNumbers()));
-            _arrayCommands.Add(new ArrayCommands("end", CreateSampleEnd()));
+            //_arrayCommands.Add(new ArrayCommands("left", CreateSampleNumbers()));
+            //_arrayCommands.Add(new ArrayCommands("right", CreateSampleNumbers()));
+            //_arrayCommands.Add(new ArrayCommands("double", CreateSampleNumbers()));
+            //_arrayCommands.Add(new ArrayCommands("scale", CreateSampleNumbers()));
+            //_arrayCommands.Add(new ArrayCommands("loupe", CreateSampleNumbers()));
+            //_arrayCommands.Add(new ArrayCommands("end", CreateSampleEnd()));
+            _arrayCommands.Add(new ArrayCommands("левой", CreateSampleNumbers()));
+            _arrayCommands.Add(new ArrayCommands("правой", CreateSampleNumbers()));
+            _arrayCommands.Add(new ArrayCommands("двойной", CreateSampleNumbers()));
+            _arrayCommands.Add(new ArrayCommands("масштаб", CreateSampleNumbers()));
+            _arrayCommands.Add(new ArrayCommands("лупа", CreateSampleNumbers()));
+            _arrayCommands.Add(new ArrayCommands("конец", CreateSampleEnd()));
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             try
             {
-                _culture = new CultureInfo("en-US");
+                //_culture = new CultureInfo("en-US");
+                _culture = new System.Globalization.CultureInfo("ru-RU");
                 _sre = new SpeechRecognitionEngine(_culture);
 
                 // Setup event handlers
@@ -73,15 +80,25 @@ namespace VoiceControl
         {
             GrammarBuilder[] grammarBuilders = 
             {
-                 new SemanticResultValue("one", 1),
-                 new SemanticResultValue("two", 2),
-                 new SemanticResultValue("three", 3),
-                 new SemanticResultValue("four", 4),
-                 new SemanticResultValue("five", 5),
-                 new SemanticResultValue("six", 6),
-                 new SemanticResultValue("seven", 7),
-                 new SemanticResultValue("eight", 8),
-                 new SemanticResultValue("nine", 9)
+                 //new SemanticResultValue("one", 1),
+                 //new SemanticResultValue("two", 2),
+                 //new SemanticResultValue("three", 3),
+                 //new SemanticResultValue("four", 4),
+                 //new SemanticResultValue("five", 5),
+                 //new SemanticResultValue("six", 6),
+                 //new SemanticResultValue("seven", 7),
+                 //new SemanticResultValue("eight", 8),
+                 //new SemanticResultValue("nine", 9)
+
+                 new SemanticResultValue("один", 1),
+                 new SemanticResultValue("два", 2),
+                 new SemanticResultValue("три", 3),
+                 new SemanticResultValue("четыре", 4),
+                 new SemanticResultValue("пять", 5),
+                 new SemanticResultValue("шесть", 6),
+                 new SemanticResultValue("семь", 7),
+                 new SemanticResultValue("восемь", 8),
+                 new SemanticResultValue("девять", 9)
             };
 
             return new Choices(grammarBuilders);
@@ -91,8 +108,10 @@ namespace VoiceControl
         {
             GrammarBuilder[] grammarBuilders =
             {
-                 new SemanticResultValue("scale", 11),
-                 new SemanticResultValue("loupe", 12),
+                 //new SemanticResultValue("scale", 11),
+                 //new SemanticResultValue("loupe", 12),
+                 new SemanticResultValue("масштаб", 11),
+                 new SemanticResultValue("лупа", 12)
             };
 
             return new Choices(grammarBuilders);
@@ -142,8 +161,10 @@ namespace VoiceControl
             AppendLine("\t" + "Speech Recognized:", Color.WhiteSmoke);
 
             if (e.Result.Confidence < 0.35f)
+            {
+                AppendLine(e.Result.Text + " (" + e.Result.Confidence + ")", Color.LightCoral);
                 return;
-
+            }
             for (var i = 0; i < e.Result.Alternates.Count; ++i)
             {
                 AppendLine("\t" + "Alternate: " + e.Result.Alternates[i].Text + " (" + e.Result.Alternates[i].Confidence + ")", Color.WhiteSmoke);
@@ -154,7 +175,10 @@ namespace VoiceControl
                 AppendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")", Color.WhiteSmoke);
 
                 if (e.Result.Words[i].Confidence < 0.2f)
+                {
+                    AppendLine(e.Result.Text + " (" + e.Result.Confidence + ")", Color.LightCoral);
                     return;
+                }
             }
 
             AppendLine(e.Result.Text + " (" + e.Result.Confidence + ")", Color.YellowGreen);
@@ -167,37 +191,37 @@ namespace VoiceControl
 
                 switch (s.Key)
                 {
-                    case "left":
+                    case "левой":
 
                         _screenDelineation.ApplyCommand(0, number);
                       
                         break;
 
-                    case "right":
+                    case "правой":
 
                         _screenDelineation.ApplyCommand(1, number);
 
                         break;
 
-                    case "double":
+                    case "двойной":
 
                         _screenDelineation.ApplyCommand(2, number);
 
                         break;
 
-                    case "scale":
+                    case "масштаб":
 
                         _screenDelineation.ApplyCommand(3, number);
 
                         break;
 
-                    case "loupe":
+                    case "лупа":
 
                         _screenDelineation.ApplyCommand(4, number);
 
                         break;
 
-                    case "end":
+                    case "конец":
 
                         _screenDelineation.ApplyCommand(5, 0);
 
