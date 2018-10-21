@@ -104,7 +104,7 @@ namespace VoiceControl
         //    return new Choices(grammarBuilders);
         //}
 
-        private Choices CreateSample(List<Tuple<string, int>> semanticResult)
+        private Choices CreateSample(List<Tuple<string, string>> semanticResult)
         {
             GrammarBuilder[] grammarBuilders = new GrammarBuilder[semanticResult.Count];
 
@@ -214,37 +214,37 @@ namespace VoiceControl
 
             foreach (var s in e.Result.Semantics)
             {
-                var number = (int)s.Value.Value;
+                var number = s.Value.Value;
 
                 switch (s.Key)
                 {
                     case "левой":
 
-                        _screenDelineation.ApplyCommand(0, number);
+                        _screenDelineation.ApplyCommand(0, Convert.ToInt32(number));
                       
                         break;
 
                     case "правой":
 
-                        _screenDelineation.ApplyCommand(1, number);
+                        _screenDelineation.ApplyCommand(1, Convert.ToInt32(number));
 
                         break;
 
                     case "двойной":
 
-                        _screenDelineation.ApplyCommand(2, number);
+                        _screenDelineation.ApplyCommand(2, Convert.ToInt32(number));
 
                         break;
 
                     case "масштаб":
 
-                        _screenDelineation.ApplyCommand(3, number);
+                        _screenDelineation.ApplyCommand(3, Convert.ToInt32(number));
 
                         break;
 
                     case "лупа":
 
-                        _screenDelineation.ApplyCommand(4, number);
+                        _screenDelineation.ApplyCommand(4, Convert.ToInt32(number));
 
                         break;
 

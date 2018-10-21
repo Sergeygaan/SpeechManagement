@@ -12,16 +12,16 @@ namespace VoiceControl
         public class LoadArrayCommands
         {
             private string _commandText;
-            private List<Tuple<string, int>> _semanticResult = new List<Tuple<string, int>>();
+            private List<Tuple<string, string>> _semanticResult = new List<Tuple<string, string>>();
 
             public LoadArrayCommands(string commandText)
             {
                 _commandText = commandText;
             }
 
-            public void SemanticResult(string command, int number)
+            public void SemanticResult(string command, string number)
             {
-                _semanticResult.Add(new Tuple<string, int>(command, number));
+                _semanticResult.Add(new Tuple<string, string>(command, number));
             }
 
             public string CommandTextReturn()
@@ -30,27 +30,37 @@ namespace VoiceControl
             }
 
 
-            public List<Tuple<string, int>> SemanticResultReturn()
+            public List<Tuple<string, string>> SemanticResultReturn()
             {
                 return _semanticResult;
             }
         }
 
+        private string fileName = @"Command.txt";
         public List<LoadArrayCommands> _arrayCommands = new List<LoadArrayCommands>();
 
         public List<LoadArrayCommands> OpenRead()
         {
             string textFromFile = "";
 
-            using (FileStream fstream = File.OpenRead(@"Command.txt"))
+            if (!File.Exists(fileName))
+            {
+                using (StreamWriter textFile = new StreamWriter(fileName, false, Encoding.Default))
+                {
+                    textFile.WriteLine(ProjectSettings());
+                }
+            }
+            using (FileStream fstream = File.OpenRead(fileName))
             {
                 // преобразуем строку в байты
                 byte[] array = new byte[fstream.Length];
                 // считываем данные
                 fstream.Read(array, 0, array.Length);
                 // декодируем байты в строку
-                textFromFile = System.Text.Encoding.Default.GetString(array);
+                textFromFile = Encoding.Default.GetString(array);
             }
+            
+
 
             Parser(textFromFile);
 
@@ -74,7 +84,7 @@ namespace VoiceControl
                 {
                     var currentText = currentString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                    _arrayCommands[_arrayCommands.Count - 1].SemanticResult(currentText[0], int.Parse(currentText[1]));
+                    _arrayCommands[_arrayCommands.Count - 1].SemanticResult(currentText[0], currentText[1]);
                 }
             }
         }
@@ -89,6 +99,18 @@ namespace VoiceControl
             }
 
             return inpurString;
+        }
+
+        private string ProjectSettings()
+        {
+           string projectSettings = "<левой>\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
+                "<правой>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
+                "<двойной>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
+                "<масштаб>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
+                "<лупа>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
+                "<конец>\r\n\r\nмасштаб 11\r\nлупа 12";
+
+            return projectSettings;
         }
     }
 }
