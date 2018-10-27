@@ -236,19 +236,19 @@ namespace VoiceControl
 
                         break;
 
-                    case "масштаб":
+                    case "сектор":
 
                         _screenDelineation.ApplyCommand(3, Convert.ToInt32(number));
 
                         break;
 
-                    case "лупа":
+                    case "масштаб":
 
                         _screenDelineation.ApplyCommand(4, Convert.ToInt32(number));
 
                         break;
 
-                    case "конец":
+                    case "отменить":
 
                         _screenDelineation.ApplyCommand(5, 0);
 
