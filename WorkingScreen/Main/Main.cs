@@ -30,7 +30,6 @@ namespace VoiceControl
 
             _drawing = new Drawing();
 
-
             commands.Add(new CommandLeftOneClick()); //0
             commands.Add(new CommandRightOneClick()); //1
             commands.Add(new CommandLeftDoubleClick()); //2
@@ -66,7 +65,7 @@ namespace VoiceControl
 
         public void ApplyCommand(int indexCommand, int number)
         {
-            commands[indexCommand].Act(number - 1);
+            commands[indexCommand].Act(number);
         }
     }
 }

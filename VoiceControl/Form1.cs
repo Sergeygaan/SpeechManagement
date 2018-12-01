@@ -220,43 +220,43 @@ namespace VoiceControl
                 {
                     case "левой":
 
-                        _screenDelineation.ApplyCommand(0, Convert.ToInt32(number));
+                        _screenDelineation.ApplyCommand(0, Convert.ToInt32(number) - 1);
                       
                         break;
 
                     case "правой":
 
-                        _screenDelineation.ApplyCommand(1, Convert.ToInt32(number));
+                        _screenDelineation.ApplyCommand(1, Convert.ToInt32(number) - 1);
 
                         break;
 
                     case "двойной":
 
-                        _screenDelineation.ApplyCommand(2, Convert.ToInt32(number));
+                        _screenDelineation.ApplyCommand(2, Convert.ToInt32(number) - 1);
 
                         break;
 
                     case "сектор":
 
-                        _screenDelineation.ApplyCommand(3, Convert.ToInt32(number));
+                        _screenDelineation.ApplyCommand(3, Convert.ToInt32(number) - 1);
 
                         break;
 
                     case "масштаб":
 
-                        _screenDelineation.ApplyCommand(4, Convert.ToInt32(number));
+                        _screenDelineation.ApplyCommand(4, Convert.ToInt32(number) - 1);
 
                         break;
 
                     case "отменить":
 
-                        _screenDelineation.ApplyCommand(5, 0);
+                        _screenDelineation.ApplyCommand(5, Convert.ToInt32(number));
 
                         break;
 
                     case "старт":
                         
-                            Process.Start((string)number);
+                        Process.Start((string)number);
 
                         break;
 

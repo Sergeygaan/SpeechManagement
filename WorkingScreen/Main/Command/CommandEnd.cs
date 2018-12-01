@@ -1,10 +1,4 @@
-﻿using Command.Magnif;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Command.Auxiliary;
+﻿using static Command.Auxiliary;
 
 namespace Command
 {
@@ -12,9 +6,33 @@ namespace Command
     {
         public void Act(int index)
         {
+            switch(index)
+            {
+                case 11:
+
+                    CommandEndSector();
+
+                    break;
+
+                case 12:
+                    CommandEndMagnifier();
+
+                    break;
+
+                case 13:
+
+                    CommandEndMagnifier();
+                    CommandEndFullSector();
+
+                    break;
+            }
+        }
+
+        private void CommandEndMagnifier()
+        {
             var currentWorkObject = SearchChild();
 
-            if (currentWorkObject.Magnifier!= null)
+            if (currentWorkObject.Magnifier != null)
             {
                 //Метод отменяет лупу
                 currentWorkObject.Magnifier.Dispose();
@@ -23,9 +41,20 @@ namespace Command
                 CommandMagnifier.magnifierForm.Close();
                 CommandMagnifier.magnifierForm.Dispose();
                 CommandMagnifier.magnifierForm = null;
-
             }
+        }
 
+        private void CommandEndFullSector()
+        {
+            while (SearchChild().ParantNumberObject != null)
+            {
+                CommandEndSector();
+            }
+        }
+
+        private void CommandEndSector()
+        {
+            //метод отменяет разбитие сектора
             if (SearchChild().ParantNumberObject != null)
             {
                 var ParantNumberObject = SearchChild().ParantNumberObject;
