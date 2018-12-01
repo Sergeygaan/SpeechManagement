@@ -8,9 +8,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static VoiceControl.WorkObject;
 
-namespace VoiceControl
+namespace ProjectSettings
 {
     public partial class ScreenDelineation : Form
     {
@@ -20,9 +19,11 @@ namespace VoiceControl
         [DllImport("user32.dll", SetLastError = true)]
         static extern int GetWindowLong(IntPtr hWnd, int nIndex);
 
-        private Main mainObject;
+        private Main _mainObject;
 
-        private int initialStyle;
+        private int _initialStyle;
+
+        private OnTopControl _onTopControl;
 
         public ScreenDelineation()
         {
@@ -38,17 +39,15 @@ namespace VoiceControl
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
 
-            initialStyle = GetWindowLong(Handle, -20);
-            SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
+            _initialStyle = GetWindowLong(Handle, -20);
+            SetWindowLong(this.Handle, -20, _initialStyle | 0x80000 | 0x20);
 
             Size resolution = Screen.PrimaryScreen.Bounds.Size;
-        
-            mainObject = new Main(resolution.Width, resolution.Height);
 
-            OnTopControl a = new OnTopControl(Handle);
+            _mainObject = new Main(resolution.Width, resolution.Height);
+
+            _onTopControl = new OnTopControl(Handle);
         }
-
-        bool flag = false;
 
         const int WM_NCHITTEST = 0x0084;
         const int HTTRANSPARENT = -1;
@@ -65,24 +64,12 @@ namespace VoiceControl
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            mainObject.OnPaint(e);
-
-            //if (!flag)
-            //{
-            //    //ApplyCommand(3, 9);
-
-            //    //ApplyCommand(3, 7);
-
-            //    ApplyCommand(4, 9);
-
-            //    flag = true;
-            //}
-
+            _mainObject.OnPaint(e);
         }
 
         public void ApplyCommand(int indexCommand, int number)
         {
-            mainObject.ApplyCommand(indexCommand, number);
+            _mainObject.ApplyCommand(indexCommand, number);
 
             Invalidate();
         }

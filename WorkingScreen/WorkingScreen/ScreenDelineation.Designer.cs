@@ -1,4 +1,4 @@
-﻿namespace VoiceControl
+﻿namespace ProjectSettings
 {
     partial class ScreenDelineation
     {
@@ -39,7 +39,6 @@
             this.Opacity = 0.55D;
             this.Text = "ScreenDelineation";
             this.ResumeLayout(false);
-
         }
 
         #endregion

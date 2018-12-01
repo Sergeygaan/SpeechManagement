@@ -1,4 +1,4 @@
-﻿namespace VoiceControl
+﻿namespace ProjectSettings
 {
     partial class LogForm
     {
@@ -30,6 +30,7 @@
         {
             this.listView = new System.Windows.Forms.ListView();
             this.Message = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonSettings = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listView
@@ -52,11 +53,22 @@
             this.Message.Text = "Message";
             this.Message.Width = 280;
             // 
+            // buttonSettings
+            // 
+            this.buttonSettings.Location = new System.Drawing.Point(12, 296);
+            this.buttonSettings.Name = "buttonSettings";
+            this.buttonSettings.Size = new System.Drawing.Size(75, 23);
+            this.buttonSettings.TabIndex = 2;
+            this.buttonSettings.Text = "Settings";
+            this.buttonSettings.UseVisualStyleBackColor = true;
+            this.buttonSettings.Click += new System.EventHandler(this.buttonSettings_Click);
+            // 
             // LogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(339, 292);
+            this.ClientSize = new System.Drawing.Size(339, 330);
+            this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.listView);
             this.Name = "LogForm";
             this.Text = "Log";
@@ -68,6 +80,7 @@
         #endregion
         private System.Windows.Forms.ListView listView;
         private System.Windows.Forms.ColumnHeader Message;
+        private System.Windows.Forms.Button buttonSettings;
     }
 }
 

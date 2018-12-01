@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using Main.Drawing;
 using Command;
 
-namespace VoiceControl
+namespace ProjectSettings
 {
     class Main
     {

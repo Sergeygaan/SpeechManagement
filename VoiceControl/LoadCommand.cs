@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VoiceControl
+namespace ProjectSettings
 {
     public class LoadCommand
     {
@@ -29,7 +29,6 @@ namespace VoiceControl
                 return _commandText;
             }
 
-
             public List<Tuple<string, string>> SemanticResultReturn()
             {
                 return _semanticResult;
@@ -50,6 +49,7 @@ namespace VoiceControl
                     textFile.WriteLine(ProjectSettings());
                 }
             }
+
             using (FileStream fstream = File.OpenRead(fileName))
             {
                 // преобразуем строку в байты
@@ -60,8 +60,6 @@ namespace VoiceControl
                 textFromFile = Encoding.Default.GetString(array);
             }
             
-
-
             Parser(textFromFile);
 
             return _arrayCommands;
@@ -103,13 +101,6 @@ namespace VoiceControl
 
         private string ProjectSettings()
         {
-           //string projectSettings = "<левой>\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
-           //     "<правой>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
-           //     "<двойной>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
-           //     "<масштаб>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
-           //     "<лупа>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
-           //     "<конец>\r\n\r\nмасштаб 11\r\nлупа 12";
-
             string projectSettings = "<левой>\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
                 "<правой>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
                 "<двойной>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
@@ -118,7 +109,8 @@ namespace VoiceControl
                 "<нажать>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
                 "<отпустить>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
                 "<средняя>\r\n\r\nвверх 1\r\nвниз 2\r\n\r\n"+
-                "<отменить>\r\n\r\nсектор 1\r\nмасштаб 2\r\nвсе 3\r\n\r\n";
+                "<отменить>\r\n\r\nсектор 1\r\nмасштаб 2\r\nвсе 3\r\n\r\n" +
+                "<старт>\r\n\r\nвк https://vk.com/ \r\n\r\n";
 
             return projectSettings;
         }

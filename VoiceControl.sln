@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkingScreen", "WorkingScr
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InstallVoiceControl", "InstallVoiceControl\InstallVoiceControl.vdproj", "{CD1122BF-C553-4E0F-A791-69D42B7C6A1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectSettings", "ProjectSettings\ProjectSettings.csproj", "{57DB0F80-34EE-4D0A-8F66-6B8AAF7751E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,18 @@ Global
 		{CD1122BF-C553-4E0F-A791-69D42B7C6A1F}.Release|Any CPU.ActiveCfg = Release
 		{CD1122BF-C553-4E0F-A791-69D42B7C6A1F}.Release|x64.ActiveCfg = Release
 		{CD1122BF-C553-4E0F-A791-69D42B7C6A1F}.Release|x86.ActiveCfg = Release
+		{57DB0F80-34EE-4D0A-8F66-6B8AAF7751E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57DB0F80-34EE-4D0A-8F66-6B8AAF7751E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57DB0F80-34EE-4D0A-8F66-6B8AAF7751E3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{57DB0F80-34EE-4D0A-8F66-6B8AAF7751E3}.Debug|x64.Build.0 = Debug|Any CPU
+		{57DB0F80-34EE-4D0A-8F66-6B8AAF7751E3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{57DB0F80-34EE-4D0A-8F66-6B8AAF7751E3}.Debug|x86.Build.0 = Debug|Any CPU
+		{57DB0F80-34EE-4D0A-8F66-6B8AAF7751E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57DB0F80-34EE-4D0A-8F66-6B8AAF7751E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57DB0F80-34EE-4D0A-8F66-6B8AAF7751E3}.Release|x64.ActiveCfg = Release|Any CPU
+		{57DB0F80-34EE-4D0A-8F66-6B8AAF7751E3}.Release|x64.Build.0 = Release|Any CPU
+		{57DB0F80-34EE-4D0A-8F66-6B8AAF7751E3}.Release|x86.ActiveCfg = Release|Any CPU
+		{57DB0F80-34EE-4D0A-8F66-6B8AAF7751E3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

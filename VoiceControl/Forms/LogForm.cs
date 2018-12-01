@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
-using Microsoft.Speech;
 using Microsoft.Speech.Recognition;
 using Microsoft.Speech.Synthesis;
 
-namespace VoiceControl
+namespace ProjectSettings
 {
     public partial class LogForm : Form
     {
@@ -222,6 +222,15 @@ namespace VoiceControl
                     {
                         _screenDelineation.ApplyCommand(index, Convert.ToInt32(number) - 1);
 
+                        ////Process.Start((string)number);
+
+                        ////Process.Start("http://google.com");
+
+                        //System.Windows.Forms.WebBrowser webBrowser = new WebBrowser();
+
+                        //webBrowser.Navigate("http://google.com");
+                        //webBrowser.ScriptErrorsSuppressed = true;
+
                         break;
                     }
                 }
@@ -262,6 +271,12 @@ namespace VoiceControl
                 listView.Items.Clear();
             }
 
+        }
+
+        private void buttonSettings_Click(object sender, EventArgs e)
+        {
+            Settings formSettings = new Settings();
+            formSettings.ShowDialog();
         }
     }
 

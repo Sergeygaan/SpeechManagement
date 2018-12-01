@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace VoiceControl
+namespace ProjectSettings
 {
     public class WorkObject
     {
@@ -42,7 +42,7 @@ namespace VoiceControl
         {
             foreach (var currentRectangle in listRegionRectangle)
             {
-                e.Graphics.DrawRectangle(new Pen(Color.Gray), currentRectangle.Rectangle.X, currentRectangle.Rectangle.Y,
+                e.Graphics.DrawRectangle(new Pen(ProjectSettings.ColorSquares), currentRectangle.Rectangle.X, currentRectangle.Rectangle.Y,
                                                     currentRectangle.Rectangle.Width, currentRectangle.Rectangle.Height);
             }
         }
@@ -57,7 +57,7 @@ namespace VoiceControl
 
                     float fontSize = currentRectangle.Rectangle.Height / 2;
 
-                    Font f = new Font("Microsoft Sans Serif", fontSize);
+                    Font font = new Font("Microsoft Sans Serif", fontSize);
 
                     int x = (int)(currentRectangle.Rectangle.Left + currentRectangle.Rectangle.Width / 2 - fontSize * 0.7);
                     int y = (int)(currentRectangle.Rectangle.Top + currentRectangle.Rectangle.Height / 2 - fontSize * 0.7);
@@ -65,7 +65,7 @@ namespace VoiceControl
                     var Center = new Point(x, y);
 
                     var stringIdObject = currentRectangle.IdObject.ToString();
-                    e.Graphics.DrawString(stringIdObject, f, new SolidBrush(Color.Gray), Center);
+                    e.Graphics.DrawString(stringIdObject, font, new SolidBrush(ProjectSettings.ColorNumbers), Center);
                 }
             }
         }

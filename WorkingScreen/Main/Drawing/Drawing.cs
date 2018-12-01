@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VoiceControl;
+using ProjectSettings;
 using System.Drawing;
-using static VoiceControl.WorkObject;
+using static ProjectSettings.WorkObject;
 
 namespace Main.Drawing
 {

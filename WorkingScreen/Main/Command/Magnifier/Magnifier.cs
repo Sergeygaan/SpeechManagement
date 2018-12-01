@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using static VoiceControl.WorkObject;
+using static ProjectSettings.WorkObject;
 
 namespace Command.Magnif
 {
