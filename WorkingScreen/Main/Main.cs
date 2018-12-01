@@ -35,6 +35,8 @@ namespace VoiceControl
             commands.Add(new CommandLeftDoubleClick()); //2
             commands.Add(new CommandScale(_drawing));//3
             commands.Add(new CommandMagnifier()); //4
+            commands.Add(new CommandLeftLeftDown()); //4
+            commands.Add(new CommandLeftLeftUp()); //4
             commands.Add(new CommandEnd()); //5
 
             Auxiliary.WorkObject = _workObject;
