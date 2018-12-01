@@ -21,6 +21,7 @@ namespace VoiceControl
         private List<ArrayCommands> _arrayCommands = new List<ArrayCommands>();
 
         private LoadCommand _loadCommand;
+        private List<string> _commandNames = new List<string>();
 
         public Form1()
         {
@@ -42,6 +43,8 @@ namespace VoiceControl
             {
                 _arrayCommands.Add(new ArrayCommands(currentLoadArrayCommands.CommandTextReturn(),
                                     CreateSample(currentLoadArrayCommands.SemanticResultReturn())));
+
+                _commandNames.Add(currentLoadArrayCommands.CommandTextReturn());
             }
 
             ////_arrayCommands.Add(new ArrayCommands("left", CreateSampleNumbers()));
@@ -216,51 +219,26 @@ namespace VoiceControl
             {
                 var number = s.Value.Value;
 
-                switch (s.Key)
+                for(int index = 0; index < _commandNames.Count; index++)
                 {
-                    case "левой":
-
-                        _screenDelineation.ApplyCommand(0, Convert.ToInt32(number) - 1);
-                      
-                        break;
-
-                    case "правой":
-
-                        _screenDelineation.ApplyCommand(1, Convert.ToInt32(number) - 1);
+                    if (_commandNames[index] == s.Key)
+                    {
+                        _screenDelineation.ApplyCommand(index, Convert.ToInt32(number) - 1);
 
                         break;
-
-                    case "двойной":
-
-                        _screenDelineation.ApplyCommand(2, Convert.ToInt32(number) - 1);
-
-                        break;
-
-                    case "сектор":
-
-                        _screenDelineation.ApplyCommand(3, Convert.ToInt32(number) - 1);
-
-                        break;
-
-                    case "масштаб":
-
-                        _screenDelineation.ApplyCommand(4, Convert.ToInt32(number) - 1);
-
-                        break;
-
-                    case "отменить":
-
-                        _screenDelineation.ApplyCommand(5, Convert.ToInt32(number));
-
-                        break;
-
-                    case "старт":
-                        
-                        Process.Start((string)number);
-
-                        break;
-
+                    }
                 }
+
+                //switch (s.Key)
+                //{
+                   
+                //    case "старт":
+                        
+                //        Process.Start((string)number);
+
+                //        break;
+
+                //}
             }
         }
 

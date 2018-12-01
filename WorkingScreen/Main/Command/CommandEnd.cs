@@ -6,7 +6,7 @@ namespace Command
     {
         public void Act(int index)
         {
-            switch(index)
+            switch(index + 1)
             {
                 case 11:
 
