@@ -11,7 +11,7 @@ namespace Command
     static class Auxiliary
     {
         [DllImport("user32.dll", SetLastError = true)]
-        public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, int dwExtraInfo);
+        public static extern void mouse_event(uint dwFlags, int dx, uint dy, int dwData, int dwExtraInfo);
 
         [Flags]
         public enum MouseEventFlags
@@ -23,8 +23,9 @@ namespace Command
             MOVE = 0x00000001,
             ABSOLUTE = 0x00008000,
             RIGHTDOWN = 0x00000008,
-            RIGHTUP = 0x00000010
-        }
+            RIGHTUP = 0x00000010,
+            SCROLL = 0x800
+    }
 
         static public WorkObject WorkObject;
 

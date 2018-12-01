@@ -6,20 +6,20 @@ namespace Command
     {
         public void Act(int index)
         {
-            switch(index + 1)
+            switch(index)
             {
-                case 11:
+                case 0:
 
                     CommandEndSector();
 
                     break;
 
-                case 12:
+                case 1:
                     CommandEndMagnifier();
 
                     break;
 
-                case 13:
+                case 2:
 
                     CommandEndMagnifier();
                     CommandEndFullSector();

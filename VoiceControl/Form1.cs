@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Microsoft.Speech;
 using Microsoft.Speech.Recognition;
@@ -12,7 +9,7 @@ using Microsoft.Speech.Synthesis;
 
 namespace VoiceControl
 {
-    public partial class Form1 : Form
+    public partial class LogForm : Form
     {
         private CultureInfo _culture;
         private SpeechRecognitionEngine _sre;
@@ -23,7 +20,7 @@ namespace VoiceControl
         private LoadCommand _loadCommand;
         private List<string> _commandNames = new List<string>();
 
-        public Form1()
+        public LogForm()
         {
             InitializeComponent();
 

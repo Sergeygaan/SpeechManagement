@@ -85,6 +85,7 @@
     <Compile Include="Main\Command\Auxiliary.cs" />
     <Compile Include="Main\Command\CommandEnd.cs" />
     <Compile Include="Main\Command\CommandLeftLeftDown.cs" />
+    <Compile Include="Main\Command\CommandScroll.cs" />
     <Compile Include="Main\Command\CommandLeftLeftUp.cs" />
     <Compile Include="Main\Command\CommandMagnifier.cs" />
     <Compile Include="Main\Command\CommandRightOneClick.cs" />

@@ -1,6 +1,6 @@
 ﻿namespace VoiceControl
 {
-    partial class Form1
+    partial class LogForm
     {
         /// <summary>
         /// Required designer variable.
@@ -52,13 +52,13 @@
             this.Message.Text = "Message";
             this.Message.Width = 280;
             // 
-            // Form1
+            // LogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(339, 292);
             this.Controls.Add(this.listView);
-            this.Name = "Form1";
+            this.Name = "LogForm";
             this.Text = "Log";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
