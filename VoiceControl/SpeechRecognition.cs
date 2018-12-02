@@ -7,6 +7,7 @@ using WorkingScreen;
 using Microsoft.Speech.Recognition;
 
 using static VoiceControl.LogForm;
+using ProjectSettings;
 
 namespace VoiceControl
 {
@@ -15,8 +16,6 @@ namespace VoiceControl
         private CultureInfo _culture;
         private SpeechRecognitionEngine _sre;
         private ScreenDelineation _screenDelineation;
-
-        private List<ArrayCommands> _arrayCommands = new List<ArrayCommands>();
 
         private LoadCommand _loadCommand;
         private List<string> _commandNames = new List<string>();
@@ -43,7 +42,7 @@ namespace VoiceControl
 
             foreach (var currentLoadArrayCommands in loadArrayCommands)
             {
-                _arrayCommands.Add(new ArrayCommands(currentLoadArrayCommands.CommandTextReturn(),
+                ProjectSettingsStyle.ArrayCommands.Add(new ArrayCommands(currentLoadArrayCommands.CommandTextReturn(),
                                     CreateSample(currentLoadArrayCommands.SemanticResultReturn())));
 
                 _commandNames.Add(currentLoadArrayCommands.CommandTextReturn());
@@ -99,7 +98,7 @@ namespace VoiceControl
         private void LoadGrammar()
         {
             //Загрузка команд из списка
-            foreach (var currentCommand in _arrayCommands)
+            foreach (ArrayCommands currentCommand in ProjectSettingsStyle.ArrayCommands)
             {
                 _sre.LoadGrammar(CreateGrammar(currentCommand.CommandText, currentCommand.SemanticResult));
             }
@@ -107,8 +106,11 @@ namespace VoiceControl
 
         private Grammar CreateGrammar(string commandText, Choices semanticResult)
         {
-            var grammarBuilder = new GrammarBuilder(commandText, SubsetMatchingMode.SubsequenceContentRequired);
-            grammarBuilder.Culture = _culture;
+            var grammarBuilder = new GrammarBuilder(commandText, SubsetMatchingMode.SubsequenceContentRequired)
+            {
+                Culture = _culture
+            };
+
             grammarBuilder.Append(new SemanticResultKey(commandText, semanticResult));
 
             return new Grammar(grammarBuilder);
@@ -199,21 +201,6 @@ namespace VoiceControl
                 //        break;
 
                 //}
-            }
-        }
-
-        public delegate void MethodContainer();
-
-        //Событие OnCount c типом делегата MethodContainer.
-        public event MethodContainer onCount;
-
-        public void Count()
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                if (i == 71)
-                {
-                }
             }
         }
     }
