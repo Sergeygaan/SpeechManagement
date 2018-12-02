@@ -72,7 +72,6 @@
             this.Controls.Add(this.listView);
             this.Name = "LogForm";
             this.Text = "Log";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }

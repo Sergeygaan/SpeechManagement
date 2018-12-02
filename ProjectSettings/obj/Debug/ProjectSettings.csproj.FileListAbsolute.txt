@@ -3,4 +3,3 @@ C:\Users\Sergey\Desktop\SpeechManagement\ProjectSettings\bin\Debug\ProjectSettin
 C:\Users\Sergey\Desktop\SpeechManagement\ProjectSettings\obj\Debug\ProjectSettings.csproj.CoreCompileInputs.cache
 C:\Users\Sergey\Desktop\SpeechManagement\ProjectSettings\obj\Debug\ProjectSettings.dll
 C:\Users\Sergey\Desktop\SpeechManagement\ProjectSettings\obj\Debug\ProjectSettings.pdb
-C:\Users\Sergey\Desktop\SpeechManagement\ProjectSettings\obj\Debug\ProjectSettings.csprojAssemblyReference.cache
