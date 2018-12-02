@@ -10,18 +10,19 @@ namespace WorkingScreen
             {
                 case 0:
 
+                    CommandEndMagnifier();
                     CommandEndSector();
 
                     break;
 
                 case 1:
+
                     CommandEndMagnifier();
 
                     break;
 
                 case 2:
 
-                    //CommandEndMagnifier();
                     CommandEndFullSector();
 
                     break;
