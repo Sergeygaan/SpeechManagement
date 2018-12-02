@@ -10,28 +10,23 @@ namespace WorkingScreen
             {
                 case 0:
 
-                    CommandEndMagnifier();
-                    CommandEndSector();
+                    CommandEndMagnifier(Auxiliary.SearchChild());
+                    CommandEndSector(Auxiliary.SearchChild());
 
                     break;
 
                 case 1:
-
-                    CommandEndMagnifier();
-
-                    break;
-
                 case 2:
 
-                    CommandEndFullSector();
+                    CommandEndFull(index);
 
                     break;
             }
         }
 
-        private void CommandEndMagnifier()
+        private void CommandEndMagnifier(WorkObject SearchChild)
         {
-            var currentWorkObject = Auxiliary.SearchChild();
+            var currentWorkObject = SearchChild;
 
             if (currentWorkObject.Magnifier != null)
             {
@@ -45,31 +40,36 @@ namespace WorkingScreen
             }
         }
 
-        private void CommandEndFullSector()
+        private void CommandEndSector(WorkObject Object)
         {
-            while (Auxiliary.SearchChild().ParantNumberObject != null)
-            {
-                CommandEndMagnifier();
-                CommandEndSector();
-            }
+            ////метод отменяет разбитие сектора
 
-            CommandEndMagnifier();
+            var ParantNumberObject = Object.ParantNumberObject;
+
+            if (ParantNumberObject?.ChildNumberObject != null)
+            {
+                ParantNumberObject.ChildNumberObject = null;
+
+                ParantNumberObject.Visible = true;
+            }
         }
 
-        private void CommandEndSector()
+        private void CommandEndFull(int index)
         {
-            //метод отменяет разбитие сектора
-            if (Auxiliary.SearchChild().ParantNumberObject != null)
-            {
-                var ParantNumberObject = Auxiliary.SearchChild().ParantNumberObject;
+            WorkObject currentWorkObject = Auxiliary.SearchChild();
 
-                if (ParantNumberObject.ChildNumberObject != null)
+            do
+            {
+                CommandEndMagnifier(currentWorkObject);
+
+                if(index == 2)
                 {
-                    ParantNumberObject.ChildNumberObject = null;
-
-                    ParantNumberObject.Visible = true;
+                    CommandEndSector(currentWorkObject);
                 }
+
+                currentWorkObject = currentWorkObject.ParantNumberObject;
             }
-        }
+            while (currentWorkObject != null);
+        }       
     }
 }
