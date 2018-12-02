@@ -21,7 +21,7 @@ namespace WorkingScreen
 
                 case 2:
 
-                    CommandEndMagnifier();
+                    //CommandEndMagnifier();
                     CommandEndFullSector();
 
                     break;
@@ -48,8 +48,11 @@ namespace WorkingScreen
         {
             while (Auxiliary.SearchChild().ParantNumberObject != null)
             {
+                CommandEndMagnifier();
                 CommandEndSector();
             }
+
+            CommandEndMagnifier();
         }
 
         private void CommandEndSector()
