@@ -52,7 +52,7 @@ namespace WorkingScreen
         {
             if (_workObject.listRegionRectangle.Count == 0)
             {
-                _drawing.DrawingDividingLines(_workObject, _widthFrom, _heightForm);
+                _drawing.StandardLineDrawingMethod(_workObject, _widthFrom, _heightForm);
             }
 
             if (_currentObject.ChildNumberObject != null)

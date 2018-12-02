@@ -5,7 +5,7 @@ namespace WorkingScreen
     public class Drawing
     {
         //Метод по созданию новых зон для мыши
-        public void DrawingDividingLines(WorkObject _currentObject, float width, float height, float startX = 0, float startY = 0)
+        public void StandardLineDrawingMethod(WorkObject _currentObject, float width, float height, float startX = 0, float startY = 0)
         {
             float saveStartX = startX;
 

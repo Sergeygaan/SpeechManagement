@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace VoiceControl
 {
@@ -7,6 +10,11 @@ namespace VoiceControl
         public Settings()
         {
             InitializeComponent();
+            a();
+        }
+
+        private void a()
+        {
 
         }
     }

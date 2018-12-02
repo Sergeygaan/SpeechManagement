@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WorkingScreen
@@ -40,7 +34,7 @@ namespace WorkingScreen
             WindowState = FormWindowState.Maximized;
 
             _initialStyle = GetWindowLong(Handle, -20);
-            SetWindowLong(this.Handle, -20, _initialStyle | 0x80000 | 0x20);
+            SetWindowLong(Handle, -20, _initialStyle | 0x80000 | 0x20);
 
             Size resolution = Screen.PrimaryScreen.Bounds.Size;
 

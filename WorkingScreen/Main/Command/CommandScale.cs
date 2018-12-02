@@ -27,7 +27,7 @@ namespace WorkingScreen
 
             currentNumberObject.Visible = false;
 
-            _drawing.DrawingDividingLines(newChildNumberObject,
+            _drawing.StandardLineDrawingMethod(newChildNumberObject,
                                  currentNumberObject.listRegionRectangle[index].Width, currentNumberObject.listRegionRectangle[index].Height,
                                  currentNumberObject.listRegionRectangle[index].StartX, currentNumberObject.listRegionRectangle[index].StartY);
         }
