@@ -1,4 +1,4 @@
-﻿namespace ProjectSettings
+﻿namespace VoiceControl
 {
     partial class LogForm
     {

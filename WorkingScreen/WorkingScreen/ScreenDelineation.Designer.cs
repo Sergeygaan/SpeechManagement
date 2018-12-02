@@ -1,4 +1,4 @@
-﻿namespace ProjectSettings
+﻿namespace WorkingScreen
 {
     partial class ScreenDelineation
     {

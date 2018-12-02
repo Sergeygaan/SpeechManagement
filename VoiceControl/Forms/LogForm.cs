@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using Microsoft.Speech.Recognition;
-using Microsoft.Speech.Synthesis;
+using WorkingScreen;
 
-namespace ProjectSettings
+namespace VoiceControl
 {
     public partial class LogForm : Form
     {

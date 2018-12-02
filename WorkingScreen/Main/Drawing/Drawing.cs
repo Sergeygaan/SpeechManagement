@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProjectSettings;
-using System.Drawing;
-using static ProjectSettings.WorkObject;
+﻿using System.Drawing;
 
-namespace Main.Drawing
+namespace WorkingScreen
 {
     public class Drawing
     {
@@ -51,19 +44,20 @@ namespace Main.Drawing
 
             var Rectangle = new RectangleF(startX, startY, width, height);
 
-            RegionRectangle regionRectangle = new RegionRectangle();
+            RegionRectangle regionRectangle = new RegionRectangle
+            {
+                Rectangle = new RectangleF(startX, startY, width, height),
 
-            regionRectangle.Rectangle = new RectangleF(startX, startY, width, height);
+                IdObject = iDObject,
 
-            regionRectangle.IdObject = iDObject;
+                Visible = true,
 
-            regionRectangle.Visible = true;
+                StartX = startX,
+                StartY = startY,
 
-            regionRectangle.StartX = startX;
-            regionRectangle.StartY = startY;
-
-            regionRectangle.Width = width;
-            regionRectangle.Height = height;
+                Width = width,
+                Height = height
+            };
 
             return regionRectangle;
         }

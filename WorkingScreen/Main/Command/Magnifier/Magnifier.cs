@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using static ProjectSettings.WorkObject;
+using WorkingScreen;
 
 namespace Command.Magnif
 {

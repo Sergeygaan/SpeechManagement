@@ -1,13 +1,6 @@
-﻿using Main.Drawing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProjectSettings;
-using static Command.Auxiliary;
+﻿using Command;
 
-namespace Command
+namespace WorkingScreen
 {
     class CommandScale : ICommand
     {
@@ -20,7 +13,7 @@ namespace Command
 
         public void Act(int index)
         {
-            var currentNumberObject = SearchChild();
+            var currentNumberObject = Auxiliary.SearchChild();
 
             var newChildNumberObject = new WorkObject
             {

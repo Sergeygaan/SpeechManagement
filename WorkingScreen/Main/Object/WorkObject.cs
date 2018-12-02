@@ -2,26 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using ProjectSettings;
 
-namespace ProjectSettings
+namespace WorkingScreen
 {
     public class WorkObject
     {
-        public class RegionRectangle
-        {
-            public RectangleF Rectangle { set; get; }
-
-            public int IdObject { set; get; }
-
-            public bool Visible { set; get; }
-
-            public float StartX { set; get; }
-            public float StartY { set; get; }
-
-            public float Width { set; get; }
-            public float Height { set; get; }
-        }
-
         public WorkObject ChildNumberObject;
         public WorkObject ParantNumberObject;
 
@@ -42,7 +28,7 @@ namespace ProjectSettings
         {
             foreach (var currentRectangle in listRegionRectangle)
             {
-                e.Graphics.DrawRectangle(new Pen(ProjectSettings.ColorSquares), currentRectangle.Rectangle.X, currentRectangle.Rectangle.Y,
+                e.Graphics.DrawRectangle(new Pen(ProjectSettingsStyle.ColorSquares), currentRectangle.Rectangle.X, currentRectangle.Rectangle.Y,
                                                     currentRectangle.Rectangle.Width, currentRectangle.Rectangle.Height);
             }
         }
@@ -65,7 +51,7 @@ namespace ProjectSettings
                     var Center = new Point(x, y);
 
                     var stringIdObject = currentRectangle.IdObject.ToString();
-                    e.Graphics.DrawString(stringIdObject, font, new SolidBrush(ProjectSettings.ColorNumbers), Center);
+                    e.Graphics.DrawString(stringIdObject, font, new SolidBrush(ProjectSettingsStyle.ColorNumbers), Center);
                 }
             }
         }
@@ -74,8 +60,6 @@ namespace ProjectSettings
         {
                 return new PointF(listRegionRectangle[index].Rectangle.Left + listRegionRectangle[index].Width / 2,
                              listRegionRectangle[index].Rectangle.Top + listRegionRectangle[index].Height / 2);
-            
         }
-
     }
 }

@@ -1,18 +1,18 @@
-﻿using System.Drawing;
+﻿using Command;
+using System.Drawing;
 using System.Windows.Forms;
-using static Command.Auxiliary;
 
-namespace Command
+namespace WorkingScreen
 {
     class CommandLeftOneClick : ICommand
     {
         public void Act(int index)
         {
-            var currentObject = SearchChild();
+            var currentObject = Auxiliary.SearchChild();
 
             Cursor.Position = Point.Round(currentObject.Center(index));
 
-            mouse_event((uint)MouseEventFlags.LEFTDOWN | (uint)MouseEventFlags.LEFTUP, 0, 0, 0, 0);
+            Auxiliary.mouse_event((uint)Auxiliary.MouseEventFlags.LEFTDOWN | (uint)Auxiliary.MouseEventFlags.LEFTUP, 0, 0, 0, 0);
         }
     }
 }

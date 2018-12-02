@@ -1,12 +1,6 @@
 ﻿using Command.Magnif;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Command.Auxiliary;
 
-namespace Command
+namespace WorkingScreen
 {
     class CommandMagnifier : ICommand
     {
@@ -16,7 +10,7 @@ namespace Command
         {
             if (magnifierForm == null)
             {
-                var currentNumberObject = SearchChild();
+                var currentNumberObject = Auxiliary.SearchChild();
 
                 magnifierForm = new MagnifierForm();
                 magnifierForm.Show();

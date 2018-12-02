@@ -1,8 +1,6 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
-using static Command.Auxiliary;
+﻿using Command;
 
-namespace Command
+namespace WorkingScreen
 {
     class CommandScroll : ICommand
     {
@@ -19,7 +17,7 @@ namespace Command
                 commandData = -500;
             }
 
-            mouse_event((uint)MouseEventFlags.SCROLL, 0, 0, commandData, 0);
+            Auxiliary.mouse_event((uint)Auxiliary.MouseEventFlags.SCROLL, 0, 0, commandData, 0);
         }
     }
 }

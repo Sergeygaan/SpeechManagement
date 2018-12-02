@@ -2,7 +2,7 @@
 
 namespace ProjectSettings
 {
-    public static class ProjectSettings
+    public static class ProjectSettingsStyle
     {
         //Цвет квадратных разделителей
         static public Color ColorSquares { get; set; } = Color.Gray;

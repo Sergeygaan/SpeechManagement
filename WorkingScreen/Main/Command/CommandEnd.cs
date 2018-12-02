@@ -1,6 +1,6 @@
-﻿using static Command.Auxiliary;
+﻿using Command;
 
-namespace Command
+namespace WorkingScreen
 {
     class CommandEnd : ICommand
     {
@@ -30,7 +30,7 @@ namespace Command
 
         private void CommandEndMagnifier()
         {
-            var currentWorkObject = SearchChild();
+            var currentWorkObject = Auxiliary.SearchChild();
 
             if (currentWorkObject.Magnifier != null)
             {
@@ -46,7 +46,7 @@ namespace Command
 
         private void CommandEndFullSector()
         {
-            while (SearchChild().ParantNumberObject != null)
+            while (Auxiliary.SearchChild().ParantNumberObject != null)
             {
                 CommandEndSector();
             }
@@ -55,9 +55,9 @@ namespace Command
         private void CommandEndSector()
         {
             //метод отменяет разбитие сектора
-            if (SearchChild().ParantNumberObject != null)
+            if (Auxiliary.SearchChild().ParantNumberObject != null)
             {
-                var ParantNumberObject = SearchChild().ParantNumberObject;
+                var ParantNumberObject = Auxiliary.SearchChild().ParantNumberObject;
 
                 if (ParantNumberObject.ChildNumberObject != null)
                 {

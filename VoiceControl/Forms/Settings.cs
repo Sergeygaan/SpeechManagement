@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace ProjectSettings
+namespace VoiceControl
 {
     public partial class Settings : Form
     {

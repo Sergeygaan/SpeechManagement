@@ -3,7 +3,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace ProjectSettings
+namespace WorkingScreen
 { 
     public class OnTopControl : IDisposable
     {
