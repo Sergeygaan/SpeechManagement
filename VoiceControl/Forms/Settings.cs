@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyPaint;
+using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -16,6 +17,12 @@ namespace VoiceControl
         private void a()
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DrawingZone drawingZone = new DrawingZone();
+            drawingZone.Show();
         }
     }
 }

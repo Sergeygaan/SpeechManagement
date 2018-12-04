@@ -1,4 +1,4 @@
-﻿namespace DynamicControZone
+﻿namespace MyPaint
 {
     partial class DrawingZone
     {
@@ -29,11 +29,31 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.rightClickMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.SuspendLayout();
+            // 
+            // rightClickMenuStrip
+            // 
+            this.rightClickMenuStrip.Name = "rightClickMenuStrip";
+            this.rightClickMenuStrip.Size = new System.Drawing.Size(61, 4);
+            // 
+            // DrawingZone
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Name = "DrawingZone";
             this.Text = "DrawingZone";
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawingZone_Paint);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DrawingZone_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DrawingZone_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DrawingZone_MouseUp);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ContextMenuStrip rightClickMenuStrip;
     }
 }

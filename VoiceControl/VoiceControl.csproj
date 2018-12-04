@@ -151,6 +151,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DynamicControZone\DynamicControZone.csproj">
+      <Project>{edc82cc0-1c80-4bf9-a28b-bb0718afe554}</Project>
+      <Name>DynamicControZone</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProjectSettings\ProjectSettings.csproj">
       <Project>{57db0f80-34ee-4d0a-8f66-6b8aaf7751e3}</Project>
       <Name>ProjectSettings</Name>
