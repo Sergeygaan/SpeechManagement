@@ -91,9 +91,10 @@ namespace MyPaint
         /// <para name = "e">Объект хранящий данные для отображения эллипса</para>
         /// <para name = "Points">Точки для построения эллипса</para>
         /// <para name = "PenFigure">Кисть которая будет использоваться в построение эллипса</para>
-        public void PaintFigure(PaintEventArgs e, List<PointF> Points, Pen PenFigure)
+        public void PaintFigure(PaintEventArgs e, List<PointF> Points)
         {
-            e.Graphics.DrawRectangle(PenFigure, _сonstructionFigure.ShowRectangle(Points[0], Points[1]));
+            Pen pen = new Pen(Color.Red, 1);
+            e.Graphics.DrawRectangle(pen, _сonstructionFigure.ShowRectangle(Points[0], Points[1]));
         }
 
         /// <summary>
@@ -118,10 +119,11 @@ namespace MyPaint
         /// <para name = "SelectObject">Переменная хранащая объект для которого нужно построить опорные точки</para>
         public void AddSupportPoint(ObjectFugure SelectObject, Color ColorLine)
         {
-            for (int i = 0; i < SelectObject.PointSelect.Length; i++)
+
+            for (int i = 0; i < SelectObject.Path.PointCount; i++)
             {
                 _drawSupportObject = new SupportObjectFugure(new Pen(ColorLine, 1), new GraphicsPath());
-                _drawSupportObject.Path.AddEllipse(_сonstructionFigure.SelectFigure(SelectObject.PointSelect[i], SelectObject.Pen.Width));
+                _drawSupportObject.Path.AddEllipse(_сonstructionFigure.SelectFigure(SelectObject.Path.PathPoints[i], SelectObject.Pen.Width));
                 _drawSupportObject.IdFigure = SelectObject.IdFigure;
                 _drawSupportObject.ControlPointF = i;
 
@@ -162,8 +164,6 @@ namespace MyPaint
                             SelectObject.PointSelect[0].Y += DeltaY;
 
                         }
-                        SelectObject.Path.Reset();
-                        SelectObject.Path.AddRectangle(_figureBuild.ShowRectangle(SelectObject.PointSelect[0], SelectObject.PointSelect[2]));
 
 
                         break;
@@ -183,10 +183,6 @@ namespace MyPaint
                         }
 
 
-                        SelectObject.Path.Reset();
-                        SelectObject.Path.AddRectangle(_figureBuild.ShowRectangle(SelectObject.PointSelect[0], SelectObject.PointSelect[2]));
-
-
                         break;
 
                     case 2:
@@ -202,10 +198,6 @@ namespace MyPaint
                             SelectObject.PointSelect[2].Y += DeltaY;
 
                         }
-
-                        SelectObject.Path.Reset();
-                        SelectObject.Path.AddRectangle(_figureBuild.ShowRectangle(SelectObject.PointSelect[0], SelectObject.PointSelect[2]));
-
 
                         break;
 
@@ -224,13 +216,14 @@ namespace MyPaint
 
                         }
 
-                        SelectObject.Path.Reset();
-                        SelectObject.Path.AddRectangle(_figureBuild.ShowRectangle(SelectObject.PointSelect[0], SelectObject.PointSelect[2]));
-
 
                         break;
                 }
 
+                SelectObject.Path.Reset();
+                SelectObject.Path.AddRectangle(_figureBuild.ShowRectangle(SelectObject.PointSelect[0], SelectObject.PointSelect[2]));
+
+                SelectObject.nameRec();
             }
 
             _edipParametr.MoveObjectSupport(SelectObject, DeltaX, DeltaY);

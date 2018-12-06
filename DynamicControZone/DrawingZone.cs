@@ -35,13 +35,16 @@ namespace MyPaint
             // создаем элементы меню
             ToolStripMenuItem copyMenuItem = new ToolStripMenuItem("Копировать");
             ToolStripMenuItem pasteMenuItem = new ToolStripMenuItem("Вставить");
+
+            ToolStripMenuItem selectMenuItem = new ToolStripMenuItem("Выделить");
             // добавляем элементы в меню
-            rightClickMenuStrip.Items.AddRange(new[] { copyMenuItem, pasteMenuItem });
+            rightClickMenuStrip.Items.AddRange(new[] { copyMenuItem, pasteMenuItem, selectMenuItem });
             // ассоциируем контекстное меню с текстовым полем
             //textBox1.ContextMenuStrip = contextMenuStrip1;
             // устанавливаем обработчики событий для меню
             copyMenuItem.Click += copyMenuItem_Click;
             pasteMenuItem.Click += pasteMenuItem_Click;
+            selectMenuItem.Click += selectMenuItem_Click;
 
             Size resolution = Screen.PrimaryScreen.Bounds.Size;
 
@@ -54,34 +57,26 @@ namespace MyPaint
         {
             MessageBox.Show("paste");
         }
+
+        // вставка текста
+        void selectMenuItem_Click(object sender, EventArgs e)
+        {
+            select = !select;
+        }
+
         // копирование текста
         void copyMenuItem_Click(object sender, EventArgs e)
         {
             // если выделен текст в текстовом поле, то копируем его в буфер
             //MessageBox.Show("copy");
+            select = false;
+
             drawing.Clear();
 
             Refresh();
         }
 
-
-
-        Drawing drawing;
-
-        List<PointF> point = new List<PointF>();
-
-
-        private void DrawingZone_MouseUp(object sender, MouseEventArgs e)
-        {
-            point.Add(new PointF(e.X, e.Y));
-
-            drawing.MouseUp(point);
-
-            Refresh();
-
-            point.Clear();
-
-        }
+        private SelectPointActions selectPointActions = new SelectPointActions();
 
         private void DrawingZone_MouseDown(object sender, MouseEventArgs e)
         {
@@ -94,17 +89,95 @@ namespace MyPaint
                     break;
             }
 
-            point.Add(new PointF(e.X, e.Y));
+            if (!select)
+            {
+                point.Add(new PointF(e.X, e.Y));
+                point.Add(new PointF(e.X, e.Y));
+
+                flagPaint = true;
+            }
+            else
+            {
+                selectPointActions.MouseDown(e, drawing.FiguresList, 1);
+                //drawing.SavePoint(e);
+            }
+
+            Refresh();
+        }
+
+        bool flagPaint = false;
+        bool select = false;
+
+        private void DrawingZone_Paint(object sender, PaintEventArgs e)
+        {
+            if (!select)
+            {
+                if (flagPaint)
+                {
+                    drawing?.PaintFigure(e, point);
+                }
+
+                drawing?.Paint(e, 1);
+            }
+            else
+            {
+                drawing?.Paint(e, 1);
+
+                //if (_selectClass.SeleckResult() != null)
+                //{
+                //drawing.SupportPoint(drawing.FiguresList);
+                //}
+            }
+
+            drawing.RefreshBitmap();
+        }
+
+        Drawing drawing;
+
+        List<PointF> point = new List<PointF>();
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //drawing.SelectObject(0);
+
+            Refresh();
+
+            select = !select;
+        }
+
+        private void DrawingZone_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (!select)
+            {
+                drawing.MouseUp(point);
+
+                Refresh();
+
+                point.Clear();
+
+                flagPaint = false;
+            }
+            else
+            {
+                selectPointActions.MouseUp(e, drawing.FiguresList, 0);
+            }
+
+            Refresh();
         }
 
         private void DrawingZone_MouseMove(object sender, MouseEventArgs e)
         {
+            if (!select)
+            {
+                drawing.MouseMove(point, e);
+            }
+            else
+            {
+                selectPointActions.MouseMove(e, 0, 0);
 
-        }
+            }
 
-        private void DrawingZone_Paint(object sender, PaintEventArgs e)
-        {
-            drawing?.Paint(e, 1);
+            Refresh();
         }
     }
 }

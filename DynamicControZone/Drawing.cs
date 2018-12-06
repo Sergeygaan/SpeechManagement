@@ -60,14 +60,26 @@ namespace MyPaint
         /// </summary>
         private bool _brushFill;
 
+        /// <summary>
+        /// Переменная, хранящая зону выделения.
+        /// </summary>
+        private RectangleF _rectangleF;
+
+        /// <summary>
+        /// Переменная, хранящая список с выделенными фигурами.
+        /// </summary>
+
         public Drawing(int Width, int Height)
         {
             _widthDraw = Width;
             _heightDraw = Height;
             _bmp = new Bitmap(Width, Height);
             _figures = new List<ObjectFugure>();
+
+            rectangles = new Rectangles();
         }
 
+        Rectangles rectangles;
 
         public void Paint(PaintEventArgs e, int Currentfigure)
         {
@@ -78,7 +90,7 @@ namespace MyPaint
             //{
             //    StyleFigure(linecolor, thickness, dashstyle);
 
-            //    FiguresBuild[_currentfigure].PaintFigure(e, Points, _penFigure);     // Отрисовка нужной фигуры
+            //    rectangles.PaintFigure(e, Points);     // Отрисовка нужной фигуры
 
             //    if (Points.Count > 1)
             //    {
@@ -87,6 +99,17 @@ namespace MyPaint
             //}
 
             e.Graphics.DrawImage(_bmp, 0, 0);
+
+        }
+
+        public void MouseMove(List<PointF> _points, MouseEventArgs e)
+        {
+            rectangles.MouseMove(_points, e);
+        }
+
+        public void PaintFigure(PaintEventArgs e, List<PointF> Points)
+        {
+            rectangles.PaintFigure(e, Points);
 
         }
 
@@ -108,13 +131,22 @@ namespace MyPaint
 
             //StyleFigure(linecolor, thickness, dashStyle);
 
-            _drawObject = new ObjectFugure(linecolor, thickness, dashStyle, new GraphicsPath(), brushcolor, _currentfigure, _brushFill);
+            GraphicsPath myPath = new GraphicsPath();
+
+            _drawObject = new ObjectFugure(linecolor, thickness, dashStyle, myPath, brushcolor, _currentfigure, _brushFill);
 
 
             var newFigure = new AddBuildFigure();
             newFigure.AddFigure(_drawObject, point);
 
-            _figures.Add(newFigure.Output());
+            var obj = newFigure.Output();
+
+            obj.nameRec();
+
+            _figures.Add(obj);
+
+
+
             RefreshBitmap();
         }
 
@@ -127,6 +159,13 @@ namespace MyPaint
             GC.Collect();
 
         }
+
+        public void SelectObject(int index)
+        {
+            //_selectedFigures.Add(_figures[index]);
+            //rectangles.AddSupportPoint(_figures[index], Color.Green);
+        }
+
         /// <summary>
         /// Метод, выполняющий отрисовку всех фигур на рабочей области.
         /// </summary>
@@ -150,19 +189,44 @@ namespace MyPaint
                 {
                     DrawList.DrawPath(DrawObject.Pen, DrawObject.Path);
 
-                    if (DrawObject.Fill == true)
-                    {
-                        DrawList.FillPath(DrawObject.Brush, DrawObject.Path);  //Заливка
-                    }
+                    //if (DrawObject.Fill == true)
+                    //{
+                    //    DrawList.FillPath(DrawObject.Brush, DrawObject.Path);  //Заливка
+                    //}
 
                     foreach (SupportObjectFugure SuppportObject in DrawObject.SelectListFigure())
                     {
                         DrawList.DrawPath(SuppportObject.Pen, SuppportObject.Path);
                     }
+
+
                 }
             }
         }
 
+        /// <summary>
+        /// Метод, выполняющий отрисовку опорных точек.
+        /// </summary>
+        /// <para name = "e">Переменная, хранящая  события отрисовки.</para>
+        /// <para name = "SeleckResult">Переменная, хранящая  список выделенных фигур.</para>
+        /// <para name = "FiguresBuild">Переменная, хранящая класс отрисовки.</para>
+        public void SupportPoint(List<ObjectFugure> SeleckResult)
+        {
+            foreach (ObjectFugure SelectObject in SeleckResult)
+            {
+                if (SelectObject.SelectFigure == true)
+                {
+                    SelectObject.SelectFigure = false;
+                    SelectObject.ClearListFigure();
+
+                    Color ColorLine = Color.Black;
+
+                    rectangles.AddSupportPoint(SelectObject, ColorLine);
+
+                }
+
+            }
+        }
 
         /// <summary>
         /// Метод, выполняющий редактирование стилей для каждой фигуры.
@@ -208,5 +272,7 @@ namespace MyPaint
             _saveProjectClear = true;
             RefreshBitmap();
         }
+
+
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace MyPaint
 {
@@ -65,6 +66,24 @@ namespace MyPaint
         /// Переменная, хранящая список опорных точек.
         /// </summary>
         private List<SupportObjectFugure> _supportFigures = new List<SupportObjectFugure>();
+
+        public void nameRec()
+        {
+            string stringText = "Sample Text";
+            FontFamily family = new FontFamily("Arial");
+            int fontStyle = (int)FontStyle.Italic;
+            int emSize = 26;
+            Point origin = new Point(20, 20);
+            StringFormat format = StringFormat.GenericDefault;
+
+            // Add the string to the path.
+            _path.AddString(stringText,
+                family,
+                fontStyle,
+                emSize,
+                origin,
+                format);
+        }
 
         /// <summary>
         /// Метод, выполняющий действия над номером фигуры.
@@ -236,6 +255,7 @@ namespace MyPaint
         //{
         //    return new ObjectFugure(Pen, Path.Clone() as GraphicsPath, _brush.Color, _currentFigure, _fill);
         //}
+
 
     }
 }

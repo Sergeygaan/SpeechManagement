@@ -50,15 +50,15 @@ namespace MyPaint
                     CurrObj.EditListFigure(i, _figureBuild.SelectFigure(CurrObj.PointSelect[i], CurrObj.Pen.Width));
                 }
             }
-            else
-            {
-                int k = 0;
-                for (int i = 0; i < CurrObj.PointSelect.Length; i += 3)
-                {
-                    CurrObj.EditListFigure(k, _figureBuild.SelectFigure(CurrObj.PointSelect[i], CurrObj.Pen.Width));
-                    k++;
-                }
-            }
+            //else
+            //{
+            //    int k = 0;
+            //    for (int i = 0; i < CurrObj.PointSelect.Length; i += 3)
+            //    {
+            //        CurrObj.EditListFigure(k, _figureBuild.SelectFigure(CurrObj.PointSelect[i], CurrObj.Pen.Width));
+            //        k++;
+            //    }
+            //}
         }
 
 
