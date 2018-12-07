@@ -1,87 +1,128 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Windows.Forms;
 
 namespace MyPaint
 {
-
     /// <summary>
     /// Класс, являющийся основным объектом построения
     /// </summary>
     public class ObjectFugure
     {
         /// <summary>
-        /// Переменная, хранящая основную структуру фигуры.
+        /// Метод, выполняющий действия над номером фигуры.
         /// </summary>
-        private GraphicsPath _path;
+        public int IdFigure { get; set; }
 
         /// <summary>
-        /// Переменная, хранящая кисть для отрисовки фигуры.
+        /// Метод, выполняющий действия над графическим представлением фигуры.
         /// </summary>
-        private Pen _pen;
+        public GraphicsPath Path { get; set; }
 
         /// <summary>
-        /// Переменная, хранящая набор точек фигуры.
+        /// Метод, выполняющий клонирование фигуры.
         /// </summary>
-        private PointF[] _pointSelect;
+        public GraphicsPath PathClone
+        {
+            get { return (GraphicsPath)Path.Clone(); }
+            set { Path = value; }
+        }
 
         /// <summary>
-        /// Переменная, хранящая начальную точку.
+        /// Метод, выполняющий возврат опорных точек.
         /// </summary>
-        private PointF _figureStart = new Point();
+        public List<SupportObjectFugure> SelectListFigure()
+        {
+            return _supportFigures;
+        }
 
         /// <summary>
-        /// Переменная, хранящая конечную точку.
-        /// </summary>                
-        private PointF _figureEnd = new Point();
-
-        /// <summary>
-        /// Переменная, хранящая значение выбрана ли фигура.
-        /// </summary>                        
-        private bool _selectFigure = false;
-
-        /// <summary>
-        /// Переменная, хранящая номер фигуры.
+        /// Метод, выполняющий возврат типа фигуры.
         /// </summary>
-        private int _idFigure;
+        public int CurrentFigure { get; set; }
 
         /// <summary>
-        /// Переменная, хранящая заливку фигуры.
+        /// Метод, выполняющий действия над точками в фигуре.
         /// </summary>
-        private SolidBrush _brush;
+        public PointF[] PointSelect { get; set; }
 
         /// <summary>
-        /// Переменная, хранящая значение заливки.
+        /// Метод, выполняющий действия над выбранной фигурой.
         /// </summary>
-        private bool _fill;
+        public bool SelectFigure { get; set; } = false;
 
         /// <summary>
-        /// Переменная, хранящая тип фигуры.
+        /// Метод, выполняющий действия начальной координатой.
         /// </summary>
-        private int _currentFigure;
+        public PointF FigureStart { get; set; } = new Point();
+
+        /// <summary>
+        /// Метод, выполняющий действия конечной координатой.
+        /// </summary>
+        public PointF FigureEnd { get; set; } = new Point();
 
         /// <summary>
         /// Переменная, хранящая список опорных точек.
         /// </summary>
         private List<SupportObjectFugure> _supportFigures = new List<SupportObjectFugure>();
 
-        public void nameRec()
-        {
-            if (_path.PointCount != 0)
-            {
-                RectangleF rectangle = СonstructionFigure.ShowRectangleFloat(_path.PathPoints[0], _path.PathPoints[2]);
-   
-                int fontSize = (int)rectangle.Height / 2;
+        /// <summary>
+        /// Метод, выполняющий действия заливкой.
+        /// </summary>
+        public SolidBrush Brush { get; set; }
 
-                int x = (int)(rectangle.Left + rectangle.Width / 2 - fontSize * 0.7);
-                int y = (int)(rectangle.Top + rectangle.Height / 2 - fontSize * 0.7);
+        /// <summary>
+        /// Метод, выполняющий действия заливкой.
+        /// </summary>
+        public bool Fill { get; set; }
+
+        /// <summary>
+        /// Метод, выполняющий действия кистью.
+        /// </summary>
+        public Pen @Pen { get; set; }
+
+        /// <summary>
+        /// Метод, выполняющий создание объекта.
+        /// </summary>
+        /// <para name = "Pen">Переменная, хранящая кисть.</para>
+        /// <para name = "Path">Переменная, хранящая графическое представление фигуры.</para>
+        /// <para name = "Brush">Переменная, хранящая заливки.</para>
+        /// <para name = "CurrentFigure">Переменная, хранящая тип фигуры.</para>
+        /// <para name = "Fill">Переменная, хранящая параметны заливки.</para>
+        public ObjectFugure(Color linecolor, int thickness, DashStyle dashStyle, GraphicsPath path)
+        {
+            Path = path;
+
+            Pen = new Pen(linecolor, thickness)
+            {
+                DashStyle = dashStyle
+            };
+        }
+
+        public void DrawText()
+        {
+            if (Path.PointCount != 0)
+            {
+                RectangleF rectangle = СonstructionFigure.ShowRectangleFloat(Path.PathPoints[0], Path.PathPoints[2]);
+
+                int fontSize;
+
+                if ((int)rectangle.Height / 2 < (int)rectangle.Width / 2)
+                {
+                    fontSize = (int)rectangle.Height / 2;
+                }
+                else
+                {
+                    fontSize = (int)rectangle.Width / 2;
+                }
+
+                int x = (int)(rectangle.Left + rectangle.Width / 2 - fontSize * 0.5);
+                int y = (int)(rectangle.Top + rectangle.Height / 2 - fontSize * 0.5);
 
                 var Center = new Point(x, y);
-                
+
                 //
-                string stringText = "1";
+                string stringText = IdFigure.ToString();
                 FontFamily family = new FontFamily("Arial");
                 int fontStyle = (int)FontStyle.Regular;
                 int emSize = fontSize;
@@ -91,7 +132,7 @@ namespace MyPaint
                 if (emSize > 0)
                 {
                     // Add the string to the path.
-                    _path.AddString(stringText,
+                    Path.AddString(stringText,
                         family,
                         fontStyle,
                         emSize,
@@ -99,33 +140,6 @@ namespace MyPaint
                         format);
                 }
             }
-        }
-
-        /// <summary>
-        /// Метод, выполняющий действия над номером фигуры.
-        /// </summary>
-        public int IdFigure
-        {
-            get { return _idFigure; }
-            set { _idFigure = value; }
-        }
-
-        /// <summary>
-        /// Метод, выполняющий действия над графическим представлением фигуры.
-        /// </summary>
-        public GraphicsPath Path
-        {
-            get { return _path; }
-            set { _path = value; }
-        }
-
-        /// <summary>
-        /// Метод, выполняющий клонирование фигуры.
-        /// </summary>
-        public GraphicsPath PathClone
-        {
-            get { return (GraphicsPath)_path.Clone(); }
-            set { _path = value; }
         }
 
         /// <summary>
@@ -153,123 +167,5 @@ namespace MyPaint
         {
             _supportFigures.Clear();
         }
-
-        /// <summary>
-        /// Метод, выполняющий возврат опорных точек.
-        /// </summary>
-        public List<SupportObjectFugure> SelectListFigure()
-        {
-            return _supportFigures;
-        }
-
-        /// <summary>
-        /// Метод, выполняющий возврат типа фигуры.
-        /// </summary>
-        public int CurrentFigure
-        {
-            get { return _currentFigure; }
-            set { _currentFigure = value; }
-        }
-
-        /// <summary>
-        /// Метод, выполняющий действия над точками в фигуре.
-        /// </summary>
-        public PointF[] PointSelect
-        {
-            get { return _pointSelect; }
-            set { _pointSelect = value; }
-        }
-
-        /// <summary>
-        /// Метод, выполняющий действия над выбранной фигурой.
-        /// </summary>
-        public bool SelectFigure
-        {
-            get { return _selectFigure; }
-            set { _selectFigure = value; }
-        }
-
-        /// <summary>
-        /// Метод, выполняющий действия начальной координатой.
-        /// </summary>
-        public PointF FigureStart
-        {
-            get { return _figureStart; }
-            set { _figureStart = value; }
-        }
-
-        /// <summary>
-        /// Метод, выполняющий действия конечной координатой.
-        /// </summary>
-        public PointF FigureEnd
-        {
-            get { return _figureEnd; }
-            set { _figureEnd = value; }
-        }
-
-        /// <summary>
-        /// Метод, выполняющий действия цветом заливки.
-        /// </summary>
-        public Color BrushColor
-        {
-            get { return _brush.Color; }
-            set { _brush.Color = value; }
-        }
-
-        /// <summary>
-        /// Метод, выполняющий действия заливкой.
-        /// </summary>
-        public SolidBrush Brush
-        {
-            get { return _brush; }
-            set { _brush = value; }
-        }
-
-        /// <summary>
-        /// Метод, выполняющий действия заливкой.
-        /// </summary>
-        public bool Fill
-        {
-            get { return _fill; }
-            set { _fill = value; }
-        }
-
-        /// <summary>
-        /// Метод, выполняющий действия кистью.
-        /// </summary>
-        public Pen @Pen
-        {
-            get { return _pen; }
-            set { _pen = value; }
-        }
-
-        /// <summary>
-        /// Метод, выполняющий создание объекта.
-        /// </summary>
-        /// <para name = "Pen">Переменная, хранящая кисть.</para>
-        /// <para name = "Path">Переменная, хранящая графическое представление фигуры.</para>
-        /// <para name = "Brush">Переменная, хранящая заливки.</para>
-        /// <para name = "CurrentFigure">Переменная, хранящая тип фигуры.</para>
-        /// <para name = "Fill">Переменная, хранящая параметны заливки.</para>
-        public ObjectFugure(Color linecolor, int thickness, DashStyle dashStyle, GraphicsPath Path, Color Brush, int CurrentFigure, bool Fill)
-        {
-            _brush = new SolidBrush(Color.Black);
-            _path = Path;
-            _pen = Pen;
-            _brush.Color = Brush;
-            _currentFigure = CurrentFigure;
-            _fill = Fill;
-
-            _pen = new Pen(linecolor, thickness);
-            _pen.DashStyle = dashStyle;
-        }
-
-        /// <summary>
-        /// Метод, выполняющий создание клона объекта.
-        /// </summary>
-        //public ObjectFugure CloneObject()
-        //{
-        //    return new ObjectFugure(Pen, Path.Clone() as GraphicsPath, _brush.Color, _currentFigure, _fill);
-        //}
     }
 }

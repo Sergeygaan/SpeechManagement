@@ -183,7 +183,7 @@ namespace MyPaint
                 SelectObject.Path.Reset();
                 SelectObject.Path.AddRectangle(СonstructionFigure.ShowRectangleFloat(SelectObject.PointSelect[0], SelectObject.PointSelect[2]));
 
-                SelectObject.nameRec();
+                SelectObject.DrawText();
             }
 
             EditObject.MoveObjectSupport(SelectObject, DeltaX, DeltaY);
