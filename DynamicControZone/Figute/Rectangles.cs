@@ -94,7 +94,7 @@ namespace MyPaint
         {
             for (int i = 0; i < 4; i++)
             {
-                SupportObjectFugure supportObjectFugure = new SupportObjectFugure(new Pen(ColorLine, 1), new GraphicsPath());
+                SupportObjectFugure supportObjectFugure = new SupportObjectFugure(new Pen(ColorLine, 2), new GraphicsPath());
                 supportObjectFugure.Path.AddEllipse(СonstructionFigure.SelectFigure(SelectObject.Path.PathPoints[i], SelectObject.Pen.Width));
                 supportObjectFugure.IdFigure = SelectObject.IdFigure;
                 supportObjectFugure.ControlPointF = i;

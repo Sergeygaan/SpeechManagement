@@ -56,7 +56,6 @@ namespace MyPaint
             {
                 //_supportObj.Pen.Width -= 5;
                 _supportObj = null;
-
             }
         }
 
@@ -76,10 +75,7 @@ namespace MyPaint
                         if (_rectangleF.Contains(e.Location))
                         {
                             _supportObj = supportObjecFigure;
-                            // MessageBox.Show(_supportObj.ControlPointF.ToString());
-
                         }
-
                     }
                 }
             }
@@ -98,16 +94,12 @@ namespace MyPaint
             ////Запоминаем положение курсора
             _oldPoint = e.Location;
 
-            //rectangles.ScaleFigure(e, Figures[CurrentActions], _selectedFigures);
-
             float figurestartX, figurestartY, figureendX, figureendY;
 
             if (_selectedFigures.Count == 0)
             {
-
                 foreach (ObjectFugure DrawObject in Figures)
                 {
-
                     figurestartX = DrawObject.FigureStart.X;
                     figurestartY = DrawObject.FigureStart.Y;
 
@@ -127,23 +119,13 @@ namespace MyPaint
                         _rectangleF.Inflate(5, 10);
                     }
 
-                    switch (1)
+                    if (_rectangleF.Contains(e.Location))
                     {
-
-                        case 1:
-
-                            if (_rectangleF.Contains(e.Location))
-                            {
-                                Rectangles.ScaleFigure(e, DrawObject, _selectedFigures);
-                                Rectangles.AddSupportPoint(DrawObject, Color.Green);
-                            }
-
-                            break;
+                        Rectangles.ScaleFigure(e, DrawObject, _selectedFigures);
+                        Rectangles.AddSupportPoint(DrawObject, Color.Red);
                     }
-
                 }
             }
-
         }
 
         /// <summary>

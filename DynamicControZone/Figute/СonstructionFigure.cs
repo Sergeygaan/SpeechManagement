@@ -51,7 +51,5 @@ namespace MyPaint
 
             return RectangleF.FromLTRB(_right, _down, _left, _top);
         }
-
-
     }
 }

@@ -13,10 +13,6 @@ namespace MyPaint
         /// </summary>
         public List<ObjectFugure> FiguresList { get; set; }
 
-        /// <summary>
-        /// Переменная, хранящая параметры кисти для отрисовки фигур.
-        /// </summary>
-        private Pen _penFigure;
 
         /// <summary>
         /// Переменная, хранящая зону отрисовки фигур.
@@ -37,11 +33,6 @@ namespace MyPaint
         /// Переменная, хранящая значения о сохранение проекта.
         /// </summary>
         private bool _saveProjectClear = false;
-
-        /// <summary>
-        /// Переменная, хранящая объекс для отрисовки фигур.
-        /// </summary>
-        private ObjectFugure _drawObject;
 
         /// <summary>
         /// Переменная, хранящая список с выделенными фигурами.
@@ -85,7 +76,7 @@ namespace MyPaint
 
             DashStyle dashStyle = DashStyle.Solid;
 
-            int thickness = 2;
+            int thickness = 5;
 
             var _drawObject = new ObjectFugure(linecolor, thickness, dashStyle, new GraphicsPath())
             {
@@ -110,7 +101,6 @@ namespace MyPaint
             RefreshBitmap();
 
             GC.Collect();
-
         }
 
         /// <summary>
@@ -124,7 +114,7 @@ namespace MyPaint
 
             //Прорисовка всех объектов из списка
 
-            using (Graphics DrawList = Graphics.FromImage(_bmp))
+            using (var DrawList = Graphics.FromImage(_bmp))
             {
                 if (_saveProjectClear == true)
                 {
@@ -140,28 +130,6 @@ namespace MyPaint
                     {
                         DrawList.DrawPath(SuppportObject.Pen, SuppportObject.Path);
                     }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Метод, выполняющий отрисовку опорных точек.
-        /// </summary>
-        /// <para name = "e">Переменная, хранящая  события отрисовки.</para>
-        /// <para name = "SeleckResult">Переменная, хранящая  список выделенных фигур.</para>
-        /// <para name = "FiguresBuild">Переменная, хранящая класс отрисовки.</para>
-        public void SupportPoint(List<ObjectFugure> SeleckResult)
-        {
-            foreach (ObjectFugure SelectObject in SeleckResult)
-            {
-                if (SelectObject.SelectFigure == true)
-                {
-                    SelectObject.SelectFigure = false;
-                    SelectObject.ClearListFigure();
-
-                    Color ColorLine = Color.Black;
-
-                    Rectangles.AddSupportPoint(SelectObject, ColorLine);
                 }
             }
         }

@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MyPaint
@@ -16,21 +11,23 @@ namespace MyPaint
         {
             InitializeComponent();
 
-            //TransparencyKey = BackColor;
-
             StartPosition = FormStartPosition.CenterScreen;
-           // TopMost = true;
+
+            // TopMost = true;
+
             TopLevel = true;
             ShowIcon = false;
             ShowInTaskbar = false;
-            //FormBorderStyle = FormBorderStyle.None;
-            //WindowState = FormWindowState.Maximized;
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
             AllowTransparency = true;
-            BackColor = Color.AliceBlue;//цвет фона  
-            TransparencyKey = this.BackColor;//он же будет заменен на прозрачный цвет
 
-            //textBox1.Multiline = true;
-            //textBox1.Dock = DockStyle.Fill;
+            //BackColor = Color.AliceBlue;//цвет фона  
+            //TransparencyKey = this.BackColor;//он же будет заменен на прозрачный цвет
+
+            BackColor = Color.Black;
+            Opacity = 0.65;
+            AutoScaleMode = AutoScaleMode.None;
 
             // создаем элементы меню
             ToolStripMenuItem copyMenuItem = new ToolStripMenuItem("Копировать");
