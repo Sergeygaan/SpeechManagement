@@ -33,8 +33,6 @@ namespace MyPaint
         /// </summary>
         private int _heightDraw;
 
-        private СonstructionFigure _constructionFigure = new СonstructionFigure();
-
         /// <summary>
         /// Переменная, хранящая прямоугольник для выделения фигур.
         /// </summary>
@@ -84,20 +82,6 @@ namespace MyPaint
         public void Paint(PaintEventArgs e, int Currentfigure)
         {
 
-            //_currentfigure = Currentfigure;
-
-            //if ((Points != null) && (Points.Count != 0))
-            //{
-            //    StyleFigure(linecolor, thickness, dashstyle);
-
-            //    rectangles.PaintFigure(e, Points);     // Отрисовка нужной фигуры
-
-            //    if (Points.Count > 1)
-            //    {
-            //        _rect = _constructionFigure.ShowRectangle(Points[0], Points[1]);
-            //    }
-            //}
-
             e.Graphics.DrawImage(_bmp, 0, 0);
 
         }
@@ -129,23 +113,17 @@ namespace MyPaint
 
             int thickness = 2;
 
-            //StyleFigure(linecolor, thickness, dashStyle);
+            _drawObject = new ObjectFugure(linecolor, thickness, dashStyle, new GraphicsPath(), brushcolor, _currentfigure, _brushFill)
+            {
+                FigureStart = point[0],
+                FigureEnd = point[1],
+            };
 
-            GraphicsPath myPath = new GraphicsPath();
+            _drawObject.Path.AddRectangle(СonstructionFigure.ShowRectangleFloat(point[0], point[1]));
 
-            _drawObject = new ObjectFugure(linecolor, thickness, dashStyle, myPath, brushcolor, _currentfigure, _brushFill);
+            _drawObject.nameRec();
 
-
-            var newFigure = new AddBuildFigure();
-            newFigure.AddFigure(_drawObject, point);
-
-            var obj = newFigure.Output();
-
-            obj.nameRec();
-
-            _figures.Add(obj);
-
-
+            _figures.Add(_drawObject);
 
             RefreshBitmap();
         }
@@ -158,12 +136,6 @@ namespace MyPaint
 
             GC.Collect();
 
-        }
-
-        public void SelectObject(int index)
-        {
-            //_selectedFigures.Add(_figures[index]);
-            //rectangles.AddSupportPoint(_figures[index], Color.Green);
         }
 
         /// <summary>
@@ -262,17 +234,5 @@ namespace MyPaint
             get { return _figures; }
             set { _figures = value; }
         }
-
-        /// <summary>
-        /// Метод, выполняющий импорт изображения.
-        /// </summary>
-        /// <para name = "DrawForm">Переменная, хранящая ссылку на область отрисовки фигур.</para>
-        public void SaveProject()
-        {
-            _saveProjectClear = true;
-            RefreshBitmap();
-        }
-
-
     }
 }

@@ -29,19 +29,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.rightClickMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.AddRegion = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.AddRegion.SuspendLayout();
             this.SuspendLayout();
             // 
-            // rightClickMenuStrip
+            // AddRegion
             // 
-            this.rightClickMenuStrip.Name = "rightClickMenuStrip";
-            this.rightClickMenuStrip.Size = new System.Drawing.Size(61, 4);
+            this.AddRegion.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1});
+            this.AddRegion.Name = "rightClickMenuStrip";
+            this.AddRegion.Size = new System.Drawing.Size(174, 26);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(173, 22);
+            this.toolStripMenuItem1.Text = "Добавить область";
             // 
             // DrawingZone
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(195, 96);
+            this.ClientSize = new System.Drawing.Size(775, 361);
             this.DoubleBuffered = true;
             this.Name = "DrawingZone";
             this.Text = "DrawingZone";
@@ -49,12 +59,14 @@
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DrawingZone_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DrawingZone_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DrawingZone_MouseUp);
+            this.AddRegion.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ContextMenuStrip rightClickMenuStrip;
+        private System.Windows.Forms.ContextMenuStrip AddRegion;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }

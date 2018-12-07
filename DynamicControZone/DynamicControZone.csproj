@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddBuildFigure.cs" />
     <Compile Include="Drawing.cs" />
     <Compile Include="DrawingZone.cs">
       <SubType>Form</SubType>

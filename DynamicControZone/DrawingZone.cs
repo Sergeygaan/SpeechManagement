@@ -23,8 +23,8 @@ namespace MyPaint
             TopLevel = true;
             ShowIcon = false;
             ShowInTaskbar = false;
-            FormBorderStyle = FormBorderStyle.None;
-            WindowState = FormWindowState.Maximized;
+            //FormBorderStyle = FormBorderStyle.None;
+            //WindowState = FormWindowState.Maximized;
             AllowTransparency = true;
             BackColor = Color.AliceBlue;//цвет фона  
             TransparencyKey = this.BackColor;//он же будет заменен на прозрачный цвет
@@ -38,7 +38,7 @@ namespace MyPaint
 
             ToolStripMenuItem selectMenuItem = new ToolStripMenuItem("Выделить");
             // добавляем элементы в меню
-            rightClickMenuStrip.Items.AddRange(new[] { copyMenuItem, pasteMenuItem, selectMenuItem });
+            AddRegion.Items.AddRange(new[] { copyMenuItem, pasteMenuItem, selectMenuItem });
             // ассоциируем контекстное меню с текстовым полем
             //textBox1.ContextMenuStrip = contextMenuStrip1;
             // устанавливаем обработчики событий для меню
@@ -84,7 +84,7 @@ namespace MyPaint
             {
                 case MouseButtons.Right:
                     {
-                        rightClickMenuStrip.Show(this, new Point(e.X, e.Y));//places the menu at the pointer position 
+                        AddRegion.Show(this, new Point(e.X, e.Y));//places the menu at the pointer position 
                     }
                     break;
             }

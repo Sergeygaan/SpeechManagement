@@ -69,20 +69,36 @@ namespace MyPaint
 
         public void nameRec()
         {
-            string stringText = "Sample Text";
-            FontFamily family = new FontFamily("Arial");
-            int fontStyle = (int)FontStyle.Italic;
-            int emSize = 26;
-            Point origin = new Point(20, 20);
-            StringFormat format = StringFormat.GenericDefault;
+            if (_path.PointCount != 0)
+            {
+                RectangleF rectangle = СonstructionFigure.ShowRectangleFloat(_path.PathPoints[0], _path.PathPoints[2]);
+   
+                int fontSize = (int)rectangle.Height / 2;
 
-            // Add the string to the path.
-            _path.AddString(stringText,
-                family,
-                fontStyle,
-                emSize,
-                origin,
-                format);
+                int x = (int)(rectangle.Left + rectangle.Width / 2 - fontSize * 0.7);
+                int y = (int)(rectangle.Top + rectangle.Height / 2 - fontSize * 0.7);
+
+                var Center = new Point(x, y);
+                
+                //
+                string stringText = "1";
+                FontFamily family = new FontFamily("Arial");
+                int fontStyle = (int)FontStyle.Regular;
+                int emSize = fontSize;
+                Point origin = Center;
+                StringFormat format = StringFormat.GenericDefault;
+
+                if (emSize > 0)
+                {
+                    // Add the string to the path.
+                    _path.AddString(stringText,
+                        family,
+                        fontStyle,
+                        emSize,
+                        origin,
+                        format);
+                }
+            }
         }
 
         /// <summary>
@@ -123,7 +139,7 @@ namespace MyPaint
         /// <summary>
         /// Метод, выполняющий перерисовку опорных точек.
         /// </summary>
-        public void EditListFigure(int index, Rectangle Rectangles)
+        public void EditListFigure(int index, RectangleF Rectangles)
         {
             _supportFigures[index].Path.Reset();
 
@@ -255,7 +271,5 @@ namespace MyPaint
         //{
         //    return new ObjectFugure(Pen, Path.Clone() as GraphicsPath, _brush.Color, _currentFigure, _fill);
         //}
-
-
     }
 }

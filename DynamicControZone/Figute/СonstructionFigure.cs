@@ -12,63 +12,51 @@ namespace MyPaint
     /// <summary>
     /// Класс, выполняющий построение основной структуры фигуры.
     /// </summary>
-    public class СonstructionFigure
+    public static class СonstructionFigure
     {
         /// <summary>
-        /// Переменная, хранящая верхнуую координату фигуры.
+        /// Метод, выполняющий пострение структуры фигуры.
         /// </summary>
-        private int _top;
+        /// <para name = "Start">Переменная, хранящая начальную координату фигуры.</para>
+        /// <para name = "End">Переменная, хранящая конечную координату фигуры.</para>
+        public static RectangleF ShowRectangleFloat(PointF Start, PointF End)
+        {
+            float _left = ((Start.X - End.X > 0) ? End.X : Start.X);
+            float _down = ((Start.Y - End.Y > 0) ? Start.Y : End.Y);
+            float _top = ((Start.Y - End.Y > 0) ? End.Y : Start.Y);
+            float _right = ((Start.X - End.X > 0) ? Start.X : End.X);
 
-        /// <summary>
-        /// Переменная, хранящая левую координату фигуры.
-        /// </summary>       
-        private int _left;
-
-        /// <summary>
-        /// Переменная, хранящая нижнюю координату фигуры.
-        /// </summary>           
-        private int _down;
-
-        /// <summary>
-        /// Переменная, хранящая правую координату фигуры.
-        /// </summary>        
-        private int _right;
+            return RectangleF.FromLTRB(_left, _top, _right, _down);
+        }
 
         /// <summary>
         /// Метод, выполняющий пострение структуры фигуры.
         /// </summary>
         /// <para name = "Start">Переменная, хранящая начальную координату фигуры.</para>
         /// <para name = "End">Переменная, хранящая конечную координату фигуры.</para>
-        public Rectangle ShowRectangle(PointF Start, PointF End)
+        public static Rectangle ShowRectangleInt(PointF Start, PointF End)
         {
+            int _left = (int)((Start.X - End.X > 0) ? End.X : Start.X);
+            int _down = (int)((Start.Y - End.Y > 0) ? Start.Y : End.Y);
+            int _top = (int)((Start.Y - End.Y > 0) ? End.Y : Start.Y);
+            int _right = (int)((Start.X - End.X > 0) ? Start.X : End.X);
 
-            _left = (int)((Start.X - End.X > 0) ? End.X : Start.X);
-            _down = (int)((Start.Y - End.Y > 0) ? Start.Y : End.Y);
-            _top = (int)((Start.Y - End.Y > 0) ? End.Y : Start.Y);
-            _right = (int)((Start.X - End.X > 0) ? Start.X : End.X);
-
-            Rectangle rect = Rectangle.FromLTRB(_left, _top, _right, _down);
-
-            return rect;
+            return Rectangle.FromLTRB(_left, _top, _right, _down);
         }
-
 
         /// <summary>
         /// Метод, выполняющий пострение структуры опорных точек.
         /// </summary>
         /// <para name = "SelectPoint">Переменная, хранящая координату опорной точки.</para>
         /// <para name = "Width">Переменная, хранящая толщину линии.</para>
-        public Rectangle SelectFigure(PointF SelectPoint, float Width)
+        public static RectangleF SelectFigure(PointF SelectPoint, float Width)
         {
+            float _left = SelectPoint.X - 5 - Width / 2;
+            float _down = SelectPoint.Y - 5 - Width / 2;
+            float  _top = SelectPoint.Y + 5 + Width / 2;
+            float _right = SelectPoint.X + 5 + Width / 2;
 
-            _left = (int)(SelectPoint.X - 5 - Width / 2);
-            _down = (int)(SelectPoint.Y - 5 - Width / 2);
-            _top = (int)(SelectPoint.Y + 5 + Width / 2);
-            _right = (int)(SelectPoint.X + 5 + Width / 2);
-
-            Rectangle rect = Rectangle.FromLTRB(_right, _down, _left, _top);
-
-            return rect;
+            return RectangleF.FromLTRB(_right, _down, _left, _top);
         }
 
 

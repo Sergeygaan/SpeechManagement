@@ -7,7 +7,7 @@ namespace MyPaint
     /// <summary>
     /// Класс, являющийся опорными точками
     /// </summary>
-    public class SupportObjectFugure : ICloneable
+    public class SupportObjectFugure
     {
         /// <summary>
         /// Переменная, хранящая основную структуру опорных точек.
@@ -78,13 +78,13 @@ namespace MyPaint
 
         #region ICloneable Members
 
-        /// <summary>
-        /// Метод, выполняющий клонирование опорной точки.
-        /// </summary>
-        public object Clone()
-        {
-            return new SupportObjectFugure(this.Pen, this.Path.Clone() as GraphicsPath);
-        }
+        ///// <summary>
+        ///// Метод, выполняющий клонирование опорной точки.
+        ///// </summary>
+        //public object Clone()
+        //{
+        //    return new SupportObjectFugure(this.Pen, this.Path.Clone() as GraphicsPath);
+        //}
 
         #endregion
     }

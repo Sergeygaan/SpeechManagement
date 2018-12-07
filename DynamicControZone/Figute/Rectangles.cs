@@ -14,21 +14,6 @@ namespace MyPaint
     public class Rectangles
     {
         /// <summary>
-        /// Переменная, хранящая класс для построения и создания эллипса.
-        /// </summary>
-        //private AddRectangle _addFigureRectangle;
-
-        /// <summary>
-        /// Переменная, хранящая класс для построеня структуры фигур.
-        /// </summary>
-        private СonstructionFigure _figureBuild = new СonstructionFigure();
-
-        /// <summary>
-        /// Переменная, хранящая класс для построения структуры эллипса.
-        /// </summary>
-        private СonstructionFigure _сonstructionFigure = new СonstructionFigure();
-
-        /// <summary>
         /// Переменная, хранящая опорные точки.
         /// </summary>
         private SupportObjectFugure _drawSupportObject;
@@ -94,7 +79,8 @@ namespace MyPaint
         public void PaintFigure(PaintEventArgs e, List<PointF> Points)
         {
             Pen pen = new Pen(Color.Red, 1);
-            e.Graphics.DrawRectangle(pen, _сonstructionFigure.ShowRectangle(Points[0], Points[1]));
+
+            e.Graphics.DrawRectangle(pen, СonstructionFigure.ShowRectangleInt(Points[0], Points[1]));
         }
 
         /// <summary>
@@ -120,10 +106,10 @@ namespace MyPaint
         public void AddSupportPoint(ObjectFugure SelectObject, Color ColorLine)
         {
 
-            for (int i = 0; i < SelectObject.Path.PointCount; i++)
+            for (int i = 0; i < 4; i++)
             {
                 _drawSupportObject = new SupportObjectFugure(new Pen(ColorLine, 1), new GraphicsPath());
-                _drawSupportObject.Path.AddEllipse(_сonstructionFigure.SelectFigure(SelectObject.Path.PathPoints[i], SelectObject.Pen.Width));
+                _drawSupportObject.Path.AddEllipse(СonstructionFigure.SelectFigure(SelectObject.Path.PathPoints[i], SelectObject.Pen.Width));
                 _drawSupportObject.IdFigure = SelectObject.IdFigure;
                 _drawSupportObject.ControlPointF = i;
 
@@ -221,7 +207,7 @@ namespace MyPaint
                 }
 
                 SelectObject.Path.Reset();
-                SelectObject.Path.AddRectangle(_figureBuild.ShowRectangle(SelectObject.PointSelect[0], SelectObject.PointSelect[2]));
+                SelectObject.Path.AddRectangle(СonstructionFigure.ShowRectangleFloat(SelectObject.PointSelect[0], SelectObject.PointSelect[2]));
 
                 SelectObject.nameRec();
             }
