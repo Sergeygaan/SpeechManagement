@@ -30,11 +30,6 @@ namespace MyPaint
         private RectangleF _rectangleF;
 
         /// <summary>
-        /// Переменная, хранящая класс с действиями над фигурами.
-        /// </summary>
-        private EditObject _edipParametr = new EditObject();
-
-        /// <summary>
         /// Метод, выполняющий отмену выделения.
         /// </summary>
         public void MouseUp()
@@ -139,8 +134,8 @@ namespace MyPaint
 
                             if (_rectangleF.Contains(e.Location))
                             {
-                                rectangles.ScaleFigure(e, DrawObject, _selectedFigures);
-                                rectangles.AddSupportPoint(DrawObject, Color.Green);
+                                Rectangles.ScaleFigure(e, DrawObject, _selectedFigures);
+                                Rectangles.AddSupportPoint(DrawObject, Color.Green);
                             }
 
                             break;
@@ -150,10 +145,6 @@ namespace MyPaint
             }
 
         }
-
-        EditObject _editObject = new EditObject();
-        Rectangles rectangles = new Rectangles();
-
 
         /// <summary>
         /// Метод, выполняющий действия над выделенными фигурами.
@@ -174,7 +165,7 @@ namespace MyPaint
                 //Масштабирование опорных точек
                 if ((SelectObject != null) && (_supportObj != null))
                 {
-                    rectangles.ScaleSelectFigure(SelectObject, _supportObj, deltaX, deltaY);
+                    Rectangles.ScaleSelectFigure(SelectObject, _supportObj, deltaX, deltaY);
 
                 }
                 else
@@ -183,7 +174,7 @@ namespace MyPaint
                     {
                         SelectObject.PointSelect = SelectObject.Path.PathPoints;
 
-                        _edipParametr.MoveObject(SelectObject, deltaX, deltaY);
+                        EditObject.MoveObject(SelectObject, deltaX, deltaY);
                     }
                 }
 

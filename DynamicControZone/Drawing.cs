@@ -73,11 +73,7 @@ namespace MyPaint
             _heightDraw = Height;
             _bmp = new Bitmap(Width, Height);
             _figures = new List<ObjectFugure>();
-
-            rectangles = new Rectangles();
         }
-
-        Rectangles rectangles;
 
         public void Paint(PaintEventArgs e, int Currentfigure)
         {
@@ -88,13 +84,12 @@ namespace MyPaint
 
         public void MouseMove(List<PointF> _points, MouseEventArgs e)
         {
-            rectangles.MouseMove(_points, e);
+            Rectangles.MouseMove(_points, e);
         }
 
         public void PaintFigure(PaintEventArgs e, List<PointF> Points)
         {
-            rectangles.PaintFigure(e, Points);
-
+            Rectangles.PaintFigure(e, Points);
         }
 
         /// <summary>
@@ -193,10 +188,8 @@ namespace MyPaint
 
                     Color ColorLine = Color.Black;
 
-                    rectangles.AddSupportPoint(SelectObject, ColorLine);
-
+                    Rectangles.AddSupportPoint(SelectObject, ColorLine);
                 }
-
             }
         }
 
