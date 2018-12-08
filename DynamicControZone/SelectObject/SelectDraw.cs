@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -7,7 +8,7 @@ namespace MyPaint
     /// <summary>
     /// Класс, выполняющий выделение фигур.
     /// </summary>
-    public class SelectDraw
+    public class SelectDraw : IDisposable
     {
         /// <summary>
         /// Переменная, хранящая список с выделенными фигурами.
@@ -171,6 +172,12 @@ namespace MyPaint
         public List<ObjectFugure> SeleckResult()
         {
             return _selectedFigures;
+        }
+
+        public void Dispose()
+        {
+            _selectedFigures = null;
+            _supportObj = null;
         }
     }
 }

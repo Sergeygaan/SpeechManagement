@@ -29,6 +29,8 @@ namespace MyPaint
                     };
 
                     ProjectSettingsMain.Zone_ListRegionRectangle.Add(regionRectangle);
+
+                    regionRectangle = null;
                 }
             }
 

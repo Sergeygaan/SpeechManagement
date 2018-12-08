@@ -31,6 +31,7 @@
             this.groupBoxAdditionalCommands = new System.Windows.Forms.GroupBox();
             this.groupBoxSettings = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.ModeDraw = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // groupBoxAdditionalCommands
@@ -61,17 +62,30 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // ModeDraw
+            // 
+            this.ModeDraw.AutoSize = true;
+            this.ModeDraw.Location = new System.Drawing.Point(793, 21);
+            this.ModeDraw.Name = "ModeDraw";
+            this.ModeDraw.Size = new System.Drawing.Size(117, 17);
+            this.ModeDraw.TabIndex = 3;
+            this.ModeDraw.Text = "Режим отрисовки";
+            this.ModeDraw.UseVisualStyleBackColor = true;
+            this.ModeDraw.MouseCaptureChanged += new System.EventHandler(this.ModeDraw_MouseCaptureChanged);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1128, 463);
+            this.Controls.Add(this.ModeDraw);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBoxSettings);
             this.Controls.Add(this.groupBoxAdditionalCommands);
             this.Name = "Settings";
             this.Text = "Settings";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -80,5 +94,6 @@
         private System.Windows.Forms.GroupBox groupBoxAdditionalCommands;
         private System.Windows.Forms.GroupBox groupBoxSettings;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox ModeDraw;
     }
 }

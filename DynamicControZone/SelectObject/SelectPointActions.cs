@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Drawing.Drawing2D;
+using System;
 
 namespace MyPaint
 {
     /// <summary>
     /// Класс, выполнящий выделение объектов точкой
     /// </summary>
-    public class SelectPointActions
+    public class SelectPointActions : IDisposable
     {
         /// <summary>
         /// Переменная, хранящая список точек для построения фигур.
@@ -128,6 +128,10 @@ namespace MyPaint
             }
         }
 
-
+        public void Dispose()
+        {
+            _points = null;
+            _selectClass.Dispose();
+        }
     }
 }

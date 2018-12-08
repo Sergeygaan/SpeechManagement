@@ -6,13 +6,12 @@ using System.Windows.Forms;
 
 namespace MyPaint
 {
-    public class Drawing
+    public class Drawing : IDisposable
     {
         /// <summary>
         /// Метод, возвращяющий список со всеми фигурами.
         /// </summary>
         public List<ObjectFugure> FiguresList { get; set; }
-
 
         /// <summary>
         /// Переменная, хранящая зону отрисовки фигур.
@@ -47,9 +46,7 @@ namespace MyPaint
 
         public void Paint(PaintEventArgs e, int Currentfigure)
         {
-
             e.Graphics.DrawImage(_bmp, 0, 0);
-
         }
 
         public void MouseMove(List<PointF> _points, MouseEventArgs e)
@@ -140,6 +137,12 @@ namespace MyPaint
         public Bitmap BitmapReturn()
         {
             return _bmp;
+        }
+
+        public void Dispose()
+        {
+            _bmp.Dispose();
+            FiguresList.Clear();
         }
     }
 }

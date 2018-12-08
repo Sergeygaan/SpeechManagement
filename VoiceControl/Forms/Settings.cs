@@ -1,4 +1,5 @@
 ﻿using MyPaint;
+using ProjectSettings;
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -17,6 +18,9 @@ namespace VoiceControl
             a();
 
             _screenDelineation = screenDelineation;
+
+            ModeDraw.Checked = ProjectSettingsMain.Zone_DrawMethod;
+
         }
 
         private void a()
@@ -28,6 +32,18 @@ namespace VoiceControl
         {
             DrawingZone drawingZone = new DrawingZone();
             drawingZone.ShowDialog();
+
+            _screenDelineation.Refresh();
+        }
+
+        private void ModeDraw_MouseCaptureChanged(object sender, EventArgs e)
+        {
+            ProjectSettingsMain.Zone_DrawMethod = ModeDraw.Checked;
+
+            if(ProjectSettingsMain.Zone_DrawMethod)
+            {
+                ProjectSettingsMain.Zone_TracingChangeDraw = true;
+            }
 
             _screenDelineation.Refresh();
         }

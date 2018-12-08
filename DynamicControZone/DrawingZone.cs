@@ -9,6 +9,17 @@ namespace MyPaint
     {
         SaveRegion saveRegion;
 
+        Drawing drawing;
+
+
+        private SelectPointActions selectPointActions = new SelectPointActions();
+
+
+        private List<PointF> _listPoints = new List<PointF>();
+
+        bool flagPaint = false;
+        bool select = false;
+
         public DrawingZone()
         {
             InitializeComponent();
@@ -77,8 +88,6 @@ namespace MyPaint
             Refresh();
         }
 
-        private SelectPointActions selectPointActions = new SelectPointActions();
-
         private void DrawingZone_MouseDown(object sender, MouseEventArgs e)
         {
             switch (e.Button)
@@ -93,8 +102,8 @@ namespace MyPaint
                     {
                         if (!select)
                         {
-                            point.Add(new PointF(e.X, e.Y));
-                            point.Add(new PointF(e.X, e.Y));
+                            _listPoints.Add(new PointF(e.X, e.Y));
+                            _listPoints.Add(new PointF(e.X, e.Y));
 
                             flagPaint = true;
                         }
@@ -110,16 +119,13 @@ namespace MyPaint
             }
         }
 
-        bool flagPaint = false;
-        bool select = false;
-
         private void DrawingZone_Paint(object sender, PaintEventArgs e)
         {
             if (!select)
             {
                 if (flagPaint)
                 {
-                    drawing?.PaintFigure(e, point);
+                    drawing?.PaintFigure(e, _listPoints);
                 }
 
                 drawing?.Paint(e, 1);
@@ -127,20 +133,10 @@ namespace MyPaint
             else
             {
                 drawing?.Paint(e, 1);
-
-                //if (_selectClass.SeleckResult() != null)
-                //{
-                //drawing.SupportPoint(drawing.FiguresList);
-                //}
             }
 
             drawing.RefreshBitmap();
         }
-
-        Drawing drawing;
-
-        List<PointF> point = new List<PointF>();
-
 
         private void DrawingZone_MouseUp(object sender, MouseEventArgs e)
         {
@@ -150,11 +146,11 @@ namespace MyPaint
                     {
                         if (!select)
                         {
-                            drawing.MouseUp(point);
+                            drawing.MouseUp(_listPoints);
 
                             Refresh();
 
-                            point.Clear();
+                            _listPoints.Clear();
 
                             flagPaint = false;
                         }
@@ -175,12 +171,11 @@ namespace MyPaint
         {
             if (!select)
             {
-                drawing.MouseMove(point, e);
+                drawing.MouseMove(_listPoints, e);
             }
             else
             {
                 selectPointActions.MouseMove(e, 0, 0);
-
             }
 
             Refresh();
@@ -189,12 +184,26 @@ namespace MyPaint
         private void SaveButton_Click(object sender, EventArgs e)
         {
             saveRegion.Save(drawing.FiguresList);
-            Close();
+            DisposeProject();
         }
 
         private void EndButton_Click(object sender, EventArgs e)
         {
+            DisposeProject();
+        }
 
+        private void DisposeProject()
+        {
+            drawing.Dispose();
+            selectPointActions.Dispose();
+
+            saveRegion = null;
+            _listPoints = null;
+
+            Close();
+            Dispose();
+
+            GC.Collect();
         }
     }
 }
