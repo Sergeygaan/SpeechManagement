@@ -22,7 +22,7 @@ namespace VoiceControl
 
         private MethodAppendLine _appendLine;
 
-        public SpeechRecognition(MethodAppendLine appendLine)
+        public SpeechRecognition(MethodAppendLine appendLine, ScreenDelineation screenDelineation)
         {
             _appendLine = appendLine;
 
@@ -30,7 +30,7 @@ namespace VoiceControl
 
             FillListCommands();
 
-            _screenDelineation = new ScreenDelineation();
+            _screenDelineation = screenDelineation;
             _screenDelineation.Show();
 
             StartGrammar();

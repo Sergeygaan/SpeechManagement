@@ -14,6 +14,17 @@ namespace ProjectSettings
         //Спосок с основными загруженными командами
         static public List<object> ArrayCommands = new List<object>();
 
-        static public List<RegionRectangle> ListRegionRectangle = new List<RegionRectangle>();
+
+
+        //Переменные для зоны отрисовки 
+
+        //Переменна отвечающая за выбор режимо отрисовки
+        static public bool Zone_DrawMethod = false;
+
+        //Переменные отвечающая за то что нужно ли удалить старую зону и нарисовать новую
+        static public bool Zone_TracingChangeDraw = false;
+
+        //Переменная хранащая в себе список новых зон для отрисовки
+        static public List<RegionRectangle> Zone_ListRegionRectangle = new List<RegionRectangle>();
     }
 }

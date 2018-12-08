@@ -53,6 +53,7 @@ namespace WorkingScreen
                 m.Result = (IntPtr)HTTRANSPARENT;
                 return;
             }
+
             base.WndProc(ref m);
         }
 
@@ -63,11 +64,16 @@ namespace WorkingScreen
 
         public void ApplyCommand(int indexCommand, int number)
         {
-            Refresh();
+            RefreshForm();
 
             _mainObject.ApplyCommand(indexCommand, number);
 
             Invalidate();
+        }
+
+        public void RefreshForm()
+        {
+            Refresh();
         }
     }
 }

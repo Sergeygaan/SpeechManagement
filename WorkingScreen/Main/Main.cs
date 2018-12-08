@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 using Command;
 using ProjectSettings;
@@ -12,8 +8,6 @@ namespace WorkingScreen
     class Main
     {
         private WorkObject _workObject;
-
-        private Drawing _drawing;
 
         private int _widthFrom;
         private int _heightForm;
@@ -30,12 +24,10 @@ namespace WorkingScreen
                 GenerationNumber = 1
             };
 
-            _drawing = new Drawing();
-
             commands.Add(new CommandLeftOneClick()); //0
             commands.Add(new CommandRightOneClick()); //1
             commands.Add(new CommandLeftDoubleClick()); //2
-            commands.Add(new CommandScale(_drawing));//3
+            commands.Add(new CommandScale());//3
             commands.Add(new CommandMagnifier()); //4
             commands.Add(new CommandLeftLeftDown()); //5
             commands.Add(new CommandLeftLeftUp()); //6
@@ -50,25 +42,10 @@ namespace WorkingScreen
             DrawingZone(e, _workObject);
         }
 
-        bool flag = false;
-
         //Метод по отрисовке зон 
         private void DrawingZone(PaintEventArgs e, WorkObject _currentObject)
         {
-            if (flag)
-            {
-                if (_workObject.listRegionRectangle.Count == 0)
-                {
-                    _drawing.StandardLineDrawingMain(_workObject, _widthFrom, _heightForm);
-                }
-            }
-            else
-            {
-                if (_workObject.listRegionRectangle.Count == 0)
-                {
-                    _drawing.StandardLineDrawingAlternative(_workObject, ProjectSettingsMain.ListRegionRectangle);
-                }
-            }
+            StartingDelimitationZone();
 
             if (_currentObject.ChildNumberObject != null)
             {
@@ -80,9 +57,31 @@ namespace WorkingScreen
             _currentObject.DrawingText(e);
         }
 
+        private void StartingDelimitationZone()
+        {
+            if(ProjectSettingsMain.Zone_TracingChangeDraw)
+            {
+                _workObject.listRegionRectangle.Clear();
+
+                ProjectSettingsMain.Zone_TracingChangeDraw = false;
+            }
+
+            if (_workObject.listRegionRectangle.Count == 0)
+            {
+                if (ProjectSettingsMain.Zone_DrawMethod)
+                {
+                    Drawing.MethodMain(_workObject, _widthFrom, _heightForm);
+                }
+                else
+                {
+                    Drawing.MethodAlternative(_workObject, ProjectSettingsMain.Zone_ListRegionRectangle);
+                }
+            }
+        }
+     
         public void ApplyCommand(int indexCommand, int number)
         {
-            commands[indexCommand].Act(number);
+            commands[indexCommand].Act(number);   
         }
     }
 }

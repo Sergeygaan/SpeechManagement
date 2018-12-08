@@ -8,7 +8,7 @@ namespace MyPaint
     {
         public void Save(List<ObjectFugure> FiguresList)
         {
-            ProjectSettingsMain.ListRegionRectangle.Clear();
+            ProjectSettingsMain.Zone_ListRegionRectangle.Clear();
 
             foreach (var currentFiguresList in FiguresList)
             {
@@ -28,9 +28,14 @@ namespace MyPaint
                         Height = rectangleF.Height
                     };
 
-                    ProjectSettingsMain.ListRegionRectangle.Add(regionRectangle);
+                    ProjectSettingsMain.Zone_ListRegionRectangle.Add(regionRectangle);
                 }
-            } 
+            }
+
+            if (ProjectSettingsMain.Zone_ListRegionRectangle.Count != 0)
+            {
+                ProjectSettingsMain.Zone_TracingChangeDraw = true;
+            }
         }
     }
 }

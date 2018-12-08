@@ -8,14 +8,17 @@ namespace WorkingScreen
        
         public void Act(int index)
         {
-            if (magnifierForm == null)
+            if (Auxiliary.SearchChild().listRegionRectangle.Count > index)
             {
-                var currentNumberObject = Auxiliary.SearchChild();
+                if (magnifierForm == null)
+                {
+                    var currentNumberObject = Auxiliary.SearchChild();
 
-                magnifierForm = new MagnifierForm();
-                magnifierForm.Show();
+                    magnifierForm = new MagnifierForm();
+                    magnifierForm.Show();
 
-                currentNumberObject.Magnifier = new Magnifier(magnifierForm, currentNumberObject.listRegionRectangle[index], currentNumberObject.GenerationNumber);
+                    currentNumberObject.Magnifier = new Magnifier(magnifierForm, currentNumberObject.listRegionRectangle[index], currentNumberObject.GenerationNumber);
+                }
             }
         }
     }

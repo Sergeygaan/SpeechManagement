@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using WorkingScreen;
 
 namespace VoiceControl
 {
@@ -10,13 +11,17 @@ namespace VoiceControl
 
         private SpeechRecognition speechRecognition;
 
+        ScreenDelineation _screenDelineation;
+
         public LogForm()
         {
             InitializeComponent();
 
             MethodAppendLine methodAppendLine = new MethodAppendLine(AppendLine);
 
-            speechRecognition = new SpeechRecognition(methodAppendLine);
+            _screenDelineation = new ScreenDelineation();
+
+            speechRecognition = new SpeechRecognition(methodAppendLine, _screenDelineation);
         }
         
         private void AppendLine(string text, Color color)
@@ -45,7 +50,7 @@ namespace VoiceControl
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
-            Settings formSettings = new Settings();
+            Settings formSettings = new Settings(_screenDelineation);
             formSettings.ShowDialog();
         }
     }

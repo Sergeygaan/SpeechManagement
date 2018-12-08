@@ -4,10 +4,10 @@ using System.Drawing;
 
 namespace WorkingScreen
 {
-    public class Drawing
+    public static class Drawing
     {
         //Метод по созданию новых зон для мыши
-        public void StandardLineDrawingMain(WorkObject _currentObject, float width, float height, float startX = 0, float startY = 0)
+        public static void MethodMain(WorkObject _currentObject, float width, float height, float startX = 0, float startY = 0)
         {
             float saveStartX = startX;
 
@@ -39,7 +39,7 @@ namespace WorkingScreen
             }
         }
 
-        private RegionRectangle CreateRegionRectangle(int iDObject, float startX, float startY, float endtX, float endY)
+        private static RegionRectangle CreateRegionRectangle(int iDObject, float startX, float startY, float endtX, float endY)
         {
             var width = endtX - startX;
             var height = endY - startY;
@@ -65,7 +65,7 @@ namespace WorkingScreen
         }
 
         //Метод по созданию новых зон для мыши
-        public void StandardLineDrawingAlternative(WorkObject _currentObject, List<RegionRectangle> regionRectangles)
+        public static void MethodAlternative(WorkObject _currentObject, List<RegionRectangle> regionRectangles)
         {
             foreach (var currentRegionRectangl in regionRectangles)
             {

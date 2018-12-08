@@ -41,17 +41,27 @@ namespace WorkingScreen
                 {
                     e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 
-                    float fontSize = currentRectangle.Rectangle.Height / 2;
+                    float fontSize;
 
-                    Font font = new Font("Microsoft Sans Serif", fontSize);
+                    if ((int)currentRectangle.Rectangle.Height / 2 < (int)currentRectangle.Rectangle.Width / 2)
+                    {
+                        fontSize = (int)currentRectangle.Rectangle.Height / 2;
+                    }
+                    else
+                    {
+                        fontSize = (int)currentRectangle.Rectangle.Width / 2;
+                    }
 
-                    int x = (int)(currentRectangle.Rectangle.Left + currentRectangle.Rectangle.Width / 2 - fontSize * 0.7);
-                    int y = (int)(currentRectangle.Rectangle.Top + currentRectangle.Rectangle.Height / 2 - fontSize * 0.7);
+                    //Font font = new Font("Arial", fontSize);
 
-                    var Center = new Point(x, y);
+                    int x = (int)(currentRectangle.Rectangle.Left + currentRectangle.Rectangle.Width / 2 - fontSize * 0.6);
+                    int y = (int)(currentRectangle.Rectangle.Top + currentRectangle.Rectangle.Height / 2 - fontSize * 0.6);
+
+                    //var Center = new Point(x, y);
 
                     var stringIdObject = currentRectangle.IdObject.ToString();
-                    e.Graphics.DrawString(stringIdObject, font, new SolidBrush(ProjectSettingsMain.ColorNumbers), Center);
+                    e.Graphics.DrawString(stringIdObject, new Font("Arial", fontSize),
+                        new SolidBrush(ProjectSettingsMain.ColorNumbers), new Point(x, y));
                 }
             }
         }

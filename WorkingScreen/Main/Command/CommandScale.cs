@@ -4,32 +4,28 @@ namespace WorkingScreen
 {
     class CommandScale : ICommand
     {
-        Drawing _drawing;
-
-        public CommandScale(Drawing drawing)
-        {
-            _drawing = drawing;
-        }
-
         public void Act(int index)
         {
-            var currentNumberObject = Auxiliary.SearchChild();
-
-            var newChildNumberObject = new WorkObject
+            if (Auxiliary.SearchChild().listRegionRectangle.Count > index)
             {
-                //Добавление родителя
-                ParantNumberObject = currentNumberObject,
-                GenerationNumber = currentNumberObject.GenerationNumber + 1
-            };
+                var currentNumberObject = Auxiliary.SearchChild();
 
-            //Добавление потомка
-            currentNumberObject.ChildNumberObject = newChildNumberObject;
+                var newChildNumberObject = new WorkObject
+                {
+                    //Добавление родителя
+                    ParantNumberObject = currentNumberObject,
+                    GenerationNumber = currentNumberObject.GenerationNumber + 1
+                };
 
-            currentNumberObject.Visible = false;
+                //Добавление потомка
+                currentNumberObject.ChildNumberObject = newChildNumberObject;
 
-            _drawing.StandardLineDrawingMain(newChildNumberObject,
-                                 currentNumberObject.listRegionRectangle[index].Width, currentNumberObject.listRegionRectangle[index].Height,
-                                 currentNumberObject.listRegionRectangle[index].StartX, currentNumberObject.listRegionRectangle[index].StartY);
+                currentNumberObject.Visible = false;
+
+                Drawing.MethodMain(newChildNumberObject,
+                                     currentNumberObject.listRegionRectangle[index].Width, currentNumberObject.listRegionRectangle[index].Height,
+                                     currentNumberObject.listRegionRectangle[index].StartX, currentNumberObject.listRegionRectangle[index].StartY);
+            }
         }
     }
 }

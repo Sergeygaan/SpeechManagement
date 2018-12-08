@@ -110,14 +110,14 @@ namespace MyPaint
                 int x = (int)(rectangle.Left + rectangle.Width / 2 - fontSize * 0.5);
                 int y = (int)(rectangle.Top + rectangle.Height / 2 - fontSize * 0.5);
 
-                var Center = new Point(x, y);
+                //var Center = new Point(x, y);
 
                 //
                 string stringText = IdFigure.ToString();
                 FontFamily family = new FontFamily("Arial");
                 int fontStyle = (int)FontStyle.Regular;
                 int emSize = fontSize;
-                Point origin = Center;
+                Point origin = new Point(x, y);
                 StringFormat format = StringFormat.GenericDefault;
 
                 if (emSize > 0)

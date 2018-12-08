@@ -35,6 +35,5 @@ namespace WorkingScreen
 
             return local;
         }
-
     }
 }

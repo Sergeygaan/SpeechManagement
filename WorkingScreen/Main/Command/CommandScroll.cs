@@ -1,6 +1,4 @@
-﻿using Command;
-
-namespace WorkingScreen
+﻿namespace WorkingScreen
 {
     class CommandScroll : ICommand
     {
