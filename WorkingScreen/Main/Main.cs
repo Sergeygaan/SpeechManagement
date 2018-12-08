@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Command;
+using ProjectSettings;
 
 namespace WorkingScreen
 {
@@ -24,8 +25,10 @@ namespace WorkingScreen
             _widthFrom = widthFrom;
             _heightForm = heightForm;
 
-            _workObject = new WorkObject();
-            _workObject.GenerationNumber = 1;
+            _workObject = new WorkObject
+            {
+                GenerationNumber = 1
+            };
 
             _drawing = new Drawing();
 
@@ -47,12 +50,24 @@ namespace WorkingScreen
             DrawingZone(e, _workObject);
         }
 
+        bool flag = false;
+
         //Метод по отрисовке зон 
         private void DrawingZone(PaintEventArgs e, WorkObject _currentObject)
         {
-            if (_workObject.listRegionRectangle.Count == 0)
+            if (flag)
             {
-                _drawing.StandardLineDrawingMethod(_workObject, _widthFrom, _heightForm);
+                if (_workObject.listRegionRectangle.Count == 0)
+                {
+                    _drawing.StandardLineDrawingMain(_workObject, _widthFrom, _heightForm);
+                }
+            }
+            else
+            {
+                if (_workObject.listRegionRectangle.Count == 0)
+                {
+                    _drawing.StandardLineDrawingAlternative(_workObject, ProjectSettingsMain.ListRegionRectangle);
+                }
             }
 
             if (_currentObject.ChildNumberObject != null)

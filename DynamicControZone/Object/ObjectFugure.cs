@@ -20,15 +20,6 @@ namespace MyPaint
         public GraphicsPath Path { get; set; }
 
         /// <summary>
-        /// Метод, выполняющий клонирование фигуры.
-        /// </summary>
-        public GraphicsPath PathClone
-        {
-            get { return (GraphicsPath)Path.Clone(); }
-            set { Path = value; }
-        }
-
-        /// <summary>
         /// Метод, выполняющий возврат опорных точек.
         /// </summary>
         public List<SupportObjectFugure> SelectListFigure()

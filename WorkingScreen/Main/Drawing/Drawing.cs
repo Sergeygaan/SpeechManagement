@@ -1,11 +1,13 @@
-﻿using System.Drawing;
+﻿using ProjectSettings;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace WorkingScreen
 {
     public class Drawing
     {
         //Метод по созданию новых зон для мыши
-        public void StandardLineDrawingMethod(WorkObject _currentObject, float width, float height, float startX = 0, float startY = 0)
+        public void StandardLineDrawingMain(WorkObject _currentObject, float width, float height, float startX = 0, float startY = 0)
         {
             float saveStartX = startX;
 
@@ -60,6 +62,15 @@ namespace WorkingScreen
             };
 
             return regionRectangle;
+        }
+
+        //Метод по созданию новых зон для мыши
+        public void StandardLineDrawingAlternative(WorkObject _currentObject, List<RegionRectangle> regionRectangles)
+        {
+            foreach (var currentRegionRectangl in regionRectangles)
+            {
+                _currentObject.listRegionRectangle.Add(currentRegionRectangl);
+            }
         }
     }
 }

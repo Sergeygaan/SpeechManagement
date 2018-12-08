@@ -7,9 +7,13 @@ namespace MyPaint
 {
     public partial class DrawingZone : Form
     {
+        SaveRegion saveRegion;
+
         public DrawingZone()
         {
             InitializeComponent();
+
+            saveRegion = new SaveRegion();
 
             StartPosition = FormStartPosition.CenterScreen;
 
@@ -84,22 +88,26 @@ namespace MyPaint
                         AddRegion.Show(this, new Point(e.X, e.Y));//places the menu at the pointer position 
                     }
                     break;
-            }
 
-            if (!select)
-            {
-                point.Add(new PointF(e.X, e.Y));
-                point.Add(new PointF(e.X, e.Y));
+                case MouseButtons.Left:
+                    {
+                        if (!select)
+                        {
+                            point.Add(new PointF(e.X, e.Y));
+                            point.Add(new PointF(e.X, e.Y));
 
-                flagPaint = true;
-            }
-            else
-            {
-                selectPointActions.MouseDown(e, drawing.FiguresList, 1);
-                //drawing.SavePoint(e);
-            }
+                            flagPaint = true;
+                        }
+                        else
+                        {
+                            selectPointActions.MouseDown(e, drawing.FiguresList, 1);
+                            //drawing.SavePoint(e);
+                        }
 
-            Refresh();
+                        Refresh();
+                    }
+                    break;
+            }
         }
 
         bool flagPaint = false;
@@ -133,33 +141,34 @@ namespace MyPaint
 
         List<PointF> point = new List<PointF>();
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //drawing.SelectObject(0);
-
-            Refresh();
-
-            select = !select;
-        }
 
         private void DrawingZone_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!select)
+            switch (e.Button)
             {
-                drawing.MouseUp(point);
+                case MouseButtons.Left:
+                    {
+                        if (!select)
+                        {
+                            drawing.MouseUp(point);
 
-                Refresh();
+                            Refresh();
 
-                point.Clear();
+                            point.Clear();
 
-                flagPaint = false;
+                            flagPaint = false;
+                        }
+                        else
+                        {
+                            selectPointActions.MouseUp(e, drawing.FiguresList, 0);
+                        }
+
+                        Refresh();
+                    }
+
+                    break;
             }
-            else
-            {
-                selectPointActions.MouseUp(e, drawing.FiguresList, 0);
-            }
-
-            Refresh();
+            
         }
 
         private void DrawingZone_MouseMove(object sender, MouseEventArgs e)
@@ -175,6 +184,17 @@ namespace MyPaint
             }
 
             Refresh();
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            saveRegion.Save(drawing.FiguresList);
+            Close();
+        }
+
+        private void EndButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

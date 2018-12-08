@@ -42,7 +42,7 @@ namespace VoiceControl
 
             foreach (var currentLoadArrayCommands in loadArrayCommands)
             {
-                ProjectSettingsStyle.ArrayCommands.Add(new ArrayCommands(currentLoadArrayCommands.CommandTextReturn(),
+                ProjectSettingsMain.ArrayCommands.Add(new ArrayCommands(currentLoadArrayCommands.CommandTextReturn(),
                                     CreateSample(currentLoadArrayCommands.SemanticResultReturn())));
 
                 _commandNames.Add(currentLoadArrayCommands.CommandTextReturn());
@@ -98,7 +98,7 @@ namespace VoiceControl
         private void LoadGrammar()
         {
             //Загрузка команд из списка
-            foreach (ArrayCommands currentCommand in ProjectSettingsStyle.ArrayCommands)
+            foreach (ArrayCommands currentCommand in ProjectSettingsMain.ArrayCommands)
             {
                 _sre.LoadGrammar(CreateGrammar(currentCommand.CommandText, currentCommand.SemanticResult));
             }

@@ -63,6 +63,8 @@ namespace WorkingScreen
 
         public void ApplyCommand(int indexCommand, int number)
         {
+            Refresh();
+
             _mainObject.ApplyCommand(indexCommand, number);
 
             Invalidate();

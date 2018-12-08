@@ -28,7 +28,7 @@ namespace WorkingScreen
         {
             foreach (var currentRectangle in listRegionRectangle)
             {
-                e.Graphics.DrawRectangle(new Pen(ProjectSettingsStyle.ColorSquares), currentRectangle.Rectangle.X, currentRectangle.Rectangle.Y,
+                e.Graphics.DrawRectangle(new Pen(ProjectSettingsMain.ColorSquares), currentRectangle.Rectangle.X, currentRectangle.Rectangle.Y,
                                                     currentRectangle.Rectangle.Width, currentRectangle.Rectangle.Height);
             }
         }
@@ -51,7 +51,7 @@ namespace WorkingScreen
                     var Center = new Point(x, y);
 
                     var stringIdObject = currentRectangle.IdObject.ToString();
-                    e.Graphics.DrawString(stringIdObject, font, new SolidBrush(ProjectSettingsStyle.ColorNumbers), Center);
+                    e.Graphics.DrawString(stringIdObject, font, new SolidBrush(ProjectSettingsMain.ColorNumbers), Center);
                 }
             }
         }

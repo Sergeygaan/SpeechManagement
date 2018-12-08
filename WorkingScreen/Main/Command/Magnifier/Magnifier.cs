@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ProjectSettings;
+using System;
 using System.Windows.Forms;
-using WorkingScreen;
 
 namespace Command.Magnif
 {

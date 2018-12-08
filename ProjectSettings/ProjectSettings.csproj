@@ -42,8 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ProjectSettings.cs" />
+    <Compile Include="ProjectSettingsMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegionRectangle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

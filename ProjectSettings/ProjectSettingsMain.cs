@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace ProjectSettings
 {
-    public static class ProjectSettingsStyle
+    public static class ProjectSettingsMain
     {
         //Цвет квадратных разделителей
         static public Color ColorSquares { get; set; } = Color.Gray;
@@ -13,5 +13,7 @@ namespace ProjectSettings
 
         //Спосок с основными загруженными командами
         static public List<object> ArrayCommands = new List<object>();
+
+        static public List<RegionRectangle> ListRegionRectangle = new List<RegionRectangle>();
     }
 }

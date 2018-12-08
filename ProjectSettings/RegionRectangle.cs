@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace WorkingScreen
+namespace ProjectSettings
 {
     public class RegionRectangle
     {

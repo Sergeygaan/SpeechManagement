@@ -104,7 +104,6 @@
     <Compile Include="Main\Command\Magnifier\NativeStructures.cs" />
     <Compile Include="Main\Drawing\Drawing.cs" />
     <Compile Include="Main\Main.cs" />
-    <Compile Include="Main\Object\RegionRectangle.cs" />
     <Compile Include="Main\Object\WorkObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkingScreen\OnTopControl.cs" />
