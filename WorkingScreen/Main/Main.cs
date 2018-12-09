@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Command;
 using ProjectSettings;
@@ -61,14 +62,19 @@ namespace WorkingScreen
         {
             if(ProjectSettingsMain.Zone_TracingChangeDraw)
             {
+                //Отменить все
+                commands[8].Act(2);
+
                 _workObject.listRegionRectangle.Clear();
 
                 ProjectSettingsMain.Zone_TracingChangeDraw = false;
+
+                GC.Collect();
             }
 
             if (_workObject.listRegionRectangle.Count == 0)
             {
-                if (ProjectSettingsMain.Zone_DrawMethod)
+                if (ProjectSettingsMain.Zone_DrawMethod == 0)
                 {
                     Drawing.MethodMain(_workObject, _widthFrom, _heightForm);
                 }

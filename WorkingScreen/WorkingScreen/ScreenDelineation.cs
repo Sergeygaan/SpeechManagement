@@ -48,13 +48,17 @@ namespace WorkingScreen
 
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == WM_NCHITTEST)
+            try
             {
-                m.Result = (IntPtr)HTTRANSPARENT;
-                return;
-            }
+                if (m.Msg == WM_NCHITTEST)
+                {
+                    m.Result = (IntPtr)HTTRANSPARENT;
+                    return;
+                }
 
-            base.WndProc(ref m);
+                base.WndProc(ref m);
+            }
+            catch { }
         }
 
         protected override void OnPaint(PaintEventArgs e)

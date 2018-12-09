@@ -25,7 +25,11 @@ namespace WorkingScreen
                 {
                     id += 1;
 
-                    _currentObject.listRegionRectangle.Add(CreateRegionRectangle(id, startX, startY, endX, endY));
+                    RegionRectangle createRegionRectangle = CreateRegionRectangle(id, startX, startY, endX, endY);
+
+                    _currentObject.listRegionRectangle.Add(createRegionRectangle);
+
+                    createRegionRectangle = null;
 
                     startX += stepWidth;
                     endX += stepWidth;

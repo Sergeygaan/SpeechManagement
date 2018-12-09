@@ -19,7 +19,7 @@ namespace ProjectSettings
         //Переменные для зоны отрисовки 
 
         //Переменна отвечающая за выбор режимо отрисовки
-        static public bool Zone_DrawMethod = false;
+        static public int Zone_DrawMethod = 0;
 
         //Переменные отвечающая за то что нужно ли удалить старую зону и нарисовать новую
         static public bool Zone_TracingChangeDraw = false;

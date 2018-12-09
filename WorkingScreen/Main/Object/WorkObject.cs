@@ -52,12 +52,8 @@ namespace WorkingScreen
                         fontSize = (int)currentRectangle.Rectangle.Width / 2;
                     }
 
-                    //Font font = new Font("Arial", fontSize);
-
                     int x = (int)(currentRectangle.Rectangle.Left + currentRectangle.Rectangle.Width / 2 - fontSize * 0.6);
                     int y = (int)(currentRectangle.Rectangle.Top + currentRectangle.Rectangle.Height / 2 - fontSize * 0.6);
-
-                    //var Center = new Point(x, y);
 
                     var stringIdObject = currentRectangle.IdObject.ToString();
                     e.Graphics.DrawString(stringIdObject, new Font("Arial", fontSize),
@@ -68,8 +64,8 @@ namespace WorkingScreen
 
         public PointF Center(int index)
         {
-                return new PointF(listRegionRectangle[index].Rectangle.Left + listRegionRectangle[index].Width / 2,
-                             listRegionRectangle[index].Rectangle.Top + listRegionRectangle[index].Height / 2);
+            return new PointF(listRegionRectangle[index].Rectangle.Left + listRegionRectangle[index].Width / 2,
+                            listRegionRectangle[index].Rectangle.Top + listRegionRectangle[index].Height / 2);
         }
     }
 }

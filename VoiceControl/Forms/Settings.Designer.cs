@@ -30,8 +30,9 @@
         {
             this.groupBoxAdditionalCommands = new System.Windows.Forms.GroupBox();
             this.groupBoxSettings = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.ModeDraw = new System.Windows.Forms.CheckBox();
+            this.CreatingNewArea = new System.Windows.Forms.Button();
+            this.ModeDrawComboBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // groupBoxAdditionalCommands
@@ -52,34 +53,46 @@
             this.groupBoxSettings.TabStop = false;
             this.groupBoxSettings.Text = "Settings";
             // 
-            // button1
+            // CreatingNewArea
             // 
-            this.button1.Location = new System.Drawing.Point(474, 119);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(236, 87);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.CreatingNewArea.Location = new System.Drawing.Point(790, 55);
+            this.CreatingNewArea.Name = "CreatingNewArea";
+            this.CreatingNewArea.Size = new System.Drawing.Size(121, 37);
+            this.CreatingNewArea.TabIndex = 2;
+            this.CreatingNewArea.Text = "Новая область";
+            this.CreatingNewArea.UseVisualStyleBackColor = true;
+            this.CreatingNewArea.Click += new System.EventHandler(this.button1_Click);
             // 
-            // ModeDraw
+            // ModeDrawComboBox
             // 
-            this.ModeDraw.AutoSize = true;
-            this.ModeDraw.Location = new System.Drawing.Point(793, 21);
-            this.ModeDraw.Name = "ModeDraw";
-            this.ModeDraw.Size = new System.Drawing.Size(117, 17);
-            this.ModeDraw.TabIndex = 3;
-            this.ModeDraw.Text = "Режим отрисовки";
-            this.ModeDraw.UseVisualStyleBackColor = true;
-            this.ModeDraw.MouseCaptureChanged += new System.EventHandler(this.ModeDraw_MouseCaptureChanged);
+            this.ModeDrawComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ModeDrawComboBox.FormattingEnabled = true;
+            this.ModeDrawComboBox.Items.AddRange(new object[] {
+            "Классический",
+            "Альтернативный"});
+            this.ModeDrawComboBox.Location = new System.Drawing.Point(790, 28);
+            this.ModeDrawComboBox.Name = "ModeDrawComboBox";
+            this.ModeDrawComboBox.Size = new System.Drawing.Size(121, 21);
+            this.ModeDrawComboBox.TabIndex = 4;
+            this.ModeDrawComboBox.SelectedIndexChanged += new System.EventHandler(this.ModeDrawComboBox_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(787, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Режим отрисовки";
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1128, 463);
-            this.Controls.Add(this.ModeDraw);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.ModeDrawComboBox);
+            this.Controls.Add(this.CreatingNewArea);
             this.Controls.Add(this.groupBoxSettings);
             this.Controls.Add(this.groupBoxAdditionalCommands);
             this.Name = "Settings";
@@ -93,7 +106,8 @@
 
         private System.Windows.Forms.GroupBox groupBoxAdditionalCommands;
         private System.Windows.Forms.GroupBox groupBoxSettings;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.CheckBox ModeDraw;
+        private System.Windows.Forms.Button CreatingNewArea;
+        private System.Windows.Forms.ComboBox ModeDrawComboBox;
+        private System.Windows.Forms.Label label1;
     }
 }

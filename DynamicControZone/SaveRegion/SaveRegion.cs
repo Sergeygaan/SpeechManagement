@@ -28,6 +28,11 @@ namespace MyPaint
                         Height = rectangleF.Height
                     };
 
+                    if ((rectangleF.Width < 10) || (rectangleF.Height < 10))
+                    {
+                        break;
+                    }
+
                     ProjectSettingsMain.Zone_ListRegionRectangle.Add(regionRectangle);
 
                     regionRectangle = null;
