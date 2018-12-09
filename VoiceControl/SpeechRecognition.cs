@@ -191,16 +191,7 @@ namespace VoiceControl
                     }
                 }
 
-                //switch (s.Key)
-                //{
-
-                //    case "старт":
-
-                //        Process.Start((string)number);
-
-                //        break;
-
-                //}
+                GC.Collect();
             }
         }
     }

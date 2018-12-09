@@ -28,7 +28,7 @@ namespace MyPaint
 
             StartPosition = FormStartPosition.CenterScreen;
 
-            // TopMost = true;
+            TopMost = true;
 
             TopLevel = true;
             ShowIcon = false;
@@ -61,7 +61,6 @@ namespace MyPaint
             Size resolution = Screen.PrimaryScreen.Bounds.Size;
 
             drawing = new Drawing(resolution.Width, resolution.Height);
-
         }
 
         // вставка текста

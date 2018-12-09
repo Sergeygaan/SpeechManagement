@@ -16,6 +16,11 @@ namespace MyPaint
                 {
                     RectangleF rectangleF = СonstructionFigure.ShowRectangleFloat(currentFiguresList.Path.PathPoints[0], currentFiguresList.Path.PathPoints[2]);
 
+                    if ((rectangleF.Width < 10) || (rectangleF.Height < 10))
+                    {
+                        break;
+                    }
+
                     RegionRectangle regionRectangle = new RegionRectangle
                     {
                         Rectangle = rectangleF,
@@ -27,11 +32,6 @@ namespace MyPaint
                         Width = rectangleF.Width,
                         Height = rectangleF.Height
                     };
-
-                    if ((rectangleF.Width < 10) || (rectangleF.Height < 10))
-                    {
-                        break;
-                    }
 
                     ProjectSettingsMain.Zone_ListRegionRectangle.Add(regionRectangle);
 

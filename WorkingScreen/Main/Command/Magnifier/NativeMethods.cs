@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
 
 namespace Command.Magnif
 {
     internal static class NativeMethods
     {
-
         public static IntPtr HWND_TOPMOST = new IntPtr(-1);
 
         public const int USER_TIMER_MINIMUM = 0x0000000A;

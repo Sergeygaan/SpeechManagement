@@ -200,6 +200,8 @@ namespace Command.Magnif
 
             form.Dispose();
             form = null;
+
+            GC.Collect();
         }
 
         #endregion
