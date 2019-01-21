@@ -28,7 +28,7 @@ namespace MyPaint
 
             StartPosition = FormStartPosition.CenterScreen;
 
-            TopMost = true;
+            //TopMost = true;
 
             TopLevel = true;
             ShowIcon = false;
@@ -145,9 +145,12 @@ namespace MyPaint
                     {
                         if (!select)
                         {
-                            drawing.MouseUp(_listPoints);
+                            if (CheckPoint())
+                            {
+                                drawing.MouseUp(_listPoints);
 
-                            Refresh();
+                                Refresh();
+                            }
 
                             _listPoints.Clear();
 
@@ -164,6 +167,32 @@ namespace MyPaint
                     break;
             }
             
+        }
+
+        /// <summary>
+        /// Проверка на падение при близких координатах
+        /// </summary>
+        private bool CheckPoint()
+        {
+            if (_listPoints.Count != 2)
+            {
+                return false;
+            }
+            var sumX = Math.Abs((Math.Abs(_listPoints[0].X) - Math.Abs(_listPoints[1].X)));
+
+            var sumY = Math.Abs((Math.Abs(_listPoints[0].Y) - Math.Abs(_listPoints[1].Y)));
+
+            if (sumX < 50)
+            {
+                return false;
+            }
+
+            if (sumY < 50)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private void DrawingZone_MouseMove(object sender, MouseEventArgs e)

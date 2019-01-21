@@ -16,7 +16,7 @@ namespace MyPaint
                 {
                     RectangleF rectangleF = СonstructionFigure.ShowRectangleFloat(currentFiguresList.Path.PathPoints[0], currentFiguresList.Path.PathPoints[2]);
 
-                    if ((rectangleF.Width < 10) || (rectangleF.Height < 10))
+                    if ((rectangleF.Width < 20) || (rectangleF.Height < 20))
                     {
                         break;
                     }
