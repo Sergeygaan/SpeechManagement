@@ -3,28 +3,41 @@ using System.Drawing;
 
 namespace ProjectSettings
 {
+    /// <summary>
+    /// Класс настроек проекта
+    /// </summary>
     public static class ProjectSettingsMain
     {
-        //Цвет квадратных разделителей
+        /// <summary>
+        /// Цвет квадратных разделителей
+        /// </summary>
         static public Color ColorSquares { get; set; } = Color.Gray;
 
-        //Цвет цифр
+        /// <summary>
+        /// Цвет цифр
+        /// </summary>
         static public Color ColorNumbers { get; set; } = Color.Gray;
 
-        //Спосок с основными загруженными командами
+        /// <summary>
+        /// Спосок с основными загруженными командами
+        /// </summary>
         static public List<object> ArrayCommands = new List<object>();
-
-
 
         //Переменные для зоны отрисовки 
 
-        //Переменна отвечающая за выбор режимо отрисовки
+        /// <summary>
+        /// Переменна отвечающая за выбор режимо отрисовки
+        /// </summary>
         static public int Zone_DrawMethod = 0;
 
-        //Переменные отвечающая за то что нужно ли удалить старую зону и нарисовать новую
+        /// <summary>
+        /// Переменные отвечающая за то что нужно ли удалить старую зону и нарисовать новую
+        /// </summary>
         static public bool Zone_TracingChangeDraw = false;
 
-        //Переменная хранащая в себе список новых зон для отрисовки
+        /// <summary>
+        /// Переменная хранащая в себе список новых зон для отрисовки
+        /// </summary>
         static public List<RegionRectangle> Zone_ListRegionRectangle = new List<RegionRectangle>();
     }
 }

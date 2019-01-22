@@ -4,8 +4,15 @@ using System.Drawing;
 
 namespace MyPaint
 {
+    /// <summary>
+    /// Класс для сохранения нарисованных альтернативных областей
+    /// </summary>
     public class SaveRegion
     {
+        /// <summary>
+        /// Метод сохранения объектов
+        /// </summary>
+        /// <param name="FiguresList"></param>
         public void Save(List<ObjectFugure> FiguresList)
         {
             ProjectSettingsMain.Zone_ListRegionRectangle.Clear();

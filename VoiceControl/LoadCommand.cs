@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml;
 
 namespace VoiceControl
 {
     public class LoadCommand
     {
+        /// <summary>
+        /// Класс для загрузки команд из файла
+        /// </summary>
         public class LoadArrayCommands
         {
             private string _commandText;
@@ -34,56 +38,56 @@ namespace VoiceControl
             }
         }
 
-        private string fileName = @"Command.txt";
+        private string fileName = @"Command.xml";
         public List<LoadArrayCommands> _arrayCommands = new List<LoadArrayCommands>();
 
         public List<LoadArrayCommands> OpenRead()
         {
-            string textFromFile = "";
+            XmlNode attr = null;
 
             if (!File.Exists(fileName))
             {
-                using (StreamWriter textFile = new StreamWriter(fileName, false, Encoding.Default))
+                using (StreamWriter textFile = new StreamWriter(fileName, false, Encoding.UTF8))
                 {
                     textFile.WriteLine(ProjectSettings());
                 }
             }
 
-            using (FileStream fstream = File.OpenRead(fileName))
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(fileName);
+
+            // получим корневой элемент
+            XmlElement xRoot = xDoc.DocumentElement;
+
+            // обход всех узлов в корневом элементе
+            foreach (XmlNode xnode in xRoot)
             {
-                // преобразуем строку в байты
-                byte[] array = new byte[fstream.Length];
-                // считываем данные
-                fstream.Read(array, 0, array.Length);
-                // декодируем байты в строку
-                textFromFile = Encoding.Default.GetString(array);
+                // получаем атрибут name
+                if (xnode.Attributes.Count > 0)
+                {
+                    attr = xnode.Attributes.GetNamedItem("name");
+                    _arrayCommands.Add(new LoadArrayCommands(attr.Value));
+                }
+
+                // обходим все дочерние узлы элемента user
+                foreach (XmlNode childnode in xnode.ChildNodes)
+                {
+                    // если узел - company
+                    if (childnode.Name == "parameter")
+                    {
+                        Parser(childnode.InnerText);
+                    }
+                }
             }
-            
-            Parser(textFromFile);
 
             return _arrayCommands;
         }
 
         private void Parser(string textFromFile)
         {
-            var wordSplitting = textFromFile.Split(new[] { '\t', '\n', '\r'}, StringSplitOptions.RemoveEmptyEntries);
+            var currentText = textFromFile.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (var currentString in wordSplitting)
-            {
-                if (currentString.Contains('<'))
-                {
-                    var nameCommand = RemoveSpaces(currentString, "<", ">");
-                    _arrayCommands.Add(new LoadArrayCommands(nameCommand));
-
-                    continue;
-                }
-                else
-                {
-                    var currentText = currentString.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-                    _arrayCommands[_arrayCommands.Count - 1].SemanticResult(currentText[0], currentText[1]);
-                }
-            }
+            _arrayCommands[_arrayCommands.Count - 1].SemanticResult(currentText[0], currentText[1]);
         }
 
         //удаление символов из строки
@@ -98,20 +102,119 @@ namespace VoiceControl
             return inpurString;
         }
 
+        #region Стартовые настройки
+
         private string ProjectSettings()
         {
-            string projectSettings = "<левой>\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
-                "<правой>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
-                "<двойной>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
-                "<сектор>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
-                "<масштаб>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
-                "<нажать>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
-                "<отпустить>\r\n\r\nодин 1\r\nдва 2\r\nтри 3\r\nчетыре 4\r\nпять 5\r\nшесть 6\r\nсемь 7\r\nвосемь 8\r\nдевять 9\r\n\r\n" +
-                "<средняя>\r\n\r\nвверх 1\r\nвниз 2\r\n\r\n"+
-                "<отменить>\r\n\r\nсектор 1\r\nмасштаб 2\r\nвсе 3\r\n\r\n" +
-                "<старт>\r\n\r\nвк https://vk.com/ \r\n\r\n";
+            string projectSettings = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+            "<commands>\n" +
+
+                 "<command name=\"левой\">\n" +
+                     "   <parameter>один, 1</parameter>\n" +
+                     "   <parameter>два, 2</parameter>\n" +
+                     "   <parameter>три, 3</parameter>\n" +
+                     "   <parameter>четыре, 4</parameter>\n" +
+                     "   <parameter>пять, 5</parameter>\n" +
+                     "   <parameter>шесть, 6</parameter>\n" +
+                     "   <parameter>семь, 7</parameter>\n" +
+                     "   <parameter>восемь, 8</parameter>\n" +
+                     "   <parameter>девять, 9</parameter>\n" +
+                 "</command>\n" +
+
+                 "<command name=\"правой\">\n" +
+                     "   <parameter>один, 1</parameter>\n" +
+                     "   <parameter>два, 2</parameter>\n" +
+                     "   <parameter>три, 3</parameter>\n" +
+                     "   <parameter>четыре, 4</parameter>\n" +
+                     "   <parameter>пять, 5</parameter>\n" +
+                     "   <parameter>шесть, 6</parameter>\n" +
+                     "   <parameter>семь, 7</parameter>\n" +
+                     "   <parameter>восемь, 8</parameter>\n" +
+                     "   <parameter>девять, 9</parameter>\n" +
+                 "</command>\n" +
+
+                 "<command name=\"двойной\">\n" +
+                     "   <parameter>один, 1</parameter>\n" +
+                     "   <parameter>два, 2</parameter>\n" +
+                     "   <parameter>три, 3</parameter>\n" +
+                     "   <parameter>четыре, 4</parameter>\n" +
+                     "   <parameter>пять, 5</parameter>\n" +
+                     "   <parameter>шесть, 6</parameter>\n" +
+                     "   <parameter>семь, 7</parameter>\n" +
+                     "   <parameter>восемь, 8</parameter>\n" +
+                     "   <parameter>девять, 9</parameter>\n" +
+                 "</command>\n" +
+
+                 "<command name=\"сектор\">\n" +
+                     "   <parameter>один, 1</parameter>\n" +
+                     "   <parameter>два, 2</parameter>\n" +
+                     "   <parameter>три, 3</parameter>\n" +
+                     "   <parameter>четыре, 4</parameter>\n" +
+                     "   <parameter>пять, 5</parameter>\n" +
+                     "   <parameter>шесть, 6</parameter>\n" +
+                     "   <parameter>семь, 7</parameter>\n" +
+                     "   <parameter>восемь, 8</parameter>\n" +
+                     "   <parameter>девять, 9</parameter>\n" +
+                 "</command>\n" +
+
+                 "<command name=\"масштаб\">\n" +
+                     "   <parameter>один, 1</parameter>\n" +
+                     "   <parameter>два, 2</parameter>\n" +
+                     "   <parameter>три, 3</parameter>\n" +
+                     "   <parameter>четыре, 4</parameter>\n" +
+                     "   <parameter>пять, 5</parameter>\n" +
+                     "   <parameter>шесть, 6</parameter>\n" +
+                     "   <parameter>семь, 7</parameter>\n" +
+                     "   <parameter>восемь, 8</parameter>\n" +
+                     "   <parameter>девять, 9</parameter>\n" +
+                 "</command>\n" +
+
+                 "<command name=\"нажать\">\n" +
+                     "   <parameter>один, 1</parameter>\n" +
+                     "   <parameter>два, 2</parameter>\n" +
+                     "   <parameter>три, 3</parameter>\n" +
+                     "   <parameter>четыре, 4</parameter>\n" +
+                     "   <parameter>пять, 5</parameter>\n" +
+                     "   <parameter>шесть, 6</parameter>\n" +
+                     "   <parameter>семь, 7</parameter>\n" +
+                     "   <parameter>восемь, 8</parameter>\n" +
+                     "   <parameter>девять, 9</parameter>\n" +
+                 "</command>\n" +
+
+                 "<command name=\"отпустить\">\n" +
+                     "   <parameter>один, 1</parameter>\n" +
+                     "   <parameter>два, 2</parameter>\n" +
+                     "   <parameter>три, 3</parameter>\n" +
+                     "   <parameter>четыре, 4</parameter>\n" +
+                     "   <parameter>пять, 5</parameter>\n" +
+                     "   <parameter>шесть, 6</parameter>\n" +
+                     "   <parameter>семь, 7</parameter>\n" +
+                     "   <parameter>восемь, 8</parameter>\n" +
+                     "   <parameter>девять, 9</parameter>\n" +
+                 "</command>\n" +
+
+                 "<command name=\"средняя\">\n" +
+                     "   <parameter>один, 1</parameter>\n" +
+                     "   <parameter>два, 2</parameter>\n" +
+                     "   <parameter>три, 3</parameter>\n" +
+                     "   <parameter>четыре, 4</parameter>\n" +
+                     "   <parameter>пять, 5</parameter>\n" +
+                     "   <parameter>шесть, 6</parameter>\n" +
+                     "   <parameter>семь, 7</parameter>\n" +
+                     "   <parameter>восемь, 8</parameter>\n" +
+                     "   <parameter>девять, 9</parameter>\n" +
+                 "</command>\n" +
+
+                 "<command name=\"отменить\">\n" +
+                     "   <parameter>сектор, 1</parameter>\n" +
+                     "   <parameter>масштаб, 2</parameter>\n" +
+                     "   <parameter>все, 3</parameter>\n" +
+                 "</command>\n" +
+             "</commands>";
 
             return projectSettings;
         }
+
+        #endregion
     }
 }

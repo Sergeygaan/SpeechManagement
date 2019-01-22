@@ -86,7 +86,6 @@ namespace MyPaint
                 else
                 {
                     _selectClass.MouseUpSupport();
-
                 }
             }
 

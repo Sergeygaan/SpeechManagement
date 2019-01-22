@@ -9,10 +9,16 @@ namespace VoiceControl
     {
         public delegate void MethodAppendLine(string text, Color color);
 
+        /// <summary>
+        /// Класс для распознания речи
+        /// </summary>
         private SpeechRecognition speechRecognition;
 
         ScreenDelineation _screenDelineation;
 
+        /// <summary>
+        /// Конструктор формы
+        /// </summary>
         public LogForm()
         {
             InitializeComponent();
@@ -24,6 +30,11 @@ namespace VoiceControl
             speechRecognition = new SpeechRecognition(methodAppendLine, _screenDelineation);
         }
         
+        /// <summary>
+        /// Вывод сообщения в лог
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="color"></param>
         private void AppendLine(string text, Color color)
         {
             ListViewItem listViewItem = new ListViewItem();
@@ -48,6 +59,11 @@ namespace VoiceControl
             }
         }
 
+        /// <summary>
+        /// Отображения формы "Настройки"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSettings_Click(object sender, EventArgs e)
         {
             Settings formSettings = new Settings(_screenDelineation);

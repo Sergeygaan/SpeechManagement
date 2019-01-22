@@ -6,7 +6,14 @@ namespace WorkingScreen
 {
     public static class Drawing
     {
-        //Метод по созданию новых зон для мыши
+        /// <summary>
+        /// Метод для отрисовке классической области
+        /// </summary>
+        /// <param name="_currentObject"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="startX"></param>
+        /// <param name="startY"></param>
         public static void MethodMain(WorkObject _currentObject, float width, float height, float startX = 0, float startY = 0)
         {
             float saveStartX = startX;
@@ -43,6 +50,15 @@ namespace WorkingScreen
             }
         }
 
+        /// <summary>
+        /// Метод по созданию новых зон для мыши "Классический"
+        /// </summary>
+        /// <param name="iDObject"></param>
+        /// <param name="startX"></param>
+        /// <param name="startY"></param>
+        /// <param name="endtX"></param>
+        /// <param name="endY"></param>
+        /// <returns></returns>
         private static RegionRectangle CreateRegionRectangle(int iDObject, float startX, float startY, float endtX, float endY)
         {
             var width = endtX - startX;

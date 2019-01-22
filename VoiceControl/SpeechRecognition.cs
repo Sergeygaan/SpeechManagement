@@ -11,15 +11,28 @@ using ProjectSettings;
 
 namespace VoiceControl
 {
+    /// <summary>
+    /// Класс для распознания речи
+    /// </summary>
     class SpeechRecognition
     {
         private CultureInfo _culture;
         private SpeechRecognitionEngine _sre;
         private ScreenDelineation _screenDelineation;
 
+        /// <summary>
+        /// Загруженные команды из файла
+        /// </summary>
         private LoadCommand _loadCommand;
+
+        /// <summary>
+        /// Имя загруженных команд
+        /// </summary>
         private List<string> _commandNames = new List<string>();
 
+        /// <summary>
+        /// Делигат для вывода сообщений в лог
+        /// </summary>
         private MethodAppendLine _appendLine;
 
         public SpeechRecognition(MethodAppendLine appendLine, ScreenDelineation screenDelineation)
@@ -49,6 +62,9 @@ namespace VoiceControl
             }
         }
 
+        /// <summary>
+        /// Старт распознания
+        /// </summary>
         private void StartGrammar()
         {
             try
@@ -79,6 +95,11 @@ namespace VoiceControl
             }
         }
 
+        /// <summary>
+        /// Создание грамматики для рпспознавания речи
+        /// </summary>
+        /// <param name="semanticResult"></param>
+        /// <returns></returns>
         private Choices CreateSample(List<Tuple<string, string>> semanticResult)
         {
             GrammarBuilder[] grammarBuilders = new GrammarBuilder[semanticResult.Count];
@@ -95,6 +116,9 @@ namespace VoiceControl
             return new Choices(grammarBuilders);
         }
 
+        /// <summary>
+        /// Загрузка грамматики
+        /// </summary>
         private void LoadGrammar()
         {
             //Загрузка команд из списка
@@ -196,8 +220,12 @@ namespace VoiceControl
         }
     }
 
+    /// <summary>
+    /// Класс для хранения загруженных команд
+    /// </summary>
     public class ArrayCommands
     {
+
         public string CommandText;
         public Choices SemanticResult;
 

@@ -39,15 +39,13 @@ namespace MyPaint
             {
                 if (SelectObject != null)
                 {
-                    //SelectObject.Pen.Width -= 1;//Возвращаем ширину пера
                     SelectObject.ClearListFigure();
                     SelectObject.PointSelect = null;
                     SelectObject.SelectFigure = false;
-                    //SelectObject. = null;//Убираем ссылку на объект
                     _supportObj = null;
-
                 }
             }
+
             _selectedFigures.Clear();
         }
 
@@ -55,7 +53,6 @@ namespace MyPaint
         {
             if (_supportObj != null)
             {
-                //_supportObj.Pen.Width -= 5;
                 _supportObj = null;
             }
         }
@@ -70,7 +67,6 @@ namespace MyPaint
                 {
                     foreach (SupportObjectFugure supportObjecFigure in selectObject.SelectListFigure())
                     {
-
                         _rectangleF = supportObjecFigure.Path.GetBounds();
 
                         if (_rectangleF.Contains(e.Location))

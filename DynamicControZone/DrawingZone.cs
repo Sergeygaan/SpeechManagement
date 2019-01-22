@@ -7,14 +7,22 @@ namespace MyPaint
 {
     public partial class DrawingZone : Form
     {
+        /// <summary>
+        /// Класс для сохранения нарисованных альтернативных областей
+        /// </summary>
         SaveRegion saveRegion;
 
+        /// <summary>
+        /// Класс для отрисовки новых областей
+        /// </summary>
         Drawing drawing;
 
 
         private SelectPointActions selectPointActions = new SelectPointActions();
 
-
+        /// <summary>
+        /// Список с сохранеными координатами мышки. Для построеня объектов
+        /// </summary>
         private List<PointF> _listPoints = new List<PointF>();
 
         bool flagPaint = false;
@@ -36,10 +44,6 @@ namespace MyPaint
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
             AllowTransparency = true;
-
-            //BackColor = Color.AliceBlue;//цвет фона  
-            //TransparencyKey = this.BackColor;//он же будет заменен на прозрачный цвет
-
             BackColor = Color.Black;
             Opacity = 0.65;
             AutoScaleMode = AutoScaleMode.None;
@@ -114,10 +118,16 @@ namespace MyPaint
 
                         Refresh();
                     }
+
                     break;
             }
         }
 
+        /// <summary>
+        /// Перерисовка области
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DrawingZone_Paint(object sender, PaintEventArgs e)
         {
             if (!select)
@@ -166,7 +176,6 @@ namespace MyPaint
 
                     break;
             }
-            
         }
 
         /// <summary>
@@ -220,6 +229,9 @@ namespace MyPaint
             DisposeProject();
         }
 
+        /// <summary>
+        /// Очистка проекта
+        /// </summary>
         private void DisposeProject()
         {
             drawing.Dispose();

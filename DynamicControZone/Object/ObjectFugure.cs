@@ -28,11 +28,6 @@ namespace MyPaint
         }
 
         /// <summary>
-        /// Метод, выполняющий возврат типа фигуры.
-        /// </summary>
-        public int CurrentFigure { get; set; }
-
-        /// <summary>
         /// Метод, выполняющий действия над точками в фигуре.
         /// </summary>
         public PointF[] PointSelect { get; set; }
@@ -56,16 +51,6 @@ namespace MyPaint
         /// Переменная, хранящая список опорных точек.
         /// </summary>
         private List<SupportObjectFugure> _supportFigures = new List<SupportObjectFugure>();
-
-        /// <summary>
-        /// Метод, выполняющий действия заливкой.
-        /// </summary>
-        public SolidBrush Brush { get; set; }
-
-        /// <summary>
-        /// Метод, выполняющий действия заливкой.
-        /// </summary>
-        public bool Fill { get; set; }
 
         /// <summary>
         /// Метод, выполняющий действия кистью.
@@ -110,9 +95,6 @@ namespace MyPaint
                 int x = (int)(rectangle.Left + rectangle.Width / 2 - fontSize * 0.5);
                 int y = (int)(rectangle.Top + rectangle.Height / 2 - fontSize * 0.5);
 
-                //var Center = new Point(x, y);
-
-                //
                 string stringText = IdFigure.ToString();
                 FontFamily family = new FontFamily("Arial");
                 int fontStyle = (int)FontStyle.Regular;
@@ -122,7 +104,6 @@ namespace MyPaint
 
                 if (emSize > 0)
                 {
-                    // Add the string to the path.
                     Path.AddString(stringText,
                         family,
                         fontStyle,
