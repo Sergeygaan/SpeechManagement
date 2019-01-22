@@ -159,7 +159,6 @@ namespace MyPaint
 
                 _oldPoint = e.Location;
             }
-
         }
 
         /// <summary>

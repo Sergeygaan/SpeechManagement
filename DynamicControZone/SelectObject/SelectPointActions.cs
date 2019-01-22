@@ -81,7 +81,6 @@ namespace MyPaint
                 if (_selectClass.SeleckResult().Count == 0)
                 {
                     _selectClass.MouseDown(e, FiguresList, Currentfigure);
-
                 }
                 else
                 {

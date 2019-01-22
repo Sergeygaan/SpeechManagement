@@ -166,10 +166,18 @@ namespace MyPaint
 
                             flagPaint = false;
                         }
-                        else
-                        {
-                            selectPointActions.MouseUp(e, drawing.FiguresList, 0);
-                        }
+
+                        Refresh();
+                    }
+
+                    break;
+
+
+                case MouseButtons.Right:
+
+                    if (select)
+                    {
+                        selectPointActions.MouseUp(e, drawing.FiguresList, 0);
 
                         Refresh();
                     }
