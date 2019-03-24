@@ -106,110 +106,101 @@ namespace VoiceControl
 
         private string ProjectSettings()
         {
-            string projectSettings = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
-            "<commands>\n" +
-
-                 "<command name=\"левой\">\n" +
-                     "   <parameter>один, 1</parameter>\n" +
-                     "   <parameter>два, 2</parameter>\n" +
-                     "   <parameter>три, 3</parameter>\n" +
-                     "   <parameter>четыре, 4</parameter>\n" +
-                     "   <parameter>пять, 5</parameter>\n" +
-                     "   <parameter>шесть, 6</parameter>\n" +
-                     "   <parameter>семь, 7</parameter>\n" +
-                     "   <parameter>восемь, 8</parameter>\n" +
-                     "   <parameter>девять, 9</parameter>\n" +
-                 "</command>\n" +
-
-                 "<command name=\"правой\">\n" +
-                     "   <parameter>один, 1</parameter>\n" +
-                     "   <parameter>два, 2</parameter>\n" +
-                     "   <parameter>три, 3</parameter>\n" +
-                     "   <parameter>четыре, 4</parameter>\n" +
-                     "   <parameter>пять, 5</parameter>\n" +
-                     "   <parameter>шесть, 6</parameter>\n" +
-                     "   <parameter>семь, 7</parameter>\n" +
-                     "   <parameter>восемь, 8</parameter>\n" +
-                     "   <parameter>девять, 9</parameter>\n" +
-                 "</command>\n" +
-
-                 "<command name=\"двойной\">\n" +
-                     "   <parameter>один, 1</parameter>\n" +
-                     "   <parameter>два, 2</parameter>\n" +
-                     "   <parameter>три, 3</parameter>\n" +
-                     "   <parameter>четыре, 4</parameter>\n" +
-                     "   <parameter>пять, 5</parameter>\n" +
-                     "   <parameter>шесть, 6</parameter>\n" +
-                     "   <parameter>семь, 7</parameter>\n" +
-                     "   <parameter>восемь, 8</parameter>\n" +
-                     "   <parameter>девять, 9</parameter>\n" +
-                 "</command>\n" +
-
-                 "<command name=\"сектор\">\n" +
-                     "   <parameter>один, 1</parameter>\n" +
-                     "   <parameter>два, 2</parameter>\n" +
-                     "   <parameter>три, 3</parameter>\n" +
-                     "   <parameter>четыре, 4</parameter>\n" +
-                     "   <parameter>пять, 5</parameter>\n" +
-                     "   <parameter>шесть, 6</parameter>\n" +
-                     "   <parameter>семь, 7</parameter>\n" +
-                     "   <parameter>восемь, 8</parameter>\n" +
-                     "   <parameter>девять, 9</parameter>\n" +
-                 "</command>\n" +
-
-                 "<command name=\"масштаб\">\n" +
-                     "   <parameter>один, 1</parameter>\n" +
-                     "   <parameter>два, 2</parameter>\n" +
-                     "   <parameter>три, 3</parameter>\n" +
-                     "   <parameter>четыре, 4</parameter>\n" +
-                     "   <parameter>пять, 5</parameter>\n" +
-                     "   <parameter>шесть, 6</parameter>\n" +
-                     "   <parameter>семь, 7</parameter>\n" +
-                     "   <parameter>восемь, 8</parameter>\n" +
-                     "   <parameter>девять, 9</parameter>\n" +
-                 "</command>\n" +
-
-                 "<command name=\"нажать\">\n" +
-                     "   <parameter>один, 1</parameter>\n" +
-                     "   <parameter>два, 2</parameter>\n" +
-                     "   <parameter>три, 3</parameter>\n" +
-                     "   <parameter>четыре, 4</parameter>\n" +
-                     "   <parameter>пять, 5</parameter>\n" +
-                     "   <parameter>шесть, 6</parameter>\n" +
-                     "   <parameter>семь, 7</parameter>\n" +
-                     "   <parameter>восемь, 8</parameter>\n" +
-                     "   <parameter>девять, 9</parameter>\n" +
-                 "</command>\n" +
-
-                 "<command name=\"отпустить\">\n" +
-                     "   <parameter>один, 1</parameter>\n" +
-                     "   <parameter>два, 2</parameter>\n" +
-                     "   <parameter>три, 3</parameter>\n" +
-                     "   <parameter>четыре, 4</parameter>\n" +
-                     "   <parameter>пять, 5</parameter>\n" +
-                     "   <parameter>шесть, 6</parameter>\n" +
-                     "   <parameter>семь, 7</parameter>\n" +
-                     "   <parameter>восемь, 8</parameter>\n" +
-                     "   <parameter>девять, 9</parameter>\n" +
-                 "</command>\n" +
-
-                 "<command name=\"средняя\">\n" +
-                     "   <parameter>один, 1</parameter>\n" +
-                     "   <parameter>два, 2</parameter>\n" +
-                     "   <parameter>три, 3</parameter>\n" +
-                     "   <parameter>четыре, 4</parameter>\n" +
-                     "   <parameter>пять, 5</parameter>\n" +
-                     "   <parameter>шесть, 6</parameter>\n" +
-                     "   <parameter>семь, 7</parameter>\n" +
-                     "   <parameter>восемь, 8</parameter>\n" +
-                     "   <parameter>девять, 9</parameter>\n" +
-                 "</command>\n" +
-
-                 "<command name=\"отменить\">\n" +
-                     "   <parameter>сектор, 1</parameter>\n" +
-                     "   <parameter>масштаб, 2</parameter>\n" +
-                     "   <parameter>все, 3</parameter>\n" +
-                 "</command>\n" +
+            string projectSettings = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" +
+            "<commands>\r\n" +
+                 "<command name=\"левой\">\r\n" +
+                     "   <parameter>один, 1</parameter>\r\n" +
+                     "   <parameter>два, 2</parameter>\r\n" +
+                     "   <parameter>три, 3</parameter>\r\n" +
+                     "   <parameter>четыре, 4</parameter>\r\n" +
+                     "   <parameter>пять, 5</parameter>\r\n" +
+                     "   <parameter>шесть, 6</parameter>\r\n" +
+                     "   <parameter>семь, 7</parameter>\r\n" +
+                     "   <parameter>восемь, 8</parameter>\r\n" +
+                     "   <parameter>девять, 9</parameter>\r\n" +
+                 "</command>\r\n" +
+                 "<command name=\"правой\">\r\n" +
+                     "   <parameter>один, 1</parameter>\r\n" +
+                     "   <parameter>два, 2</parameter>\r\n" +
+                     "   <parameter>три, 3</parameter>\r\n" +
+                     "   <parameter>четыре, 4</parameter>\r\n" +
+                     "   <parameter>пять, 5</parameter>\r\n" +
+                     "   <parameter>шесть, 6</parameter>\r\n" +
+                     "   <parameter>семь, 7</parameter>\r\n" +
+                     "   <parameter>восемь, 8</parameter>\r\n" +
+                     "   <parameter>девять, 9</parameter>\r\n" +
+                 "</command>\r\n" +
+                 "<command name=\"двойной\">\r\n" +
+                     "   <parameter>один, 1</parameter>\r\n" +
+                     "   <parameter>два, 2</parameter>\r\n" +
+                     "   <parameter>три, 3</parameter>\r\n" +
+                     "   <parameter>четыре, 4</parameter>\r\n" +
+                     "   <parameter>пять, 5</parameter>\r\n" +
+                     "   <parameter>шесть, 6</parameter>\r\n" +
+                     "   <parameter>семь, 7</parameter>\r\n" +
+                     "   <parameter>восемь, 8</parameter>\r\n" +
+                     "   <parameter>девять, 9</parameter>\r\n" +
+                 "</command>\r\n" +
+                 "<command name=\"сектор\">\r\n" +
+                     "   <parameter>один, 1</parameter>\r\n" +
+                     "   <parameter>два, 2</parameter>\r\n" +
+                     "   <parameter>три, 3</parameter>\r\n" +
+                     "   <parameter>четыре, 4</parameter>\r\n" +
+                     "   <parameter>пять, 5</parameter>\r\n" +
+                     "   <parameter>шесть, 6</parameter>\r\n" +
+                     "   <parameter>семь, 7</parameter>\r\n" +
+                     "   <parameter>восемь, 8</parameter>\r\n" +
+                     "   <parameter>девять, 9</parameter>\r\n" +
+                 "</command>\r\n" +
+                 "<command name=\"масштаб\">\r\n" +
+                     "   <parameter>один, 1</parameter>\r\n" +
+                     "   <parameter>два, 2</parameter>\r\n" +
+                     "   <parameter>три, 3</parameter>\r\n" +
+                     "   <parameter>четыре, 4</parameter>\r\n" +
+                     "   <parameter>пять, 5</parameter>\r\n" +
+                     "   <parameter>шесть, 6</parameter>\r\n" +
+                     "   <parameter>семь, 7</parameter>\r\n" +
+                     "   <parameter>восемь, 8</parameter>\r\n" +
+                     "   <parameter>девять, 9</parameter>\r\n" +
+                 "</command>\r\n" +
+                 "<command name=\"нажать\">\r\n" +
+                     "   <parameter>один, 1</parameter>\r\n" +
+                     "   <parameter>два, 2</parameter>\r\n" +
+                     "   <parameter>три, 3</parameter>\r\n" +
+                     "   <parameter>четыре, 4</parameter>\r\n" +
+                     "   <parameter>пять, 5</parameter>\r\n" +
+                     "   <parameter>шесть, 6</parameter>\r\n" +
+                     "   <parameter>семь, 7</parameter>\r\n" +
+                     "   <parameter>восемь, 8</parameter>\r\n" +
+                     "   <parameter>девять, 9</parameter>\r\n" +
+                 "</command>\r\n" +
+                 "<command name=\"отпустить\">\r\n" +
+                     "   <parameter>один, 1</parameter>\r\n" +
+                     "   <parameter>два, 2</parameter>\r\n" +
+                     "   <parameter>три, 3</parameter>\r\n" +
+                     "   <parameter>четыре, 4</parameter>\r\n" +
+                     "   <parameter>пять, 5</parameter>\r\n" +
+                     "   <parameter>шесть, 6</parameter>\r\n" +
+                     "   <parameter>семь, 7</parameter>\r\n" +
+                     "   <parameter>восемь, 8</parameter>\r\n" +
+                     "   <parameter>девять, 9</parameter>\r\n" +
+                 "</command>\r\n" +
+                 "<command name=\"средняя\">\r\n" +
+                     "   <parameter>один, 1</parameter>\r\n" +
+                     "   <parameter>два, 2</parameter>\r\n" +
+                     "   <parameter>три, 3</parameter>\r\n" +
+                     "   <parameter>четыре, 4</parameter>\r\n" +
+                     "   <parameter>пять, 5</parameter>\r\n" +
+                     "   <parameter>шесть, 6</parameter>\r\n" +
+                     "   <parameter>семь, 7</parameter>\r\n" +
+                     "   <parameter>восемь, 8</parameter>\r\n" +
+                     "   <parameter>девять, 9</parameter>\r\n" +
+                 "</command>\r\n" +
+                 "<command name=\"отменить\">\r\n" +
+                     "   <parameter>сектор, 1</parameter>\r\n" +
+                     "   <parameter>масштаб, 2</parameter>\r\n" +
+                     "   <parameter>все, 3</parameter>\r\n" +
+                 "</command>\r\n" +
              "</commands>";
 
             return projectSettings;

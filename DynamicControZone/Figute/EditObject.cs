@@ -28,6 +28,11 @@ namespace MyPaint
         /// <para name = "DeltaY">Переменная, хранящая значение дельта Y.</para>
         public static void MoveObjectSupport(ObjectFugure CurrObj, int DeltaX, int DeltaY)
         {
+            //if ((CurrObj.PointSelect[0].X - CurrObj.PointSelect[2].X != 0) && (CurrObj.PointSelect[0].Y - CurrObj.PointSelect[2].Y != 0))
+            //{
+                CurrObj.PointSelect = CurrObj.Path.PathPoints;
+            //}
+
             for (int i = 0; i < 4; i++)
             {
                 CurrObj.EditListFigure(i, СonstructionFigure.SelectFigure(CurrObj.PointSelect[i], CurrObj.Pen.Width));

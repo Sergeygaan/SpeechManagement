@@ -113,11 +113,6 @@ namespace MyPaint
         /// /// <para name = "EdipParametr">Объекта класса необходимый для выполнения масштабирования</para>
         public static void ScaleSelectFigure(ObjectFugure SelectObject, SupportObjectFugure SupportObj, int DeltaX, int DeltaY)
         {
-            if ((SelectObject.PointSelect[0].X - SelectObject.PointSelect[2].X != 0) && (SelectObject.PointSelect[0].Y - SelectObject.PointSelect[2].Y != 0))
-            {
-                SelectObject.PointSelect = SelectObject.Path.PathPoints;
-            }
-
             if (SelectObject.IdFigure == SupportObj.IdFigure)
             {
                 switch (SupportObj.ControlPointF)

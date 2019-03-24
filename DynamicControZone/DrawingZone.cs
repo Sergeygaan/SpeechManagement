@@ -166,6 +166,10 @@ namespace MyPaint
 
                             flagPaint = false;
                         }
+                        else
+                        {
+                            selectPointActions.MouseUp(e, drawing.FiguresList, 0);
+                        }
 
                         Refresh();
                     }

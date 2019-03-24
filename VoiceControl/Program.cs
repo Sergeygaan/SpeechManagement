@@ -17,9 +17,9 @@ namespace VoiceControl
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LogForm());
+            //Application.Run(new LogForm());
 
-            //Application.Run(new DrawingZone());
+            Application.Run(new DrawingZone());
         }
     }
 }

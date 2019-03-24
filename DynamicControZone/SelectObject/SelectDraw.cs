@@ -151,8 +151,6 @@ namespace MyPaint
                 {
                     if (SelectObject != null)
                     {
-                        SelectObject.PointSelect = SelectObject.Path.PathPoints;
-
                         EditObject.MoveObject(SelectObject, deltaX, deltaY);
                     }
                 }
