@@ -26,7 +26,7 @@ namespace ProjectSettings
         //Переменные для зоны отрисовки 
 
         /// <summary>
-        /// Переменна отвечающая за выбор режимо отрисовки
+        /// Переменна отвечающая за выбор режима отрисовки
         /// </summary>
         static public int Zone_DrawMethod = 0;
 
@@ -34,6 +34,11 @@ namespace ProjectSettings
         /// Переменные отвечающая за то что нужно ли удалить старую зону и нарисовать новую
         /// </summary>
         static public bool Zone_TracingChangeDraw = false;
+
+        /// <summary>
+        /// Переменные отвечающая отключение распознание речи пока активна работа с новыми областями
+        /// </summary>
+        static public bool Zone_FlagVoiceControl = true;
 
         /// <summary>
         /// Переменная хранащая в себе список новых зон для отрисовки

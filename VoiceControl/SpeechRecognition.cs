@@ -163,59 +163,62 @@ namespace VoiceControl
         //Определение корректности текста
         private void sr_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            _appendLine("\t" + "Speech Recognized:", Color.WhiteSmoke);
+            if (ProjectSettingsMain.Zone_FlagVoiceControl)
+            {
+                _appendLine("\t" + "Speech Recognized:", Color.WhiteSmoke);
 
-            if (e.Result.Confidence < 0.35f)
-            {
-                _appendLine(e.Result.Text + " (" + e.Result.Confidence + ")", Color.LightCoral);
-                return;
-            }
-            for (var i = 0; i < e.Result.Alternates.Count; ++i)
-            {
-                _appendLine("\t" + "Alternate: " + e.Result.Alternates[i].Text + " (" + e.Result.Alternates[i].Confidence + ")", Color.WhiteSmoke);
-            }
-
-            for (var i = 0; i < e.Result.Words.Count; ++i)
-            {
-                if (e.Result.Words[i].Confidence < 0.2f)
+                if (e.Result.Confidence < 0.35f)
                 {
-                    _appendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")", Color.LightCoral);
+                    _appendLine(e.Result.Text + " (" + e.Result.Confidence + ")", Color.LightCoral);
                     return;
                 }
-                else
+                for (var i = 0; i < e.Result.Alternates.Count; ++i)
                 {
-                    _appendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")", Color.WhiteSmoke);
+                    _appendLine("\t" + "Alternate: " + e.Result.Alternates[i].Text + " (" + e.Result.Alternates[i].Confidence + ")", Color.WhiteSmoke);
                 }
-            }
 
-            _appendLine(e.Result.Text + " (" + e.Result.Confidence + ")", Color.YellowGreen);
-
-            _appendLine("---------------------------------------------------------------------------------------", Color.WhiteSmoke);
-
-            foreach (var s in e.Result.Semantics)
-            {
-                var number = s.Value.Value;
-
-                for (int index = 0; index < _commandNames.Count; index++)
+                for (var i = 0; i < e.Result.Words.Count; ++i)
                 {
-                    if (_commandNames[index] == s.Key)
+                    if (e.Result.Words[i].Confidence < 0.2f)
                     {
-                        _screenDelineation.ApplyCommand(index, Convert.ToInt32(number) - 1);
-
-                        ////Process.Start((string)number);
-
-                        ////Process.Start("http://google.com");
-
-                        //System.Windows.Forms.WebBrowser webBrowser = new WebBrowser();
-
-                        //webBrowser.Navigate("http://google.com");
-                        //webBrowser.ScriptErrorsSuppressed = true;
-
-                        break;
+                        _appendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")", Color.LightCoral);
+                        return;
+                    }
+                    else
+                    {
+                        _appendLine("\t" + "Word: " + e.Result.Words[i].Text + " (" + e.Result.Words[i].Confidence + ")", Color.WhiteSmoke);
                     }
                 }
 
-                GC.Collect();
+                _appendLine(e.Result.Text + " (" + e.Result.Confidence + ")", Color.YellowGreen);
+
+                _appendLine("---------------------------------------------------------------------------------------", Color.WhiteSmoke);
+
+                foreach (var s in e.Result.Semantics)
+                {
+                    var number = s.Value.Value;
+
+                    for (int index = 0; index < _commandNames.Count; index++)
+                    {
+                        if (_commandNames[index] == s.Key)
+                        {
+                            _screenDelineation.ApplyCommand(index, Convert.ToInt32(number) - 1);
+
+                            ////Process.Start((string)number);
+
+                            ////Process.Start("http://google.com");
+
+                            //System.Windows.Forms.WebBrowser webBrowser = new WebBrowser();
+
+                            //webBrowser.Navigate("http://google.com");
+                            //webBrowser.ScriptErrorsSuppressed = true;
+
+                            break;
+                        }
+                    }
+
+                    GC.Collect();
+                }
             }
         }
     }

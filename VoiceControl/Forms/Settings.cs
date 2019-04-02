@@ -37,10 +37,14 @@ namespace VoiceControl
 
         private void button1_Click(object sender, EventArgs e)
         {
+            ProjectSettingsMain.Zone_FlagVoiceControl = false;
+
             DrawingZone drawingZone = new DrawingZone();
             drawingZone.ShowDialog();
 
             _screenDelineation.Refresh();
+
+            ProjectSettingsMain.Zone_FlagVoiceControl = true;
         }
 
         private void ModeDrawComboBox_SelectedIndexChanged(object sender, EventArgs e)

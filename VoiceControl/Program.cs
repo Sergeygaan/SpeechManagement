@@ -1,8 +1,4 @@
-﻿using MyPaint;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 
 namespace VoiceControl
@@ -17,9 +13,9 @@ namespace VoiceControl
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new LogForm());
+            Application.Run(new LogForm());
 
-            Application.Run(new DrawingZone());
+            //Application.Run(new DrawingZone());
         }
     }
 }
