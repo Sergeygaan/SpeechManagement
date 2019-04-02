@@ -76,6 +76,8 @@ namespace MyPaint
         /// <para name = "FiguresBuild">Объект хранящий о классах построения</para>
         public void MouseUp(MouseEventArgs e, List<ObjectFugure> FiguresList, int Currentfigure)
         {
+            Deselect();
+
             if (e.Button == MouseButtons.Left)
             {
                 if (_selectClass.SeleckResult().Count == 0)
@@ -86,18 +88,17 @@ namespace MyPaint
                 {
                     _selectClass.MouseUpSupport();
                 }
-            }
+            } 
+        }
 
-            if (e.Button == MouseButtons.Right)
+        /// <summary>
+        /// Отмена выделенных фигур
+        /// </summary>
+        public void Deselect()
+        {
+            if (_selectClass.SeleckResult().Count != 0)
             {
-                if (_selectClass.SeleckResult().Count == 0)
-                {
-                    _selectClass.MouseUp();
-                }
-                else
-                {
-                    _selectClass.MouseUp();
-                }
+                _selectClass.MouseUp();
             }
         }
 
@@ -116,7 +117,7 @@ namespace MyPaint
             {
                 if (_selectClass.SeleckResult().Count == 0)
                 {
-                    _selectClass.MouseUp();
+                    Deselect();
                     _selectClass.MouseDown(e, Figures, Currentfigure);
                 }
                 else

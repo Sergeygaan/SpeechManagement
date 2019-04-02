@@ -15,7 +15,7 @@ namespace MyPaint
         /// <summary>
         /// Класс для отрисовки новых областей
         /// </summary>
-        Drawing drawing;
+        private  Drawing _drawing;
 
 
         private SelectPointActions selectPointActions = new SelectPointActions();
@@ -48,48 +48,111 @@ namespace MyPaint
             Opacity = 0.65;
             AutoScaleMode = AutoScaleMode.None;
 
-            // создаем элементы меню
-            ToolStripMenuItem copyMenuItem = new ToolStripMenuItem("Копировать");
-            ToolStripMenuItem pasteMenuItem = new ToolStripMenuItem("Вставить");
-
-            ToolStripMenuItem selectMenuItem = new ToolStripMenuItem("Выделить");
-            // добавляем элементы в меню
-            AddRegion.Items.AddRange(new[] { copyMenuItem, pasteMenuItem, selectMenuItem });
-            // ассоциируем контекстное меню с текстовым полем
-            //textBox1.ContextMenuStrip = contextMenuStrip1;
-            // устанавливаем обработчики событий для меню
-            copyMenuItem.Click += copyMenuItem_Click;
-            pasteMenuItem.Click += pasteMenuItem_Click;
-            selectMenuItem.Click += selectMenuItem_Click;
-
             Size resolution = Screen.PrimaryScreen.Bounds.Size;
 
-            drawing = new Drawing(resolution.Width, resolution.Height);
+            _drawing = new Drawing(resolution.Width, resolution.Height);
         }
 
-        // вставка текста
-        void pasteMenuItem_Click(object sender, EventArgs e)
+        #region Меню
+
+        private void AddMenuItems()
         {
-            MessageBox.Show("paste");
+            AddRegion.Items.Clear();
+
+            //Режим работы
+            //Добавление
+            ToolStripMenuItem MenuItem_AddFigure = new ToolStripMenuItem("Режим \"Добавление\"", null, new EventHandler(MenuItem_AddFigure_Click))
+            {
+                Checked = !select
+            };
+
+            //Выбор
+            ToolStripMenuItem MenuItem_Select = new ToolStripMenuItem("Режим \"Редактирование\"", null, new EventHandler(MenuItem_Select_Click))
+            {
+                Checked = select
+            };
+
+            //Разделитель
+
+            //Отменить
+            ToolStripMenuItem MenuItem_Cancel = new ToolStripMenuItem("Отменить", null, new EventHandler(EndButton_Click));
+            //Сохранить
+            ToolStripMenuItem MenuItem_Save = new ToolStripMenuItem("Сохранить", null, new EventHandler(SaveButton_Click));
+
+            //Разделитель
+
+            //Удалить фигуру
+            ToolStripMenuItem deleteFigure = new ToolStripMenuItem("Удалить фигуры");
+            DeleteFigure_AddList(deleteFigure);
+
+            AddRegion.Items.AddRange(new[] { MenuItem_AddFigure, MenuItem_Select });
+            AddRegion.Items.Add(new ToolStripSeparator());
+            AddRegion.Items.AddRange(new[] { MenuItem_Cancel, MenuItem_Save });
+            AddRegion.Items.Add(new ToolStripSeparator());
+            AddRegion.Items.AddRange(new[] { deleteFigure });
         }
 
-        // вставка текста
-        void selectMenuItem_Click(object sender, EventArgs e)
+        private void DeleteFigure_AddList(ToolStripMenuItem deleteFigure)
         {
-            select = !select;
+            int countFigure = _drawing.FiguresList.Count;
+
+            for(int index = 1; index <= countFigure; index++)
+            {
+                ToolStripMenuItem currentIndexFigure = new ToolStripMenuItem(index.ToString(), null, new EventHandler(MenuItem_DeleteFigure));
+                deleteFigure.DropDownItems.Add(currentIndexFigure);
+            }
         }
 
-        // копирование текста
-        void copyMenuItem_Click(object sender, EventArgs e)
+
+        #region Команды контекстного меню
+
+        private void MenuItem_DeleteFigure(object sender, EventArgs e)
         {
-            // если выделен текст в текстовом поле, то копируем его в буфер
-            //MessageBox.Show("copy");
+            try
+            {
+                _drawing.DeleteFigure(Convert.ToInt16(sender.ToString()));
+            }
+            catch { }
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            saveRegion.Save(_drawing.FiguresList);
+            DisposeProject();
+        }
+
+        private void EndButton_Click(object sender, EventArgs e)
+        {
+            DisposeProject();
+        }
+
+        /// <summary>
+        /// Режим добавление
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItem_AddFigure_Click(object sender, EventArgs e)
+        {
             select = false;
 
-            drawing.Clear();
-
+            selectPointActions.Deselect();
             Refresh();
         }
+
+        /// <summary>
+        /// режим редактирования
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItem_Select_Click(object sender, EventArgs e)
+        {
+            select = true;
+        }
+
+        #endregion
+
+        #endregion
+
 
         private void DrawingZone_MouseDown(object sender, MouseEventArgs e)
         {
@@ -97,6 +160,8 @@ namespace MyPaint
             {
                 case MouseButtons.Right:
                     {
+                        AddMenuItems();
+
                         AddRegion.Show(this, new Point(e.X, e.Y));//places the menu at the pointer position 
                     }
                     break;
@@ -112,8 +177,8 @@ namespace MyPaint
                         }
                         else
                         {
-                            selectPointActions.MouseDown(e, drawing.FiguresList, 1);
-                            //drawing.SavePoint(e);
+                            selectPointActions.MouseDown(e, _drawing.FiguresList, 1);
+                            //_drawing.SavePoint(e);
                         }
 
                         Refresh();
@@ -134,17 +199,17 @@ namespace MyPaint
             {
                 if (flagPaint)
                 {
-                    drawing?.PaintFigure(e, _listPoints);
+                    _drawing?.PaintFigure(e, _listPoints);
                 }
 
-                drawing?.Paint(e, 1);
+                _drawing?.Paint(e, 1);
             }
             else
             {
-                drawing?.Paint(e, 1);
+                _drawing?.Paint(e, 1);
             }
 
-            drawing.RefreshBitmap();
+            _drawing.RefreshBitmap();
         }
 
         private void DrawingZone_MouseUp(object sender, MouseEventArgs e)
@@ -157,7 +222,7 @@ namespace MyPaint
                         {
                             if (CheckPoint())
                             {
-                                drawing.MouseUp(_listPoints);
+                                _drawing.MouseUp(_listPoints);
 
                                 Refresh();
                             }
@@ -168,7 +233,7 @@ namespace MyPaint
                         }
                         else
                         {
-                            selectPointActions.MouseUp(e, drawing.FiguresList, 0);
+                            selectPointActions.MouseUp(e, _drawing.FiguresList, 0);
                         }
 
                         Refresh();
@@ -177,16 +242,16 @@ namespace MyPaint
                     break;
 
 
-                case MouseButtons.Right:
+                    //case MouseButtons.Right:
 
-                    if (select)
-                    {
-                        selectPointActions.MouseUp(e, drawing.FiguresList, 0);
+                    //    if (select)
+                    //    {
+                    //        selectPointActions.MouseUp(e, _drawing.FiguresList, 0);
 
-                        Refresh();
-                    }
+                    //        Refresh();
+                    //    }
 
-                    break;
+                    //    break;
             }
         }
 
@@ -220,7 +285,7 @@ namespace MyPaint
         {
             if (!select)
             {
-                drawing.MouseMove(_listPoints, e);
+                _drawing.MouseMove(_listPoints, e);
             }
             else
             {
@@ -230,23 +295,12 @@ namespace MyPaint
             Refresh();
         }
 
-        private void SaveButton_Click(object sender, EventArgs e)
-        {
-            saveRegion.Save(drawing.FiguresList);
-            DisposeProject();
-        }
-
-        private void EndButton_Click(object sender, EventArgs e)
-        {
-            DisposeProject();
-        }
-
         /// <summary>
         /// Очистка проекта
         /// </summary>
         private void DisposeProject()
         {
-            drawing.Dispose();
+            _drawing.Dispose();
             selectPointActions.Dispose();
 
             saveRegion = null;

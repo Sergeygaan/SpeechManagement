@@ -132,11 +132,51 @@ namespace MyPaint
         }
 
         /// <summary>
+        /// Удаление фигуры по индексу
+        /// </summary>
+        /// <param name="index"></param>
+        public void DeleteFigure(int index)
+        {
+            FiguresList.RemoveAt(index - 1);
+            IDRecalculation();
+
+            RefreshBitmap();
+
+            GC.Collect();
+        }
+
+        /// <summary>
+        /// Пересчитывает ID фигур в списке
+        /// </summary>
+        private void IDRecalculation()
+        {
+            int index = 1;
+
+            foreach(var currentFigures in FiguresList)
+            {
+                currentFigures.IdFigure = index;
+
+                currentFigures.PointSelect = currentFigures.Path.PathPoints;
+                currentFigures.Path.Reset();
+                currentFigures.Path.AddRectangle(СonstructionFigure.ShowRectangleFloat(currentFigures.PointSelect[0], currentFigures.PointSelect[2]));
+                currentFigures.DrawText();
+
+                index++;
+            }
+        }
+
+
+        /// <summary>
         /// Метод, возвращающий зону выделения.
         /// </summary>
         public Bitmap BitmapReturn()
         {
             return _bmp;
+        }
+
+        public int ReturnCountFigures()
+        {
+            return FiguresList.Count;
         }
 
         public void Dispose()
