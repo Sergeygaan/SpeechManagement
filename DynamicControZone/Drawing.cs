@@ -86,7 +86,10 @@ namespace MyPaint
 
             _drawObject.DrawText();
 
-            FiguresList.Add(_drawObject);
+            if (FiguresList.Count < 9)
+            {
+                FiguresList.Add(_drawObject);
+            }
 
             RefreshBitmap();
         }
