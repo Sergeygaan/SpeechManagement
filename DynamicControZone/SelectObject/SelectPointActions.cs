@@ -117,7 +117,6 @@ namespace MyPaint
             {
                 if (_selectClass.SeleckResult().Count == 0)
                 {
-                    Deselect();
                     _selectClass.MouseDown(e, Figures, Currentfigure);
                 }
                 else

@@ -41,8 +41,18 @@ namespace ProjectSettings
         static public bool Zone_FlagVoiceControl = true;
 
         /// <summary>
-        /// Переменная хранащая в себе список новых зон для отрисовки
+        /// Переменная хранащая в себе список новых зон после создания новой зоны
         /// </summary>
-        static public List<RegionRectangle> Zone_ListRegionRectangle = new List<RegionRectangle>();
+        static public List<RegionRectangle> Zone_NewList = new List<RegionRectangle>();
+
+        /// <summary>
+        /// Переменная хранащая в себе список зон для вывода на экран
+        /// </summary>
+        static public List<RegionRectangle> Zone_CurrentList = new List<RegionRectangle>();
+
+        /// <summary>
+        /// Переменная хранащая в себе список зон для вывода на экран
+        /// </summary>
+        static public List<List<RegionRectangle>> Zone_GeneralList = new List<List<RegionRectangle>>();
     }
 }

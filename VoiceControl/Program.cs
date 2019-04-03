@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyPaint;
+using System;
 using System.Windows.Forms;
 
 namespace VoiceControl

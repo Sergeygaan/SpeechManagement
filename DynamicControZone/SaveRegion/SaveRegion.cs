@@ -15,7 +15,7 @@ namespace MyPaint
         /// <param name="FiguresList"></param>
         public void Save(List<ObjectFugure> FiguresList)
         {
-            ProjectSettingsMain.Zone_ListRegionRectangle.Clear();
+            ProjectSettingsMain.Zone_NewList.Clear();
 
             foreach (var currentFiguresList in FiguresList)
             {
@@ -35,20 +35,17 @@ namespace MyPaint
                         Visible = true,
                         StartX = currentFiguresList.Path.PathPoints[0].X,
                         StartY = currentFiguresList.Path.PathPoints[0].Y,
+                        EndX = currentFiguresList.Path.PathPoints[2].X,
+                        EndY = currentFiguresList.Path.PathPoints[2].Y,
 
                         Width = rectangleF.Width,
                         Height = rectangleF.Height
                     };
 
-                    ProjectSettingsMain.Zone_ListRegionRectangle.Add(regionRectangle);
+                    ProjectSettingsMain.Zone_NewList.Add(regionRectangle);
 
                     regionRectangle = null;
                 }
-            }
-
-            if (ProjectSettingsMain.Zone_ListRegionRectangle.Count != 0)
-            {
-                ProjectSettingsMain.Zone_TracingChangeDraw = true;
             }
         }
     }

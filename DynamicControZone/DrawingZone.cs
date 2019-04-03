@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectSettings;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -28,7 +29,7 @@ namespace MyPaint
         bool flagPaint = false;
         bool select = false;
 
-        public DrawingZone()
+        public DrawingZone(int index = -1)
         {
             InitializeComponent();
 
@@ -51,7 +52,26 @@ namespace MyPaint
             Size resolution = Screen.PrimaryScreen.Bounds.Size;
 
             _drawing = new Drawing(resolution.Width, resolution.Height);
+
+            if(index != -1)
+            {
+                LoadingAreasEditing(index);
+            }
         }
+
+        private void LoadingAreasEditing(int index)
+        {
+            foreach (var currentRegion in ProjectSettingsMain.Zone_GeneralList[index])
+            {
+                _listPoints.Add(new PointF(currentRegion.StartX, currentRegion.StartY));
+                _listPoints.Add(new PointF(currentRegion.EndX, currentRegion.EndY));
+
+                _drawing.MouseUp(_listPoints);
+
+                _listPoints.Clear();
+            }
+        }
+
 
         #region Меню
 
@@ -117,12 +137,15 @@ namespace MyPaint
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.OK;
+
             saveRegion.Save(_drawing.FiguresList);
             DisposeProject();
         }
 
         private void EndButton_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.Cancel;
             DisposeProject();
         }
 
@@ -178,7 +201,6 @@ namespace MyPaint
                         else
                         {
                             selectPointActions.MouseDown(e, _drawing.FiguresList, 1);
-                            //_drawing.SavePoint(e);
                         }
 
                         Refresh();

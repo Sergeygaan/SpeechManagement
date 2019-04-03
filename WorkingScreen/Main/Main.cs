@@ -68,8 +68,6 @@ namespace WorkingScreen
                 _workObject.listRegionRectangle.Clear();
 
                 ProjectSettingsMain.Zone_TracingChangeDraw = false;
-
-                GC.Collect();
             }
 
             if (_workObject.listRegionRectangle.Count == 0)
@@ -80,9 +78,11 @@ namespace WorkingScreen
                 }
                 else
                 {
-                    Drawing.MethodAlternative(_workObject, ProjectSettingsMain.Zone_ListRegionRectangle);
+                    Drawing.MethodAlternative(_workObject, ProjectSettingsMain.Zone_CurrentList);
                 }
             }
+
+            GC.Collect();
         }
      
         public void ApplyCommand(int indexCommand, int number)

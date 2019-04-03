@@ -33,6 +33,16 @@ namespace ProjectSettings
         public float StartY { set; get; }
 
         /// <summary>
+        /// Стартовая координата X
+        /// </summary>
+        public float EndX { set; get; }
+
+        /// <summary>
+        /// Стартовая координата Y
+        /// </summary>
+        public float EndY { set; get; }
+
+        /// <summary>
         /// Ширина области
         /// </summary>
         public float Width { set; get; }

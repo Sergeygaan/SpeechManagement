@@ -30,14 +30,19 @@
         {
             this.groupBoxAdditionalCommands = new System.Windows.Forms.GroupBox();
             this.groupBoxSettings = new System.Windows.Forms.GroupBox();
-            this.CreatingNewArea = new System.Windows.Forms.Button();
+            this.CreatingAddRegion = new System.Windows.Forms.Button();
             this.ModeDrawComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.listBox = new System.Windows.Forms.ListBox();
+            this.buttonDeleteRegion = new System.Windows.Forms.Button();
+            this.buttonSelectRegion = new System.Windows.Forms.Button();
+            this.buttonEditRegion = new System.Windows.Forms.Button();
+            this.groupBoxSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxAdditionalCommands
             // 
-            this.groupBoxAdditionalCommands.Location = new System.Drawing.Point(916, 12);
+            this.groupBoxAdditionalCommands.Location = new System.Drawing.Point(323, 12);
             this.groupBoxAdditionalCommands.Name = "groupBoxAdditionalCommands";
             this.groupBoxAdditionalCommands.Size = new System.Drawing.Size(200, 100);
             this.groupBoxAdditionalCommands.TabIndex = 0;
@@ -46,22 +51,29 @@
             // 
             // groupBoxSettings
             // 
+            this.groupBoxSettings.Controls.Add(this.buttonEditRegion);
+            this.groupBoxSettings.Controls.Add(this.buttonSelectRegion);
+            this.groupBoxSettings.Controls.Add(this.buttonDeleteRegion);
+            this.groupBoxSettings.Controls.Add(this.listBox);
+            this.groupBoxSettings.Controls.Add(this.CreatingAddRegion);
+            this.groupBoxSettings.Controls.Add(this.ModeDrawComboBox);
+            this.groupBoxSettings.Controls.Add(this.label1);
             this.groupBoxSettings.Location = new System.Drawing.Point(12, 12);
             this.groupBoxSettings.Name = "groupBoxSettings";
-            this.groupBoxSettings.Size = new System.Drawing.Size(200, 100);
+            this.groupBoxSettings.Size = new System.Drawing.Size(286, 296);
             this.groupBoxSettings.TabIndex = 1;
             this.groupBoxSettings.TabStop = false;
-            this.groupBoxSettings.Text = "Settings";
+            this.groupBoxSettings.Text = "Альтернативные конфигурации";
             // 
-            // CreatingNewArea
+            // CreatingAddRegion
             // 
-            this.CreatingNewArea.Location = new System.Drawing.Point(790, 55);
-            this.CreatingNewArea.Name = "CreatingNewArea";
-            this.CreatingNewArea.Size = new System.Drawing.Size(121, 37);
-            this.CreatingNewArea.TabIndex = 2;
-            this.CreatingNewArea.Text = "Новая область";
-            this.CreatingNewArea.UseVisualStyleBackColor = true;
-            this.CreatingNewArea.Click += new System.EventHandler(this.button1_Click);
+            this.CreatingAddRegion.Location = new System.Drawing.Point(133, 19);
+            this.CreatingAddRegion.Name = "CreatingAddRegion";
+            this.CreatingAddRegion.Size = new System.Drawing.Size(136, 30);
+            this.CreatingAddRegion.TabIndex = 2;
+            this.CreatingAddRegion.Text = "Новая область";
+            this.CreatingAddRegion.UseVisualStyleBackColor = true;
+            this.CreatingAddRegion.Click += new System.EventHandler(this.button1_Click);
             // 
             // ModeDrawComboBox
             // 
@@ -70,7 +82,7 @@
             this.ModeDrawComboBox.Items.AddRange(new object[] {
             "Классический",
             "Альтернативный"});
-            this.ModeDrawComboBox.Location = new System.Drawing.Point(790, 28);
+            this.ModeDrawComboBox.Location = new System.Drawing.Point(7, 200);
             this.ModeDrawComboBox.Name = "ModeDrawComboBox";
             this.ModeDrawComboBox.Size = new System.Drawing.Size(121, 21);
             this.ModeDrawComboBox.TabIndex = 4;
@@ -79,26 +91,66 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(787, 12);
+            this.label1.Location = new System.Drawing.Point(4, 184);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Режим отрисовки";
             // 
+            // listBox
+            // 
+            this.listBox.FormattingEnabled = true;
+            this.listBox.Location = new System.Drawing.Point(7, 19);
+            this.listBox.Name = "listBox";
+            this.listBox.Size = new System.Drawing.Size(120, 134);
+            this.listBox.TabIndex = 7;
+            // 
+            // buttonDeleteRegion
+            // 
+            this.buttonDeleteRegion.Location = new System.Drawing.Point(133, 55);
+            this.buttonDeleteRegion.Name = "buttonDeleteRegion";
+            this.buttonDeleteRegion.Size = new System.Drawing.Size(136, 30);
+            this.buttonDeleteRegion.TabIndex = 8;
+            this.buttonDeleteRegion.Text = "Удалить область";
+            this.buttonDeleteRegion.UseVisualStyleBackColor = true;
+            this.buttonDeleteRegion.Click += new System.EventHandler(this.buttonDeleteRegion_Click);
+            // 
+            // buttonSelectRegion
+            // 
+            this.buttonSelectRegion.Location = new System.Drawing.Point(133, 126);
+            this.buttonSelectRegion.Name = "buttonSelectRegion";
+            this.buttonSelectRegion.Size = new System.Drawing.Size(136, 30);
+            this.buttonSelectRegion.TabIndex = 9;
+            this.buttonSelectRegion.Text = "Применить область";
+            this.buttonSelectRegion.UseVisualStyleBackColor = true;
+            this.buttonSelectRegion.Click += new System.EventHandler(this.buttonSelectRegion_Click);
+            // 
+            // buttonEditRegion
+            // 
+            this.buttonEditRegion.Location = new System.Drawing.Point(133, 90);
+            this.buttonEditRegion.Name = "buttonEditRegion";
+            this.buttonEditRegion.Size = new System.Drawing.Size(136, 30);
+            this.buttonEditRegion.TabIndex = 10;
+            this.buttonEditRegion.Text = "Редактировать область";
+            this.buttonEditRegion.UseVisualStyleBackColor = true;
+            this.buttonEditRegion.Click += new System.EventHandler(this.buttonEditRegion_Click);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1128, 463);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.ModeDrawComboBox);
-            this.Controls.Add(this.CreatingNewArea);
+            this.ClientSize = new System.Drawing.Size(631, 354);
             this.Controls.Add(this.groupBoxSettings);
             this.Controls.Add(this.groupBoxAdditionalCommands);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Settings";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
+            this.groupBoxSettings.ResumeLayout(false);
+            this.groupBoxSettings.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -106,8 +158,12 @@
 
         private System.Windows.Forms.GroupBox groupBoxAdditionalCommands;
         private System.Windows.Forms.GroupBox groupBoxSettings;
-        private System.Windows.Forms.Button CreatingNewArea;
+        private System.Windows.Forms.Button CreatingAddRegion;
         private System.Windows.Forms.ComboBox ModeDrawComboBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListBox listBox;
+        private System.Windows.Forms.Button buttonSelectRegion;
+        private System.Windows.Forms.Button buttonDeleteRegion;
+        private System.Windows.Forms.Button buttonEditRegion;
     }
 }
