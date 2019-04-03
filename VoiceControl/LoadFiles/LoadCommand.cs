@@ -186,15 +186,8 @@ namespace VoiceControl
                      "   <parameter>девять, 9</parameter>\r\n" +
                  "</command>\r\n" +
                  "<command name=\"средняя\">\r\n" +
-                     "   <parameter>один, 1</parameter>\r\n" +
-                     "   <parameter>два, 2</parameter>\r\n" +
-                     "   <parameter>три, 3</parameter>\r\n" +
-                     "   <parameter>четыре, 4</parameter>\r\n" +
-                     "   <parameter>пять, 5</parameter>\r\n" +
-                     "   <parameter>шесть, 6</parameter>\r\n" +
-                     "   <parameter>семь, 7</parameter>\r\n" +
-                     "   <parameter>восемь, 8</parameter>\r\n" +
-                     "   <parameter>девять, 9</parameter>\r\n" +
+                     "   <parameter>вверх, 1</parameter>\r\n" +
+                     "   <parameter>вниз, 2</parameter>\r\n" +
                  "</command>\r\n" +
                  "<command name=\"отменить\">\r\n" +
                      "   <parameter>сектор, 1</parameter>\r\n" +

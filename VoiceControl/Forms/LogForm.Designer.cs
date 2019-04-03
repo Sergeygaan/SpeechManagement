@@ -70,7 +70,11 @@
             this.ClientSize = new System.Drawing.Size(339, 330);
             this.Controls.Add(this.buttonSettings);
             this.Controls.Add(this.listView);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "LogForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Log";
             this.ResumeLayout(false);
 

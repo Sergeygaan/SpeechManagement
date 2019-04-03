@@ -56,6 +56,7 @@ namespace MyPaint
             if(index != -1)
             {
                 LoadingAreasEditing(index);
+                select = true;
             }
         }
 

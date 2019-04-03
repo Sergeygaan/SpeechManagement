@@ -34,7 +34,7 @@ namespace VoiceControl
 
             speechRecognition = new SpeechRecognition(methodAppendLine, _screenDelineation);
 
-            _loadConfiguration = new LoadConfiguration();
+            //_loadConfiguration = new LoadConfiguration();
         }
         
         /// <summary>
