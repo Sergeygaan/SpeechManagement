@@ -14,7 +14,12 @@ namespace VoiceControl
         /// </summary>
         private SpeechRecognition speechRecognition;
 
-        ScreenDelineation _screenDelineation;
+        private ScreenDelineation _screenDelineation;
+
+        /// <summary>
+        /// Клас для загрузки альтернативных конфигураций
+        /// </summary>
+        private LoadConfiguration _loadConfiguration;
 
         /// <summary>
         /// Конструктор формы
@@ -28,6 +33,8 @@ namespace VoiceControl
             _screenDelineation = new ScreenDelineation();
 
             speechRecognition = new SpeechRecognition(methodAppendLine, _screenDelineation);
+
+            _loadConfiguration = new LoadConfiguration();
         }
         
         /// <summary>

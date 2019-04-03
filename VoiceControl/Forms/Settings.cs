@@ -164,10 +164,5 @@ namespace VoiceControl
                 AddNewRegion(index);
             }
         }
-
-        //private int CheckIndexElement()
-        //{
-        //    listBox.SelectedIndex
-        //}
     }
 }
